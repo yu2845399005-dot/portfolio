@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#090a0d" />
+    <title>TikTok LIVE Assistant — Interactive Demo</title>
+    <link rel="stylesheet" href="./live-assistant-demo.css?v=20260922-6" />
+  </head>
+  <body>
+    <main class="demo-stage" aria-label="TikTok LIVE Assistant interactive iPhone demo">
+      <div class="ambient ambient-cyan" aria-hidden="true"></div>
+      <div class="ambient ambient-pink" aria-hidden="true"></div>
+
+      <section class="phone-viewport" id="phoneViewport">
+        <div class="phone-scaler" id="phoneScaler">
+          <div class="iphone" id="iphone">
+            <div class="phone-shadow" aria-hidden="true"></div>
+            <div class="side-button silent" aria-hidden="true"></div>
+            <div class="side-button volume-up" aria-hidden="true"></div>
+            <div class="side-button volume-down" aria-hidden="true"></div>
+            <div class="side-button power" aria-hidden="true"></div>
+
+            <div class="phone-black-bed" aria-hidden="true"></div>
+            <img class="phone-body-art" src="./assets/live-assistant-demo/phone-body.svg" alt="" />
+
+            <div class="phone-screen">
+              <div class="app-surface" id="appSurface">
+                <div class="status-bar" aria-label="iOS status bar">
+                  <span class="status-time" id="statusTime">8:00</span>
+                  <div class="status-icons" aria-hidden="true">
+                    <img src="./assets/live-assistant-demo/signal.svg" alt="" />
+                    <img src="./assets/live-assistant-demo/wifi.svg" alt="" />
+                    <img class="battery" src="./assets/live-assistant-demo/battery.svg" alt="" />
+                  </div>
+                </div>
+
+                <header class="app-navbar">
+                  <button class="nav-icon nav-back" type="button" aria-label="Back to Assistant home" id="backButton">
+                    <img src="./assets/live-assistant-demo/back.svg" alt="" />
+                  </button>
+                  <div class="nav-title">
+                    <div class="mini-assistant" aria-hidden="true">
+                      <span class="conversation-orb">
+                        <img class="conversation-orb-base" src="./assets/live-assistant-demo/hero-base.svg" alt="" />
+                        <span class="conversation-orb-mask">
+                          <img class="conversation-orb-cyan" src="./assets/live-assistant-demo/hero-fill-b.svg" alt="" />
+                          <img class="conversation-orb-pink" src="./assets/live-assistant-demo/hero-fill-a.svg" alt="" />
+                        </span>
+                        <span class="conversation-orb-eyes"><i></i><i></i></span>
+                      </span>
+                    </div>
+                    <strong>LIVE Assistant</strong>
+                  </div>
+                  <button class="nav-icon nav-parcel" type="button" aria-label="Open creator benefits" data-toast="Creator benefits are ready for your next LIVE.">
+                    <img src="./assets/live-assistant-demo/parcel.svg" alt="" />
+                  </button>
+                </header>
+
+                <section class="assistant-home" id="assistantHome">
+                  <img class="hero-glow" src="./assets/live-assistant-demo/hero-glow.svg" alt="" />
+                  <div class="assistant-orb" aria-label="LIVE Assistant avatar">
+                    <img class="orb-base" src="./assets/live-assistant-demo/hero-base.svg" alt="" />
+                    <div class="orb-paint-mask" aria-hidden="true">
+                      <img class="orb-fill orb-fill-cyan" src="./assets/live-assistant-demo/hero-fill-b.svg" alt="" />
+                      <img class="orb-fill orb-fill-pink" src="./assets/live-assistant-demo/hero-fill-a.svg" alt="" />
+                    </div>
+                    <img class="orb-highlight orb-highlight-wide" src="./assets/live-assistant-demo/hero-overlay-a.svg" alt="" />
+                    <img class="orb-highlight orb-highlight-tight" src="./assets/live-assistant-demo/hero-overlay-b.svg" alt="" />
+                    <div class="orb-eyes" aria-hidden="true"><i></i><i></i></div>
+                  </div>
+
+                  <button class="floating-question" type="button" data-prompt="Why is my LIVE reach low?">
+                    <span>Why low reach?</span>
+                    <img src="./assets/live-assistant-demo/arrow.svg" alt="" />
+                  </button>
+
+                  <div class="welcome-copy">
+                    <h1>Hey Leon !</h1>
+                    <h2>I'm LIVE Assistant</h2>
+                    <p>Livestream tips, content insights &amp; benefits<br />to help you grow.</p>
+                    <div class="suggestions" aria-label="Suggested questions">
+                      <button type="button" data-prompt="Show me my weekly LIVE report">
+                        Weekly LIVE report
+                        <img src="./assets/live-assistant-demo/arrow.svg" alt="" />
+                      </button>
+                      <button type="button" data-prompt="I need Fast VIP Support">
+                        Fast VIP Support
+                        <img src="./assets/live-assistant-demo/arrow.svg" alt="" />
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="conversation-view" id="conversationView" aria-live="polite" aria-hidden="true">
+                    <div class="conversation-scroll">
+                      <section class="conversation-intro" aria-label="About LIVE Assistant">
+                        <img class="conversation-card-glow" src="./assets/live-assistant-demo/conversation-card-glow.svg" alt="" />
+                        <div class="conversation-avatar" aria-hidden="true">
+                          <div class="conversation-orb">
+                            <img class="conversation-orb-base" src="./assets/live-assistant-demo/hero-base.svg" alt="" />
+                            <div class="conversation-orb-mask">
+                              <img class="conversation-orb-cyan" src="./assets/live-assistant-demo/hero-fill-b.svg" alt="" />
+                              <img class="conversation-orb-pink" src="./assets/live-assistant-demo/hero-fill-a.svg" alt="" />
+                            </div>
+                            <span class="conversation-orb-eyes"><i></i><i></i></span>
+                          </div>
+                        </div>
+                        <h2>Hey, I'm LIVE Assistant</h2>
+                        <p>Livestream tips, content insights, and<br />benefits to help you grow.</p>
+                      </section>
+
+                      <p class="conversation-time" id="conversationTime">9:43 AM</p>
+
+                      <div class="sender-row">
+                        <div class="sender-bubble" id="conversationPrompt">Why was the online audience number<br />so low in the report?</div>
+                        <img class="sender-tail" src="./assets/live-assistant-demo/message-tail.svg" alt="" />
+                      </div>
+
+                      <section class="analysis-status" id="analysisStatus" aria-label="LIVE Assistant analysis status">
+                        <div class="analysis-heading">
+                          <span class="analysis-avatar" aria-hidden="true">
+                            <span class="conversation-orb">
+                              <img class="conversation-orb-base" src="./assets/live-assistant-demo/hero-base.svg" alt="" />
+                              <span class="conversation-orb-mask">
+                                <img class="conversation-orb-cyan" src="./assets/live-assistant-demo/hero-fill-b.svg" alt="" />
+                                <img class="conversation-orb-pink" src="./assets/live-assistant-demo/hero-fill-a.svg" alt="" />
+                              </span>
+                              <span class="conversation-orb-eyes"><i></i><i></i></span>
+                            </span>
+                          </span>
+                          <span class="phase-sheen" id="analysisPhase">Thinking</span>
+                        </div>
+                        <div class="analysis-steps" id="analysisSteps">
+                          <div class="analysis-pill" id="analysisStepOne" data-label="Analyzing your LIVE data" hidden>
+                            <img src="./assets/live-assistant-demo/analysis-spinner.svg" alt="" />
+                            <span>Analyzing your LIVE data</span>
+                          </div>
+                          <div class="analysis-pill" id="analysisStepTwo" data-label="Analyzing your recent appeals" hidden>
+                            <img src="./assets/live-assistant-demo/analysis-spinner.svg" alt="" />
+                            <span>Analyzing your recent appeals</span>
+                          </div>
+                        </div>
+                      </section>
+
+                      <section class="assistant-answer" id="assistantAnswer" aria-hidden="true" hidden>
+                        <div class="answer-bubble">
+                          <p id="answerText"></p>
+                          <span class="typing-caret" aria-hidden="true"></span>
+                        </div>
+                      </section>
+
+                      <div class="follow-up-suggestions" id="followUpSuggestions" hidden>
+                        <button type="button" id="followUpButton" data-follow-up="Improve my LIVE score?">
+                          <span>Improve my LIVE score?</span>
+                          <img src="./assets/live-assistant-demo/arrow.svg" alt="" />
+                        </button>
+                      </div>
+
+                      <section class="follow-up-round" id="followUpRound" aria-label="Follow-up conversation" aria-hidden="true" hidden>
+                        <div class="sender-row follow-up-sender-row">
+                          <div class="sender-bubble" id="followUpPrompt"></div>
+                          <img class="sender-tail" src="./assets/live-assistant-demo/message-tail.svg" alt="" />
+                        </div>
+
+                        <section class="analysis-status" id="followUpAnalysisStatus" aria-label="LIVE Assistant follow-up analysis status">
+                          <div class="analysis-heading">
+                            <span class="analysis-avatar" aria-hidden="true">
+                              <span class="conversation-orb">
+                                <img class="conversation-orb-base" src="./assets/live-assistant-demo/hero-base.svg" alt="" />
+                                <span class="conversation-orb-mask">
+                                  <img class="conversation-orb-cyan" src="./assets/live-assistant-demo/hero-fill-b.svg" alt="" />
+                                  <img class="conversation-orb-pink" src="./assets/live-assistant-demo/hero-fill-a.svg" alt="" />
+                                </span>
+                                <span class="conversation-orb-eyes"><i></i><i></i></span>
+                              </span>
+                            </span>
+                            <span class="phase-sheen" id="followUpAnalysisPhase">Thinking</span>
+                          </div>
+                          <div class="analysis-steps" id="followUpAnalysisSteps">
+                            <div class="analysis-pill" id="followUpAnalysisStepOne" data-label="Analyzing your LIVE data" hidden>
+                              <img src="./assets/live-assistant-demo/analysis-spinner.svg" alt="" />
+                              <span>Analyzing your LIVE data</span>
+                            </div>
+                            <div class="analysis-pill" id="followUpAnalysisStepTwo" data-label="Reviewing your performance" hidden>
+                              <img src="./assets/live-assistant-demo/analysis-spinner.svg" alt="" />
+                              <span>Reviewing your performance</span>
+                            </div>
+                          </div>
+                        </section>
+
+                        <section class="assistant-answer" id="followUpAssistantAnswer" aria-hidden="true" hidden>
+                          <div class="answer-bubble">
+                            <p id="followUpAnswerText"></p>
+                            <span class="typing-caret" aria-hidden="true"></span>
+                          </div>
+                        </section>
+
+                        <nav class="answer-actions" id="answerActions" aria-label="Answer actions" hidden>
+                          <div class="answer-actions-left">
+                            <button type="button" aria-label="Copy answer" data-toast="Answer copied."><img src="./assets/live-assistant-demo/action-copy.svg" alt="" /></button>
+                            <button type="button" aria-label="Read answer aloud" data-toast="Reading answer aloud."><img src="./assets/live-assistant-demo/action-audio.svg" alt="" /></button>
+                            <button type="button" id="dislikeButton" aria-label="Dislike answer"><img src="./assets/live-assistant-demo/action-dislike.svg" alt="" /></button>
+                            <button type="button" aria-label="Share answer" data-toast="Share options opened."><img src="./assets/live-assistant-demo/action-share.svg" alt="" /></button>
+                          </div>
+                          <button type="button" aria-label="Regenerate answer" data-toast="Regenerating answer."><img src="./assets/live-assistant-demo/action-redo.svg" alt="" /></button>
+                        </nav>
+                      </section>
+                    </div>
+                  </div>
+                </section>
+
+                <div class="bottom-compose">
+                  <button class="vip-pill" id="benefitPill" type="button" data-toast="VIP Support gives priority help for LIVE creators.">
+                    <img src="./assets/live-assistant-demo/vip.svg" alt="" />
+                    <span>VIP support</span>
+                  </button>
+
+                  <div class="input-suggestions" id="inputSuggestions" aria-live="polite" aria-label="Suggested completions">
+                    <button type="button" data-suggestion-index="0">
+                      <span class="suggestion-copy"></span>
+                      <img src="./assets/live-assistant-demo/suggestion-arrow.svg" alt="" />
+                    </button>
+                    <button type="button" data-suggestion-index="1">
+                      <span class="suggestion-copy"></span>
+                      <img src="./assets/live-assistant-demo/suggestion-arrow.svg" alt="" />
+                    </button>
+                  </div>
+
+                  <form class="composer" id="chatForm">
+                    <button class="compose-icon" id="plusButton" type="button" aria-label="Add attachment">
+                      <img src="./assets/live-assistant-demo/plus.svg" alt="" />
+                    </button>
+                    <label class="sr-only" for="chatInput">Ask LIVE Assistant</label>
+                    <textarea id="chatInput" name="message" inputmode="none" autocomplete="off" spellcheck="false" placeholder="Ask anything" rows="2"></textarea>
+                    <button class="compose-icon microphone" id="micButton" type="button" aria-label="Start voice input">
+                      <img src="./assets/live-assistant-demo/microphone.svg" alt="" />
+                    </button>
+                    <button class="send-button" id="sendButton" type="submit" aria-label="Send message">
+                      <img src="./assets/live-assistant-demo/paperplane.svg" alt="" />
+                    </button>
+                  </form>
+
+                  <section class="voice-composer" id="voiceComposer" aria-label="Voice input" aria-hidden="true">
+                    <div class="voice-transcript" aria-live="polite">
+                      <span id="voiceTranscript">Listening…</span>
+                    </div>
+                    <div class="voice-controls">
+                      <button class="voice-stop" id="voiceStop" type="button" aria-label="Stop voice input">
+                        <span aria-hidden="true"></span>
+                      </button>
+                      <div class="voice-waveform" id="voiceWaveform" aria-hidden="true">
+                        <img src="./assets/live-assistant-demo/voice-waveform.svg" alt="" />
+                        <span class="voice-wave-progress" id="voiceWaveProgress"></span>
+                      </div>
+                      <button class="voice-send" id="voiceSend" type="button" aria-label="Send recognized text" disabled>
+                        <img src="./assets/live-assistant-demo/paperplane.svg" alt="" />
+                      </button>
+                    </div>
+                  </section>
+                  <div class="home-indicator" aria-hidden="true"></div>
+                </div>
+
+                <section class="ios-keyboard" id="iosKeyboard" aria-label="iOS keyboard" aria-hidden="true">
+                  <img class="ios-keyboard-reference" src="./assets/live-assistant-demo/ios-keyboard.png" alt="" />
+                  <div class="keyboard-hit-layer" id="keyboardHitLayer">
+                    <div class="keyboard-row keyboard-row-one">
+                      <button type="button" data-key="q" aria-label="Q"></button>
+                      <button type="button" data-key="w" aria-label="W"></button>
+                      <button type="button" data-key="e" aria-label="E"></button>
+                      <button type="button" data-key="r" aria-label="R"></button>
+                      <button type="button" data-key="t" aria-label="T"></button>
+                      <button type="button" data-key="y" aria-label="Y"></button>
+                      <button type="button" data-key="u" aria-label="U"></button>
+                      <button type="button" data-key="i" aria-label="I"></button>
+                      <button type="button" data-key="o" aria-label="O"></button>
+                      <button type="button" data-key="p" aria-label="P"></button>
+                    </div>
+                    <div class="keyboard-row keyboard-row-two">
+                      <button type="button" data-key="a" aria-label="A"></button>
+                      <button type="button" data-key="s" aria-label="S"></button>
+                      <button type="button" data-key="d" aria-label="D"></button>
+                      <button type="button" data-key="f" aria-label="F"></button>
+                      <button type="button" data-key="g" aria-label="G"></button>
+                      <button type="button" data-key="h" aria-label="H"></button>
+                      <button type="button" data-key="j" aria-label="J"></button>
+                      <button type="button" data-key="k" aria-label="K"></button>
+                      <button type="button" data-key="l" aria-label="L"></button>
+                    </div>
+                    <div class="keyboard-row keyboard-row-three">
+                      <button type="button" data-key="Shift" aria-label="Shift"></button>
+                      <button type="button" data-key="z" aria-label="Z"></button>
+                      <button type="button" data-key="x" aria-label="X"></button>
+                      <button type="button" data-key="c" aria-label="C"></button>
+                      <button type="button" data-key="v" aria-label="V"></button>
+                      <button type="button" data-key="b" aria-label="B"></button>
+                      <button type="button" data-key="n" aria-label="N"></button>
+                      <button type="button" data-key="m" aria-label="M"></button>
+                      <button type="button" data-key="Backspace" aria-label="Delete"></button>
+                    </div>
+                    <div class="keyboard-row keyboard-row-four">
+                      <button type="button" data-key="123" aria-label="Numbers"></button>
+                      <button type="button" data-key="Emoji" aria-label="Emoji"></button>
+                      <button type="button" data-key=" " aria-label="Space"></button>
+                      <button class="keyboard-send" type="button" data-key="Enter" aria-label="Send">Send</button>
+                    </div>
+                  </div>
+                </section>
+
+                <div class="attachment-sheet" id="attachmentSheet" aria-hidden="true">
+                  <button type="button" data-toast="Screenshot attachment selected."><span>▧</span>Screenshot</button>
+                  <button type="button" data-toast="LIVE report attachment selected."><span>↗</span>LIVE report</button>
+                </div>
+
+                <div class="toast" id="toast" role="status" aria-live="polite">
+                  <img class="toast-icon" src="./assets/live-assistant-demo/feedback-success.svg" alt="" />
+                  <span id="toastText"></span>
+                </div>
+
+                <div class="feedback-modal" id="feedbackModal" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle" aria-hidden="true" hidden>
+                  <button class="feedback-backdrop" id="feedbackBackdrop" type="button" aria-label="Close feedback"></button>
+                  <section class="feedback-sheet">
+                    <header class="feedback-header">
+                      <h2 id="feedbackTitle">Feedback</h2>
+                      <button class="feedback-close" id="feedbackClose" type="button" aria-label="Close feedback">
+                        <img src="./assets/live-assistant-demo/feedback-close.svg" alt="" />
+                      </button>
+                    </header>
+
+                    <div class="feedback-options" aria-label="Feedback reasons">
+                      <button class="feedback-option is-selected" type="button" data-feedback-option aria-pressed="true">
+                        <span>It misunderstood my question</span>
+                        <i class="feedback-check"><img src="./assets/live-assistant-demo/feedback-check.svg" alt="" /></i>
+                      </button>
+                      <button class="feedback-option is-selected" type="button" data-feedback-option aria-pressed="true">
+                        <span>The response wasn’t relevant</span>
+                        <i class="feedback-check"><img src="./assets/live-assistant-demo/feedback-check.svg" alt="" /></i>
+                      </button>
+                      <button class="feedback-option" type="button" data-feedback-option aria-pressed="false">
+                        <span>The information was inaccurate</span>
+                        <i class="feedback-check"><img src="./assets/live-assistant-demo/feedback-check.svg" alt="" /></i>
+                      </button>
+                      <button class="feedback-option" type="button" data-feedback-option aria-pressed="false">
+                        <span>Other</span>
+                        <i class="feedback-check"><img src="./assets/live-assistant-demo/feedback-check.svg" alt="" /></i>
+                      </button>
+                    </div>
+
+                    <div class="feedback-detail">
+                      <textarea id="feedbackText" maxlength="140" inputmode="none" placeholder="Tell us more（optional）" aria-label="Tell us more"></textarea>
+                      <span><b id="feedbackCount">0</b>/140</span>
+                    </div>
+
+                    <footer class="feedback-footer">
+                      <button class="feedback-submit" id="feedbackSubmit" type="button">Submit</button>
+                      <div class="feedback-home-indicator" aria-hidden="true"></div>
+                    </footer>
+                  </section>
+                </div>
+
+                <div class="intro-onboarding" id="introOnboarding" role="dialog" aria-modal="true" aria-labelledby="introTitle" aria-hidden="true" hidden>
+                  <section class="intro-sheet">
+                    <div class="intro-content">
+                      <div class="intro-avatar-stage intro-reveal" aria-hidden="true">
+                        <div class="intro-avatar">
+                          <span class="conversation-orb">
+                            <img class="conversation-orb-base" src="./assets/live-assistant-demo/hero-base.svg" alt="" />
+                            <span class="conversation-orb-mask">
+                              <img class="conversation-orb-cyan" src="./assets/live-assistant-demo/hero-fill-b.svg" alt="" />
+                              <img class="conversation-orb-pink" src="./assets/live-assistant-demo/hero-fill-a.svg" alt="" />
+                            </span>
+                            <span class="conversation-orb-eyes"><i></i><i></i></span>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div class="intro-copy">
+                        <h2 class="intro-reveal" id="introTitle">AI LIVE Assistant</h2>
+                        <p class="intro-subtitle intro-reveal">Congratulations!<br />You've obtained the following services:</p>
+                        <ul class="intro-benefits" aria-label="Available AI LIVE Assistant services">
+                          <li class="intro-reveal">
+                            <img src="./assets/live-assistant-demo/intro-bulb.svg" alt="" />
+                            <span>LIVE Tips</span>
+                          </li>
+                          <li class="intro-reveal">
+                            <img src="./assets/live-assistant-demo/intro-fire.svg" alt="" />
+                            <span>Content promotion</span>
+                          </li>
+                          <li class="intro-reveal">
+                            <img src="./assets/live-assistant-demo/intro-gift.svg" alt="" />
+                            <span>Welfare information</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="intro-footer intro-reveal">
+                      <button class="intro-cta" id="introCta" type="button">Go Use</button>
+                      <div class="intro-home-indicator" aria-hidden="true"><i></i></div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+
+            <button class="dynamic-island" id="dynamicIsland" type="button" aria-label="Dynamic Island">
+              <span class="island-sensor" aria-hidden="true"></span>
+              <span class="island-camera" aria-hidden="true">
+                <img src="./assets/live-assistant-demo/camera-ring.svg" alt="" />
+                <img src="./assets/live-assistant-demo/camera-lens.png" alt="" />
+              </span>
+              <span class="island-message">LIVE Assistant is ready</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <p class="demo-hint">Tap a suggestion or ask LIVE Assistant anything</p>
+    </main>
+    <script src="./live-assistant-demo.js?v=20260922-12"></script>
+  </body>
+</html>

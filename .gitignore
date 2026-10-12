@@ -1,0 +1,10 @@
+.DS_Store
+**/.DS_Store
+tmp/
+dist/
+node_modules/
+.env
+.env.*
+*.log
+figma-portfolio-section.png
+

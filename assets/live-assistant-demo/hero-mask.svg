@@ -1,0 +1,17 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="161.043" height="161.237" viewBox="0 0 161.043 161.237" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Union" filter="url(#filter0_i_0_219)">
+<path d="M80.5216 0C124.992 0 161.043 36.0507 161.043 80.5216C161.043 92.3688 158.484 103.618 153.889 113.748C153.335 115.653 152.693 117.868 151.962 120.48C150.051 127.303 151.102 128.524 155.594 129.561C163.465 131.377 161.043 143.486 141.064 151.962C118.875 161.375 92.0249 161.648 78.7053 161.043C78.616 161.039 78.531 161.029 78.4499 161.017C34.9365 159.918 0 124.3 0 80.5216C0 36.0507 36.0507 0 80.5216 0Z" fill="white"/>
+</g>
+<defs>
+<filter id="filter0_i_0_219" x="0" y="0" width="161.043" height="162.447" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="2.4217"/>
+<feGaussianBlur stdDeviation="0.605425"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.85 0"/>
+<feBlend mode="normal" in2="shape" result="effect1_innerShadow_0_219"/>
+</filter>
+</defs>
+</svg>
