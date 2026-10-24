@@ -8,10 +8,6 @@
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const scrollBehavior = () => reducedMotion.matches ? "auto" : "smooth";
   const currentLanguage = () => document.documentElement.lang.startsWith("zh") ? "zh" : "en";
-  const editorDocuments = new WeakMap();
-  document.querySelectorAll(".editor-window").forEach((editor) => {
-    editorDocuments.set(editor, editor.querySelector(".script-document").innerHTML);
-  });
 
   const mobileNav = document.createElement("nav");
   mobileNav.className = "mobile-section-nav";
@@ -74,102 +70,6 @@
     try { localStorage.setItem("portfolio-language", next); } catch (_) { /* Private browsing can restrict storage. */ }
     requestAnimationFrame(updateProgress);
   };
-
-  const feedback = (element, zh, en) => {
-    if (!element) return;
-    element.dataset.zh = zh;
-    element.dataset.en = en;
-    element.textContent = currentLanguage() === "zh" ? zh : en;
-  };
-  document.addEventListener("click", (event) => {
-    const button = event.target.closest("button[data-action]");
-    if (!button) return;
-    const action = button.dataset.action;
-    const agent = button.closest(".agent-panel");
-    const editor = button.closest(".editor-window");
-    if (action === "option") {
-      agent.querySelectorAll(".agent-option").forEach((option) => {
-        const selected = option === button;
-        option.classList.toggle("selected", selected);
-        option.setAttribute("aria-pressed", String(selected));
-      });
-    } else if (action === "confirm-direction" || action === "skip-direction") {
-      const selected = agent.querySelector(".agent-option.selected strong");
-      const customIdea = agent.querySelector(".other-idea input").value.trim();
-      feedback(agent.querySelector(".demo-feedback"), action === "skip-direction" ? "已跳过，保留你的创作方向。" : `已确认：${customIdea || selected.dataset.zh}`, action === "skip-direction" ? "Skipped. Your creative direction is preserved." : `Confirmed: ${customIdea || selected.dataset.en}`);
-    } else if (action === "history" || action === "close-history") {
-      const overlay = agent?.querySelector(".agent-history-overlay");
-      const drawer = button.closest(".editor-history-drawer");
-      if (drawer && action === "close-history") drawer.hidden = true;
-      else if (overlay) {
-        overlay.hidden = action === "close-history" ? true : !overlay.hidden;
-        agent.querySelector(".history-toggle").setAttribute("aria-expanded", String(!overlay.hidden));
-        if (overlay.hidden) agent.querySelector(".history-toggle").focus({ preventScroll: true });
-      } else {
-        const list = button.closest(".version-list");
-        const collapsed = list.classList.toggle("is-collapsed");
-        list.querySelectorAll(".version-day").forEach((day) => { day.hidden = collapsed; });
-        button.textContent = collapsed ? "+" : "×";
-        button.setAttribute("aria-expanded", String(!collapsed));
-      }
-    } else if (action === "accept" || action === "discard") {
-      const accepted = action === "accept";
-      if (editor) {
-        editor.querySelectorAll(".scene-copy [data-zh]").forEach((line) => {
-          if (!line.dataset.originalZh) { line.dataset.originalZh = line.dataset.zh; line.dataset.originalEn = line.dataset.en; }
-          line.dataset.zh = accepted ? line.dataset.originalZh.replaceAll("林峰", "林川") : line.dataset.originalZh;
-          line.dataset.en = accepted ? line.dataset.originalEn.replaceAll("Lin Feng", "Lin Chuan") : line.dataset.originalEn;
-          line.textContent = line.dataset[currentLanguage()];
-        });
-        editor.querySelectorAll(".script-change").forEach((line) => { line.dataset.selected = String(accepted); });
-      }
-      feedback(agent.querySelector(".demo-feedback"), accepted ? "已使用此修改，可继续查看下一处。" : "已丢弃此修改，保留原版本。", accepted ? "Change accepted. You can review the next change." : "Change discarded. The original version is preserved.");
-    } else if (action === "next-change" && editor) {
-      const lines = [...editor.querySelectorAll(".scene-copy p")];
-      const index = (Number(editor.dataset.changeIndex || 0) + 1) % lines.length;
-      editor.dataset.changeIndex = index;
-      lines.forEach((line, i) => { line.dataset.selected = String(i === index); });
-      const scroller = editor.querySelector(".editor-document-scroll");
-      scroller.scrollBy({ top: lines[index].getBoundingClientRect().top - scroller.getBoundingClientRect().top - 60, behavior: scrollBehavior() });
-    } else if (action === "quote" && editor) {
-      const quoted = editor.querySelector(".quoted-text");
-      quoted.hidden = !quoted.hidden;
-      button.setAttribute("aria-pressed", String(!quoted.hidden));
-      feedback(editor.querySelector(".editor-status"), quoted.hidden ? "已取消引用" : "已引用选中的第 1 集内容", quoted.hidden ? "Quotation removed" : "Selected passage from episode 1 quoted");
-    } else if (action === "editor-tab" && editor) {
-      editor.querySelectorAll(".editor-tabs button").forEach((tab) => {
-        tab.classList.toggle("active", tab === button);
-        tab.setAttribute("aria-pressed", String(tab === button));
-      });
-      const documentNode = editor.querySelector(".script-document");
-      const tab = Number(button.dataset.tab);
-      if (tab === 2) documentNode.innerHTML = editorDocuments.get(editor);
-      else if (tab === 0) documentNode.innerHTML = `<h4 data-zh="故事设定" data-en="Story settings">故事设定</h4><p data-zh="题材：末世 / 异能觉醒 / 都市逆袭" data-en="Genre: apocalypse / awakened powers / urban comeback">题材：末世 / 异能觉醒 / 都市逆袭</p><p data-zh="主角：林峰，底层网管，扮猪吃虎，吞胶囊觉醒" data-en="Lead: Lin Feng, an internet-café worker whose powers awaken after taking a capsule">主角：林峰，底层网管，扮猪吃虎，吞胶囊觉醒</p><p data-zh="反派：基地小队长（前期）→ 制药集团二代（中期）" data-en="Antagonists: a base squad leader, then a pharmaceutical heir">反派：基地小队长（前期）→ 制药集团二代（中期）</p><p data-zh="基调：先压抑后爆发；节奏偏升级流" data-en="Tone: oppression followed by release; a progression-driven pace">基调：先压抑后爆发；节奏偏升级流</p>`;
-      else {
-        const original = document.createElement("div");
-        original.innerHTML = editorDocuments.get(editor);
-        documentNode.innerHTML = [...original.querySelectorAll("summary")].map((summary) => `<p>${summary.innerHTML}</p>`).join("");
-      }
-      setLanguage(currentLanguage());
-    } else if (action === "restore" || action === "compare") {
-      const item = button.closest(".version-item");
-      const area = button.closest(".version-detail-panel, .editor-window, .agent-panel");
-      area?.querySelectorAll(".version-item").forEach((version) => version.classList.toggle("is-selected", version === item));
-      const status = area?.querySelector(".editor-status") || area?.querySelector(".version-preview p") || item?.querySelector("p");
-      feedback(status, action === "restore" ? "已回到此版本：5月29日 16:23" : "修改对比：已高亮本次修改", action === "restore" ? "Restored version: May 29, 16:23" : "Changes compared: this revision is highlighted");
-      area?.querySelectorAll(".script-change").forEach((line) => { line.dataset.selected = String(action === "compare"); });
-    }
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape") return;
-    document.querySelectorAll(".agent-history-overlay:not([hidden])").forEach((overlay) => {
-      overlay.hidden = true;
-      const toggle = overlay.closest(".agent-panel").querySelector(".history-toggle");
-      toggle.setAttribute("aria-expanded", "false");
-      toggle.focus({ preventScroll: true });
-    });
-  });
 
   if (languageToggle) languageToggle.addEventListener("click", () => setLanguage(document.documentElement.lang.startsWith("zh") ? "en" : "zh"));
   let savedLanguage = "zh";
