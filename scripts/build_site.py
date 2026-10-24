@@ -39,6 +39,9 @@ def collect_files():
         if source.suffix == ".js":
             refs += JS_ASSETS.findall(content)
         for ref in refs:
+            # Template markup uses assets from the literal JS asset map above.
+            if source.suffix == ".js" and "${" in ref:
+                continue
             url = urlsplit(unescape(ref))
             if url.scheme or url.netloc or not url.path:
                 continue
