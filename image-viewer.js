@@ -14,7 +14,7 @@
   const dialog = document.createElement('dialog');
   dialog.className = 'image-viewer';
   dialog.setAttribute('aria-label', '高清图片查看器');
-  dialog.innerHTML = `<header class="image-viewer-toolbar"><div class="image-viewer-caption" aria-live="polite"></div><div class="image-viewer-controls"><button type="button" data-viewer="out" aria-label="缩小">−</button><button type="button" data-viewer="in" aria-label="放大">＋</button><button type="button" data-viewer="fit">适应屏幕</button><button type="button" data-viewer="actual">原始大小</button><a class="image-viewer-original" target="_blank" rel="noopener">打开原图 ↗</a><button type="button" data-viewer="close" aria-label="关闭图片" autofocus>关闭 ×</button></div></header><div class="image-viewer-stage"><img alt="" draggable="false" hidden /><p class="image-viewer-status" role="status">正在加载高清图…</p></div><footer class="image-viewer-footer"><button type="button" data-viewer="previous" aria-label="上一张">←</button><span class="image-viewer-count"></span><span>滚轮缩放 · 拖动查看 · Esc 关闭</span><button type="button" data-viewer="next" aria-label="下一张">→</button></footer>`;
+  dialog.innerHTML = `<header class="image-viewer-toolbar"><div class="image-viewer-caption" aria-live="polite"></div><div class="image-viewer-controls"><button type="button" data-viewer="out" aria-label="缩小">−</button><button type="button" data-viewer="in" aria-label="放大">＋</button><button type="button" data-viewer="fit">适应屏幕</button><button type="button" data-viewer="actual">原始大小</button><a class="image-viewer-original" target="_blank" rel="noopener">打开原图 ↗</a><button type="button" data-viewer="close" aria-label="关闭图片" autofocus>关闭 ×</button></div></header><div class="image-viewer-stage"><img alt="" draggable="false" hidden /><p class="image-viewer-status" role="status">正在加载高清图…</p></div><footer class="image-viewer-footer"><button type="button" data-viewer="previous" aria-label="上一张">←</button><span class="image-viewer-count"></span><span>点击图片或空白关闭 · 滚轮缩放 · 拖动查看</span><button type="button" data-viewer="next" aria-label="下一张">→</button></footer>`;
   document.body.append(dialog);
   const stage = dialog.querySelector('.image-viewer-stage');
   const full = stage.querySelector('img');
@@ -22,6 +22,7 @@
   let index = 0, scale = 1, fitScale = 1, panX = 0, panY = 0, requestId = 0, trigger = null;
   const pointers = new Map();
   let gesture = null;
+  let gestureMoved = false;
   const fit = () => Math.min(1, (stage.clientWidth - 32) / full.naturalWidth, (stage.clientHeight - 32) / full.naturalHeight);
   const render = () => {
     if (!full.naturalWidth) return;
@@ -64,6 +65,13 @@
   }));
   dialog.addEventListener('click', (event) => {
     const action = event.target.closest('[data-viewer]')?.dataset.viewer;
+    // A normal click anywhere outside the controls dismisses the enlarged image.
+    // Ignore the synthetic click emitted after dragging or a pinch gesture.
+    if (!action && !event.target.closest('button, a')) {
+      if (!gestureMoved) dialog.close();
+      gestureMoved = false;
+      return;
+    }
     if (action === 'close') dialog.close();
     if (action === 'in') zoom(1.25);
     if (action === 'out') zoom(.8);
@@ -84,7 +92,6 @@
     if (event.key === '-') { event.preventDefault(); zoom(.8); }
   });
   stage.addEventListener('wheel', (event) => { event.preventDefault(); zoom(Math.exp(-event.deltaY * .0015)); }, {passive:false});
-  stage.addEventListener('dblclick', () => { if (scale > fitScale * 1.1) reset(); else { scale = Math.max(1, fitScale * 2); render(); } });
   const measureGesture = () => {
     const points = [...pointers.values()];
     gesture = { x:points[0]?.x || 0, y:points[0]?.y || 0, panX, panY, scale,
@@ -92,13 +99,16 @@
   };
   stage.addEventListener('pointerdown', (event) => {
     if (full.hidden) return;
+    if (!pointers.size) gestureMoved = false;
     stage.setPointerCapture(event.pointerId);
     pointers.set(event.pointerId, {x:event.clientX,y:event.clientY}); measureGesture();
+    if (pointers.size > 1) gestureMoved = true;
   });
   stage.addEventListener('pointermove', (event) => {
     if (!pointers.has(event.pointerId) || !gesture) return;
     pointers.set(event.pointerId, {x:event.clientX,y:event.clientY});
     const points = [...pointers.values()];
+    if (Math.hypot(event.clientX - gesture.x, event.clientY - gesture.y) > 6) gestureMoved = true;
     if (points.length > 1 && gesture.distance > 0) {
       const distance = Math.hypot(points[1].x - points[0].x, points[1].y - points[0].y);
       scale = Math.max(fitScale, Math.min(4, gesture.scale * distance / gesture.distance));
