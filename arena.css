@@ -184,10 +184,16 @@ html[lang="en"] .project-intro { gap:110px; } html[lang="en"] .insight-word { fo
 #research .interview-quote:nth-child(5) { left:43.15930%; top:89.29670%; opacity:0.7; --quote-font:2.470487cqw; --quote-line:3.485913cqw; --quote-avatar:4.940769cqw; --quote-avatar-width:5.126343cqw; --quote-gap:2.470487cqw; --quote-px:2.058739cqw; --quote-py:1.235244cqw; --quote-radius:2.058739cqw; --quote-small-radius:1.029370cqw; --quote-shadow:0.102937cqw; --quote-color:rgba(0,0,0,0.8); }
 #research .interview-quote:nth-child(6) { left:60.07460%; top:46.35960%; opacity:0.6; --quote-font:1.973232cqw; --quote-line:2.665698cqw; --quote-avatar:3.946464cqw; --quote-avatar-width:4.101074cqw; --quote-gap:1.973232cqw; --quote-px:1.644326cqw; --quote-py:0.986513cqw; --quote-radius:1.644326cqw; --quote-small-radius:0.822060cqw; --quote-shadow:0.082227cqw; --quote-color:rgba(0,0,0,0.6); }
 
-#research .research-insight h4 { font-size:20px; font-weight:500; line-height:28px; }
-#research .research-insight p { margin-inline:48px; color:#0009; }
+@font-face { font-family:"Arena PingFang"; src:local("PingFangSC-Regular"); font-style:normal; font-weight:400; font-display:swap; }
+@font-face { font-family:"Arena PingFang"; src:local("PingFangSC-Medium"); font-style:normal; font-weight:500; font-display:swap; }
+#research .research-insight { font-family:"Arena PingFang","PingFang SC","Microsoft YaHei",sans-serif; font-synthesis:none; -webkit-font-smoothing:antialiased; }
+#research .research-insight h4 { display:flex; justify-content:center; align-items:center; gap:24px; color:#000; font-size:20px; font-weight:500; line-height:28px; letter-spacing:0; }
+#research .research-insight-emoji { display:inline-block; width:20px; height:20px; color:rgba(0,0,0,.6); font-size:20px; line-height:20px; }
+#research .research-insight p { margin-inline:48px; color:rgba(0,0,0,.6); font-size:14px; font-weight:400; line-height:20px; letter-spacing:0; }
+#research .research-insight-copy strong { color:rgba(0,0,0,.8); font-size:inherit; font-weight:500; }
 #research .research-goals { gap:60px; margin-top:48px; }
-#research .research-goals span { padding:16px 36px; font-size:18px; font-weight:500; line-height:25px; }
+#research .research-goals span { padding:16px 36px; border-radius:70px; background:#0064fa; color:#fff; font-size:18px; font-weight:500; line-height:25px; letter-spacing:0; }
+#research .research-goals b { width:20px; flex:0 0 20px; color:#fff; font-size:20px; font-weight:500; line-height:20px; }
 html[lang="en"] #research .interview-quotes { display:flex; flex-direction:column; gap:20px; aspect-ratio:auto; }
 html[lang="en"] #research .interview-quote:nth-child(n) { position:relative; left:auto; right:auto; top:auto; width:fit-content; max-width:100%; }
 html[lang="en"] #research .interview-quote p { min-width:0; white-space:normal; flex:1; }
