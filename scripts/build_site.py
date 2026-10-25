@@ -14,6 +14,7 @@ PAGES = (
     "onboarding.html",
     "live-assistant.html",
     "dialog-agent.html",
+    "arena.html",
     "live-assistant-demo.html",
 )
 TEXT_TYPES = {".html", ".css", ".js", ".svg"}
