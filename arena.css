@@ -291,3 +291,38 @@ html[lang="en"] #research .research-badges .badge strong { top:73%; font-size:3.
   #readability .small-metrics { gap:48px; }
 }
 @media(max-width:440px) { #readability .check-list { flex-direction:column; gap:10px; } }
+/* Figma 341:12575: measured workflow labels, frames and highlighted regions. */
+#budget-flow .state-label { align-items:center; justify-content:center; width:78.931px; height:31.505px; padding:5.907px 15.753px; margin-bottom:16.005px; border-radius:49.227px; background:#c1c1c1; color:#fff; font:400 13.784px/19.691px "Arena PingFang","PingFang SC",sans-serif; }
+#budget-flow .state-label.after { width:auto; height:36px; padding:4px 24px; margin-bottom:16px; border-radius:50px; background:#0064fa; font-size:20px; font-weight:500; line-height:28px; }
+#budget-flow .workflow-old { grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; align-items:start; }
+#budget-flow .workflow-step>p { margin:0 0 12px; color:#000; font:500 18px/25px "Arena PingFang","PingFang SC",sans-serif; font-synthesis:none; -webkit-font-smoothing:antialiased; }
+#budget-flow .workflow-screen { position:relative; aspect-ratio:371.3333333333333/236.54590185185182; padding:5.282px; border-radius:13.205px; }
+#budget-flow .workflow-screen>.image-zoom-link { height:100%; border-radius:7.923px; overflow:hidden; }
+#budget-flow .workflow-screen>.image-zoom-link>img { width:100%; height:100%; object-fit:cover; border-radius:inherit; }
+#budget-flow .workflow-screen.dimmed::after { inset:5.282px; border-radius:7.923px; background:rgba(0,0,0,.2); }
+#budget-flow .workflow-menu { left:79.35457809694795%; right:auto; top:8.662166556084678%; width:19.120287253141832%; height:6.548834656920828%; border-radius:4px; }
+#budget-flow .workflow-form { left:54.2181328545781%; right:auto; top:2.3209026058030697%; bottom:auto; width:44.43447037701975%; height:95.54171018424293%; border-radius:0 7.92px 7.92px 0; }
+#budget-flow .workflow-value-focus { position:absolute; z-index:2; left:29.622980251346497%; top:48.82350490786821%; width:22.351885098743267%; height:8.032267670356706%; border-radius:4px; overflow:hidden; pointer-events:none; }
+#budget-flow .workflow-value-focus img { width:100%; height:100%; max-width:none; object-fit:fill; }
+#budget-flow .workflow-after { margin-top:32px; }
+#budget-flow .workflow-new { display:grid; grid-template-columns:minmax(0,801.54fr) minmax(0,324.46fr); gap:36px; align-items:end; margin-top:0; }
+#budget-flow .workflow-images { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; align-items:start; min-width:0; }
+#budget-flow .workflow-images .workflow-screen { aspect-ratio:388.77/246.42491388888888; padding:3.886px; border-radius:9.715px; }
+#budget-flow .workflow-images .workflow-screen>.image-zoom-link { border-radius:5.829px; }
+#budget-flow .workflow-images .workflow-screen.dimmed::after { inset:3.886px; border-radius:5.829px; background:rgba(0,0,0,.2); }
+#budget-flow .workflow-images .workflow-form { left:54.16055765619775%; top:1.659734779026503%; width:44.780718676852636%; height:96.8883365858266%; border-radius:0 5.83px 5.83px 0; }
+#budget-flow .workflow-row-focus { position:absolute; z-index:2; left:41.947681148236754%; top:54.15442695870093%; width:55.63855235743499%; height:9.452777981086397%; overflow:hidden; border-radius:5.137px; pointer-events:none; }
+#budget-flow .workflow-row-focus img { position:absolute; left:-90.05%; top:-614.29%; width:194.66%; height:1129.73%; max-width:none; }
+#budget-flow .workflow-summary { display:flex; flex-direction:column; gap:32px; min-width:0; grid-column:auto; padding:0; font-family:"Arena PingFang","PingFang SC",sans-serif; font-synthesis:none; -webkit-font-smoothing:antialiased; }
+#budget-flow .workflow-summary .note h4 { margin-bottom:12px; color:#000; font-size:18px; font-weight:500; line-height:25px; }
+#budget-flow .workflow-summary .note p { color:rgba(0,0,0,.4); font-size:14px; font-weight:400; line-height:20px; }
+#budget-flow .workflow-summary .small-metrics { display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin:0; width:100%; }
+#budget-flow .small-metric { gap:15px; }
+#budget-flow .small-metric span { color:rgba(0,0,0,.4); font-size:14px; font-weight:400; line-height:20px; }
+#budget-flow .small-metric strong { font-size:32px; font-weight:500; line-height:45px; white-space:nowrap; color:transparent; background:linear-gradient(115.231812deg,#000 52.596%,#0064fa 93.196%); background-clip:text; -webkit-background-clip:text; }
+#budget-flow .workflow-summary .check-list { display:flex; flex-direction:column; align-items:flex-start; margin:0; gap:21px; color:#000; font-size:16px; font-weight:500; line-height:22px; }
+#budget-flow .check-list li { display:flex; align-items:center; gap:12px; white-space:nowrap; }
+#budget-flow .check-list li::before { margin:0; font-weight:400; font-size:16px; line-height:22px; }
+@media(max-width:1100px) { #budget-flow .workflow-new { grid-template-columns:minmax(0,1fr); gap:32px; } #budget-flow .workflow-summary { width:100%; max-width:700px; gap:24px; } #budget-flow .workflow-summary .small-metrics { width:min(100%,402px); align-self:flex-end; } }
+@media(max-width:680px) { #budget-flow .workflow-old,#budget-flow .workflow-images { grid-template-columns:minmax(0,1fr); gap:28px; } #budget-flow .workflow-step>p { font-size:18px; line-height:25px; } #budget-flow .workflow-summary .small-metrics { width:100%; } }
+@media(max-width:440px) { #budget-flow .workflow-summary .small-metrics { flex-wrap:wrap; } }
