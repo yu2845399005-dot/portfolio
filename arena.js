@@ -54,4 +54,12 @@
   addEventListener('resize', scheduleProgress);
   addEventListener('load', scheduleProgress);
   document.fonts?.ready.then(scheduleProgress);
+
+  const statusScreen = document.querySelector('#budget-status .status-screen');
+  if (statusScreen) {
+    const fitStatusOverlay = () => statusScreen.style.setProperty('--status-screen-scale', statusScreen.getBoundingClientRect().width / 593.611);
+    fitStatusOverlay();
+    if ('ResizeObserver' in window) new ResizeObserver(fitStatusOverlay).observe(statusScreen);
+    else addEventListener('resize', fitStatusOverlay);
+  }
 })();

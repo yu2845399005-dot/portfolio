@@ -207,3 +207,44 @@ html[lang="en"] #research .research-badges .badge strong { top:73%; font-size:3.
   #research .interview-quote:nth-child(n+4) { align-self:flex-end; }
   #research .interview-quote p { flex:1; min-width:0; white-space:normal; }
 }
+/* Budget-status composition: Figma 341:12425. Keep SVGs at their exported sizes. */
+#budget-status .status-grid { width:min(100%,1094px); grid-template-columns:minmax(0,593.611fr) minmax(0,402.389fr); gap:98px; align-items:center; }
+#budget-status .status-screen { container-type:inline-size; min-width:0; margin:0; }
+#budget-status .screen-shell { aspect-ratio:1217/768.293; padding:8px; border-radius:18px; }
+#budget-status .screen-shell>.image-zoom-link { height:100%; border-radius:10px; overflow:hidden; }
+#budget-status .screen-shell>.image-zoom-link>img { width:100%; height:100%; object-fit:cover; border-radius:10px; }
+#budget-status figcaption { margin-top:16px; font-size:14px; line-height:20px; color:rgba(0,0,0,.5); }
+#budget-status .balance-popover { left:69.201%; top:4.840cqw; width:239.8px; height:62.849px; min-height:0; gap:17.458px; padding:10.475px; border-radius:10.475px; box-shadow:none; filter:drop-shadow(0 0 3.492px #0000001a); transform:rotate(1.51deg) scale(var(--status-screen-scale,1)); transform-origin:top left; font-family:Inter,Arial,sans-serif; }
+#budget-status .mini-ring { width:41.8989px; height:41.8989px; }
+#budget-status .balance-popover { pointer-events:none; }
+#budget-status .mini-ring span { inset:auto; left:8.73px; top:12.66px; width:24.005px; color:rgba(28,31,35,.6); font:400 5.237px/6.983px Inter,Arial,sans-serif; }
+#budget-status .mini-ring b { display:block; font:600 6.983px/9.602px Inter,Arial,sans-serif; color:#1d232e; letter-spacing:-.1397px; }
+#budget-status .mini-balance { min-width:0; color:rgba(28,31,35,.6); }
+#budget-status .mini-balance-title { display:flex; align-items:center; gap:2px; padding-block:.873px; font-size:6.983px; line-height:9.976px; white-space:nowrap; }
+#budget-status .mini-balance-amount { display:flex; align-items:baseline; gap:1.746px; white-space:nowrap; }
+#budget-status .mini-balance-amount strong { color:#1d232e; font-size:12.221px; font-weight:700; line-height:17.458px; letter-spacing:-.1599px; }
+#budget-status .mini-balance-amount small { font-size:12.221px; font-weight:400; line-height:17.458px; letter-spacing:-.3666px; }
+#budget-status .status-grid>.note { min-width:0; font-family:"Arena PingFang","PingFang SC",sans-serif; font-synthesis:none; -webkit-font-smoothing:antialiased; }
+#budget-status .status-grid>.note>h4 { margin-bottom:12px; font-size:18px; font-weight:500; line-height:25px; color:#000; }
+#budget-status .status-grid>.note>p { font-size:14px; font-weight:400; line-height:20px; color:rgba(0,0,0,.4); }
+#budget-status .ring-examples { height:115.355px; margin-top:36px; padding:19.226px; border-radius:12.817px; align-items:center; gap:0; box-shadow:none; filter:drop-shadow(0 0 4.806px #0000001a); }
+#budget-status .ring-example { flex:0 0 76.903px; }
+#budget-status .ring { width:76.9029px; height:76.9029px; font-family:Inter,Arial,sans-serif; }
+#budget-status .ring-copy { inset:auto; left:16.02px; top:23.23px; width:44.059px; text-align:center; color:rgba(28,31,35,.6); font-size:9.613px; font-weight:400; line-height:12.817px; }
+#budget-status .ring-copy b { font-size:12.817px; font-weight:600; line-height:17.624px; color:#1d232e; letter-spacing:-.2563px; }
+#budget-status .ring.warning .ring-progress,#budget-status .ring.danger .ring-progress { left:34.609px; right:auto; top:0; }
+#budget-status .ring-example>p { margin:9.613px 0 0; text-align:center; font-size:9.613px; font-weight:400; line-height:13px; color:rgba(0,0,0,.5); }
+#budget-status .status-chips { display:flex; justify-content:space-between; align-items:center; gap:0; margin-top:36px; min-height:66.209px; container-type:inline-size; }
+#budget-status .status-chip { flex:0 0 47.141%; width:47.141%; height:12.9174cqw; min-height:0; padding:0 3.169cqw; gap:1.5845cqw; align-items:flex-end; border-radius:3.169cqw; border-bottom:.797px solid #1c1f2314; box-shadow:none; filter:drop-shadow(0 0 4.782px #0000001f); font-family:Inter,Arial,sans-serif; }
+#budget-status .status-chip p { margin:0; text-align:right; font-size:3.169cqw; font-weight:400; line-height:4.3577cqw; letter-spacing:-.06337cqw; color:rgba(28,31,35,.6); white-space:nowrap; }
+#budget-status .status-chip b { color:#1d232e; font-weight:600; }
+#budget-status .status-chip small { justify-content:flex-end; gap:1.5845cqw; width:auto; color:rgba(28,31,35,.6); font-size:2.3768cqw; font-weight:400; line-height:3.169cqw; white-space:nowrap; }
+#budget-status .status-chip-angle { display:grid; place-items:center; width:50.2834%; height:16.45397cqw; flex:0 0 50.2834%; }
+#budget-status .status-chip-angle>.status-chip { width:97.5788%; height:12.9387cqw; transform:rotate(4.19deg) skewX(-1.79deg); }
+@media(max-width:1280px) { #budget-status .status-grid { gap:64px; } }
+@media(max-width:1000px) {
+  #budget-status .status-grid { width:100%; grid-template-columns:minmax(0,1fr); gap:36px; }
+  #budget-status .status-screen { width:min(91%,593.611px); }
+  #budget-status .status-grid>.note { width:min(100%,402.389px); justify-self:center; }
+}
+@media(max-width:440px) { #budget-status .screen-shell { padding:5px; border-radius:12px; } #budget-status .screen-shell>.image-zoom-link,#budget-status .screen-shell>.image-zoom-link>img { border-radius:7px; } }
