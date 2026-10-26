@@ -438,3 +438,36 @@ html[lang="en"] #research .research-badges .badge strong { top:73%; font-size:3.
   #change-history .history-excerpts { margin-top:28px; }
 }
 html[lang="en"] #change-history .history-features h5 { font-size:13px; gap:6px; }
+
+/* Figma 341:12875: both native badges share the same 184.258 x 235.402 geometry. */
+#audiences { font-family:"Arena PingFang","PingFang SC",sans-serif; font-synthesis:none; -webkit-font-smoothing:antialiased; }
+#audiences .block-heading>p { color:rgba(0,0,0,.5); }
+#audiences .audience-diagram { grid-template-columns:minmax(0,528.25354fr) minmax(0,405.648285fr); align-items:center; gap:12.062%; width:100%; margin:0; padding-inline:4.302926%; }
+#audiences .audience-group { position:relative; width:100%; aspect-ratio:528.25354/429.46875; justify-self:stretch; container-type:normal; }
+#audiences .audience-group.region-group { width:100%; aspect-ratio:405.648285/425.966187; }
+#audiences .audience-canvas { position:absolute; width:528.25354px; height:429.46875px; transform:scale(var(--audience-scale,1)); transform-origin:top left; }
+#audiences .region-group .audience-canvas { width:405.648285px; height:425.966187px; }
+#audiences .audience-group .badge { position:absolute; z-index:1; left:170.9469px; top:91.4682px; width:184.258px; height:235.402px; display:block; margin:0; padding:0; border-radius:14.012px; background:linear-gradient(180deg,#eef5ff,#d2e5ff); box-shadow:0 2.802px 2.802px #a8bbe3; }
+#audiences .audience-group .badge::before { position:absolute; left:71.8116px; top:14.012px; width:40.6349px; height:14.012px; margin:0; border-radius:21.018px; background:#fff; }
+#audiences .audience-group .badge::after { position:absolute; z-index:2; left:83.46px; top:-91.4682px; bottom:auto; width:16.814px; height:108.502px; border:0; border-right:.701px solid #fff; border-bottom:.701px solid #fff; border-radius:2.802px; background:linear-gradient(180deg,#fff,#1d7bff); }
+#audiences .audience-group .badge-emoji { position:absolute; top:63.0541px; left:0; display:block; width:100%; height:78px; font-size:78.467px; line-height:78px; text-align:center; }
+#audiences .audience-group .badge strong { position:absolute; top:176.0842px; left:0; width:100%; margin:0; font-family:"Arena PingFang","PingFang SC",sans-serif; font-size:22.419px; line-height:31px; font-weight:500; color:rgba(0,0,0,.8); white-space:nowrap; text-align:center; }
+#audiences .region-group .badge { left:106.0454px; top:88.159px; background:linear-gradient(180deg,#b5d3ff,#3589ff); }
+#audiences .region-group .badge::after { left:85.0168px; top:-87.2249px; width:14.012px; background:linear-gradient(180deg,#fff,#edf4ff); }
+#audiences .region-group .badge strong { color:#fff; }
+#audiences .audience-pill { position:absolute; z-index:2; display:flex; align-items:center; justify-content:center; padding:0; border-radius:35.03px; background:rgba(255,255,255,.4); box-shadow:0 0 16.814px rgba(0,0,0,.12),inset 0 1.401px 2.802px rgba(255,255,255,.75); backdrop-filter:blur(15.413px); color:rgba(0,0,0,.8); font-family:"Arena PingFang","PingFang SC",sans-serif; font-weight:400; line-height:1.4; white-space:nowrap; }
+#audiences .audience-pill.p1 { left:0; top:239.61px; width:184.258px; height:41.335px; font-size:17.515px; backdrop-filter:blur(21.018px); }
+#audiences .audience-pill.p2 { left:340.49px; top:189.16px; width:187.761px; height:44.138px; background:#fff; box-shadow:none; filter:drop-shadow(0 0 8.407px rgba(0,0,0,.12)); backdrop-filter:none; font-size:19.617px; }
+#audiences .audience-pill.p3 { z-index:0; left:294.25px; top:321.58px; width:230.498px; height:36.431px; font-size:14.012px; }
+#audiences .audience-pill.p4 { left:99.49px; top:385.33px; width:266.229px; height:44.138px; background:#fff; box-shadow:none; filter:drop-shadow(0 0 8.407px rgba(0,0,0,.12)); backdrop-filter:none; font-size:19.617px; }
+#audiences .region-group .p1 { left:0; top:236.1px; width:116.3px; height:40.635px; font-size:16.814px; }
+#audiences .region-group .p2 { left:275.34px; top:191.26px; width:113.497px; height:44.138px; font-size:19.617px; background:rgba(255,255,255,.4); box-shadow:0 0 16.814px rgba(0,0,0,.12),inset 0 1.401px 2.802px rgba(255,255,255,.75); filter:none; backdrop-filter:blur(15.413px); }
+#audiences .region-group .p3 { z-index:0; left:256.42px; top:316.67px; width:88.976px; height:30.826px; font-size:14.012px; }
+#audiences .region-group .p4 { left:205.28px; top:381.83px; width:200.372px; height:44.138px; font-size:19.617px; background:rgba(255,255,255,.4); box-shadow:0 0 16.814px rgba(0,0,0,.12),inset 0 1.401px 2.802px rgba(255,255,255,.75); filter:none; backdrop-filter:blur(15.413px); }
+#audiences .region-group .p5 { left:50.44px; top:340.49px; width:83.372px; height:40.635px; font-size:16.814px; }
+html[lang="en"] #audiences .badge strong { font-size:17px; }
+@media(max-width:680px) {
+  #audiences .audience-diagram { grid-template-columns:minmax(0,1fr); padding-inline:0; gap:36px; }
+  #audiences .audience-group { width:min(100%,528.25354px); justify-self:center; }
+  #audiences .audience-group.region-group { width:min(84%,405.648285px); }
+}

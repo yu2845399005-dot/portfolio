@@ -59,7 +59,9 @@
     ['#budget-status .status-screen', 593.611, '--status-screen-scale'],
     ['#readability .after-composite', 584.878, '--readability-screen-scale'],
     ['#adjustment-feedback .adjustment-examples', 411, '--adjustment-example-scale'],
-    ['#change-history .history-features', 480, '--history-copy-scale']
+    ['#change-history .history-features', 480, '--history-copy-scale'],
+    ['#audiences .audience-group:not(.region-group)', 528.25354, '--audience-scale'],
+    ['#audiences .audience-group.region-group', 405.648285, '--audience-scale']
   ].forEach(([selector, referenceWidth, property]) => {
     const screen = document.querySelector(selector);
     if (!screen) return;
