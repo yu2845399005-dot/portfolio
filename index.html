@@ -8,8 +8,12 @@
     <title>Yucean Design — 2027 Portfolio</title>
     <link rel="stylesheet" href="./styles.css?v=20260924-253" />
     <script src="./home.js?v=20260924-253" defer></script>
+    <link rel="stylesheet" href="./home-badge.css?v=20261027-badge-1" />
+    <link rel="modulepreload" href="./assets/vendor/three.core.min.js" />
+    <link rel="license" href="./assets/vendor/THREE-LICENSE.txt" />
+    <script type="module" src="./employee-badge.js?v=20261027-badge-1"></script>
   </head>
-  <body>
+  <body class="badge-home">
     <main class="portfolio">
       <section class="first-screen" id="top" aria-labelledby="portfolio-title">
         <nav class="topbar" aria-label="Main navigation">
@@ -30,23 +34,27 @@
               <p class="intro">Yucean is an AI product designer creating clear, useful, and human-centered digital products</p>
             </div>
 
-            <div class="hero-visual">
-              <img src="./figma-assets/home-252/hero-orb.png" width="498" height="484" alt="Abstract blue, coral, and white 3D form" />
+            <div class="hero-visual badge-stage" data-badge-stage>
+              <button class="badge-interaction" type="button" aria-label="晃动 APIPKA 的 3D 工牌，也可以按住拖动" aria-describedby="badge-help">
+                <span class="badge-fallback" aria-hidden="true">
+                  <span class="badge-fallback-strap"></span>
+                  <span class="badge-fallback-card">
+                    <span class="badge-fallback-slot"></span>
+                    <span class="badge-print-meta"><span>Yucean Design</span><span>2026101522</span></span>
+                    <img class="badge-mascot" src="./assets/home-badge/mascot.svg" width="311.905" height="239.927" alt="" />
+                    <span class="badge-print-name">APIPKA</span>
+                  </span>
+                </span>
+              </button>
+              <p class="badge-help" id="badge-help">Drag to play · Click to swing</p>
             </div>
           </div>
-
-          <a class="experience-link" href="#professional-experience">
-            <span>View My Experience</span>
-            <span class="round-icon round-icon-gray" aria-hidden="true">
-              <img src="./figma-assets/arrow-down.svg" alt="" />
-            </span>
-          </a>
 
           <div class="explore-wrap">
             <a class="explore-link" href="#work">
               <span>Explore My Work</span>
               <span class="round-icon round-icon-black" aria-hidden="true">
-                <img src="./figma-assets/arrow-diagonal.svg" alt="" />
+                <img src="./assets/home-badge/explore-arrow.svg" width="13.7143" height="14.083" alt="" />
               </span>
             </a>
           </div>

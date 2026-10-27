@@ -36,7 +36,9 @@ def collect_files():
         if source.suffix not in TEXT_TYPES:
             continue
         content = source.read_text(encoding="utf-8")
-        refs = ATTRIBUTES.findall(content) + CSS_URLS.findall(content)
+        refs = ATTRIBUTES.findall(content)
+        if source.suffix in {".html", ".css", ".svg"}:
+            refs += CSS_URLS.findall(content)
         if source.suffix == ".js":
             refs += JS_ASSETS.findall(content)
         for ref in refs:

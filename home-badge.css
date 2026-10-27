@@ -1,0 +1,64 @@
+/* Home 377:2805. The card artwork remains the original Figma SVG and native text. */
+.badge-home .first-screen { height:min(929px,100svh); min-height:680px; padding:0; }
+.badge-home .topbar { top:36px; height:48px; }
+.badge-home .brand { color:#fff; font-size:20px; font-weight:400; }
+.badge-home .hero-area { position:absolute; top:94px; bottom:23px; height:auto; }
+.badge-home .hero { height:calc(100% - 138px); padding:0; }
+.badge-home .hero-copy { top:calc(50% - 22px); left:6.25%; width:603px; transform:translateY(-18%); }
+.badge-home .intro { width:484.7458px; max-width:84.7458%; transform:scaleX(1.18); transform-origin:left top; }
+.badge-home .explore-wrap { top:auto; bottom:0; height:128px; margin:0; }
+.badge-home .round-icon-black img { width:13.7143px; height:14.083px; max-width:none; }
+.badge-home .badge-stage { position:absolute; inset:0 0 auto auto; width:540px; height:100%; aspect-ratio:auto; margin:0; isolation:isolate; }
+.badge-interaction { position:relative; display:block; width:100%; height:100%; margin:0; padding:0; border:0; background:transparent; cursor:grab; -webkit-tap-highlight-color:transparent; touch-action:pan-y; outline-offset:-24px; }
+.badge-interaction.is-dragging { cursor:grabbing; touch-action:none; }
+.badge-interaction:focus-visible { outline:1px solid #ffffff80; border-radius:28px; }
+.badge-interaction canvas { position:absolute; inset:0; display:block; width:100%; height:100%; opacity:0; transition:opacity .24s ease; }
+.badge-ready .badge-interaction canvas { opacity:1; }
+.badge-fallback { position:absolute; inset:0; pointer-events:none; perspective:1000px; transition:opacity .24s ease; }
+.badge-ready .badge-fallback { opacity:0; }
+.badge-fallback-card { position:absolute; top:21.65%; left:calc(50% - 155.9525px); display:block; width:311.905px; height:454.7px; border-radius:19.663px; background:#fff; color:#000; box-shadow:1px 2px 0 #bac1cc,3px 4px 0 #68717b,12px 20px 25px #0008; transform:rotate(-.69deg); transform-origin:50% 17.62px; }
+.badge-print-meta { position:absolute; top:44.241px; left:17.135px; right:17.135px; display:flex; justify-content:space-between; font:200 9.831px/14px "PingFang SC",Arial,sans-serif; color:#000; }
+.badge-home .badge-mascot { position:absolute; top:93.915px; left:0; width:311.905px; height:239.927px; }
+.badge-print-name { position:absolute; top:369.516px; width:100%; left:0; text-align:center; font:600 29.494px/41px "PingFang SC",Arial,sans-serif; }
+.badge-fallback-slot { position:absolute; top:10.25px; left:calc(50% - 24.578px); width:49.156px; height:14.747px; border-radius:24.578px; background:#141619; box-shadow:0 1px 1px #fff,0 0 0 2px #d5d8dc,inset 0 2px 3px #000b; }
+.badge-fallback-strap { position:absolute; z-index:1; top:0; bottom:calc(78.35% - 18px); left:calc(50% - 12.5px); width:25px; background:linear-gradient(#000 18.916%,#fafafa); }
+.badge-help { position:absolute; bottom:24px; left:0; width:100%; margin:0; color:#ffffff70; font:400 12px/18px "Helvetica Neue",Arial,sans-serif; letter-spacing:.25px; text-align:center; opacity:0; pointer-events:none; transition:opacity .25s; }
+.badge-stage:hover .badge-help,.badge-stage:focus-within .badge-help { opacity:1; }
+@media(max-width:1200px) and (min-width:721px) {
+  .badge-home .hero-copy { width:55%; }
+  .badge-home .eyebrow { font-size:clamp(32px,3.2vw,46px); line-height:1.2; }
+  .badge-home h1 { font-size:clamp(46px,5vw,72px); line-height:1.2; }
+  .badge-home .intro { width:min(84.7458%,440px); font-size:15px; }
+  .badge-home .badge-stage { right:-3%; width:43%; }
+}
+@media(max-width:720px) {
+  .badge-home .first-screen { height:auto; min-height:100svh; }
+  .badge-home .topbar { position:relative; top:0; height:auto; padding:24px 24px 0; align-items:center; }
+  .badge-home .brand { font-size:15px; padding:0; }
+  .badge-home .nav-actions { flex-direction:row; gap:8px; }
+  .badge-home .button { font-size:11px; min-height:34px; padding:9px 11px; }
+  .badge-home .hero-area { position:relative; inset:auto; height:auto; }
+  .badge-home .hero { display:flex; height:auto; align-items:flex-start; flex-direction:column; padding:50px 24px 0; }
+  .badge-home .hero-copy { position:relative; top:auto; left:auto; width:100%; transform:none; }
+  .badge-home .eyebrow { font-size:34px; line-height:1.2; }
+  .badge-home h1 { font-size:clamp(42px,10vw,62px); line-height:1.18; white-space:nowrap; }
+  .badge-home .intro { width:min(100%,500px); max-width:100%; transform:none; font-size:14px; line-height:21px; margin-top:22px; }
+  .badge-home .badge-stage { position:relative; inset:auto; width:100%; height:360px; margin-top:16px; }
+  .badge-home .explore-wrap { position:relative; inset:auto; height:auto; padding:20px 0 28px; }
+  .badge-home .badge-fallback { transform:scale(.54); transform-origin:50% 0; height:665px; }
+  .badge-home .badge-help { bottom:0; font-size:11px; }
+}
+@media(max-width:380px) {
+  .badge-home .topbar { padding-inline:18px; }
+  .badge-home .brand { font-size:13px; }
+  .badge-home .button { font-size:10px; padding:8px; }
+  .badge-home .hero { padding-inline:20px; padding-top:36px; }
+  .badge-home .eyebrow { font-size:30px; }
+  .badge-home h1 { font-size:39px; }
+}
+@media(min-width:721px) and (max-height:760px) {
+  .badge-home .first-screen { min-height:600px; }
+  .badge-home .hero-copy { transform:translateY(-28%); }
+  .badge-home .intro { margin-top:24px; }
+}
+@media(prefers-reduced-motion:reduce) { .badge-interaction canvas,.badge-fallback,.badge-help { transition:none; } }
