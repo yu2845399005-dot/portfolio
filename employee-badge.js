@@ -4,9 +4,20 @@ const stage = document.querySelector('[data-badge-stage]');
 const button = stage?.querySelector('.badge-interaction');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
-// The print uses the original 377:2828 asset, with the Figma dimensions in pixels.
+// Print layout: 377:2805. Original expression layers: 383:3868.
 const PRINT = { width:311.905, height:454.7, slotY:17.6235, artY:93.915, artHeight:239.927 };
-const mascotUrl = './assets/home-badge/mascot.svg';
+const EXPRESSION_ASSETS = {
+  normal:'./assets/home-badge/expressions/26745.svg',
+  dizzy:'./assets/home-badge/expressions/5838f.svg',
+  drag:'./assets/home-badge/expressions/f095b.svg',
+  body:'./assets/home-badge/expressions/ac6d8.svg',
+  bodyShading:'./assets/home-badge/expressions/1bf6a.svg',
+  leftMask:'./assets/home-badge/expressions/98fae.svg',
+  leftEye:'./assets/home-badge/expressions/a225d.svg',
+  rightMask:'./assets/home-badge/expressions/6b3a4.svg',
+  rightEye:'./assets/home-badge/expressions/d2974.svg',
+  spiral:'./assets/home-badge/expressions/6fa09.svg'
+};
 const clamp = THREE.MathUtils.clamp;
 
 function roundedPath(PathType, x, y, width, height, radius) {
@@ -24,9 +35,13 @@ function roundedPath(PathType, x, y, width, height, radius) {
 }
 
 async function makePrint(maxTextureSize) {
-  const image = new Image();
-  image.src = mascotUrl;
-  await Promise.all([image.decode(), document.fonts.ready]);
+  const images = Object.fromEntries(await Promise.all(Object.entries(EXPRESSION_ASSETS).map(async ([key,src]) => {
+    const image = new Image();
+    image.src = src;
+    await image.decode();
+    return [key,image];
+  })));
+  await document.fonts.ready;
   const canvas = document.createElement('canvas');
   const textureHeight = Math.min(4096, maxTextureSize);
   const resolution = textureHeight / PRINT.height;
@@ -42,14 +57,50 @@ async function makePrint(maxTextureSize) {
   ctx.fillText('Yucean Design', 17.135, 44.241);
   ctx.textAlign = 'right';
   ctx.fillText('2026101522', PRINT.width - 17.135, 44.241);
-  ctx.drawImage(image, 0, PRINT.artY, PRINT.width, PRINT.artHeight);
   ctx.textAlign = 'center';
   ctx.font = '600 29.494px "PingFang SC", "Helvetica Neue", Arial, sans-serif';
   ctx.fillStyle = '#000';
   ctx.fillText('APIPKA', PRINT.width / 2, 369.516);
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
-  return texture;
+  // Compose the second face from the exact exported eye layers and Figma alpha masks.
+  const maskedEye = (eye, mask, imageRect, maskRect) => {
+    const x = Math.min(imageRect[0], maskRect[0]), y = Math.min(imageRect[1], maskRect[1]);
+    const width = Math.max(imageRect[0]+imageRect[2],maskRect[0]+maskRect[2])-x;
+    const height = Math.max(imageRect[1]+imageRect[3],maskRect[1]+maskRect[3])-y;
+    const pixels = resolution * PRINT.width / 104;
+    const eyeCanvas = document.createElement('canvas');
+    eyeCanvas.width = Math.ceil(width*pixels); eyeCanvas.height = Math.ceil(height*pixels);
+    const eyeContext = eyeCanvas.getContext('2d');
+    eyeContext.setTransform(pixels,0,0,pixels,-x*pixels,-y*pixels);
+    eyeContext.drawImage(eye,...imageRect);
+    eyeContext.globalCompositeOperation = 'destination-in';
+    eyeContext.drawImage(mask,...maskRect);
+    return { image:eyeCanvas,x,y,width,height };
+  };
+  const leftEye = maskedEye(images.leftEye,images.leftMask,[37.94,24,16,16],[37.773,24.152,23.2292,12.8484]);
+  const rightEye = maskedEye(images.rightEye,images.rightMask,[51.06,24,16,16],[49.997,23,18,14]);
+  function drawExpression(name) {
+    ctx.save();
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0,PRINT.artY,PRINT.width,PRINT.artHeight);
+    ctx.translate(0,PRINT.artY);
+    ctx.scale(PRINT.width/104,PRINT.artHeight/80);
+    if (name === 'tap' || name === 'blink') {
+      ctx.drawImage(images.body,15.35055,0,73.2989,80);
+      ctx.drawImage(images.bodyShading,15.35055,0,73.2989,80);
+      for (const eye of [leftEye,rightEye]) ctx.drawImage(eye.image,eye.x,eye.y,eye.width,eye.height);
+    } else if (name === 'dizzy') {
+      ctx.drawImage(images.dizzy,0,0,104,80);
+      ctx.drawImage(images.spiral,54.5,27.5,9,8.50013);
+    } else {
+      ctx.drawImage(name === 'drag' || name === 'look-up' ? images.drag : images.normal,0,0,104,80);
+    }
+    ctx.restore();
+    texture.needsUpdate = true;
+  }
+  drawExpression('normal');
+  return {texture,drawExpression};
 }
 
 function clothTextures() {
@@ -133,7 +184,7 @@ async function mountBadge() {
   const card = new THREE.Group();
   const body = new THREE.Mesh(bodyGeometry, pvc);
   card.add(body);
-  const print = await makePrint(renderer.capabilities.maxTextureSize);
+  const {texture:print,drawExpression} = await makePrint(renderer.capabilities.maxTextureSize);
   print.anisotropy = renderer.capabilities.getMaxAnisotropy();
   button.dataset.textureSize = print.image.width + 'x' + print.image.height;
   const faceGeometry = new THREE.ShapeGeometry(bodyShape, 32);
@@ -221,10 +272,45 @@ async function mountBadge() {
   let stageWidth = 540, stageHeight = 673, worldHeight = 6.73;
   let pixelScale = 100, anchorX = 0, anchorY = 3.365, strapLength = 1.4;
   let dragOrigin = null, travel = 0;
+  let expressionName = 'normal', expressionTimer = 0, idleTimer = 0;
+  let lastTapTime = -Infinity, lastTapX = 0, lastTapY = 0;
   const restAngle = -.012;
   const raycaster = new THREE.Raycaster(), pointer = new THREE.Vector2();
   const start = new THREE.Vector3(), end = new THREE.Vector3();
   const path = new THREE.CubicBezierCurve3(new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3());
+
+  function scheduleIdle() {
+    clearTimeout(idleTimer);
+    if (!visible || document.hidden || reducedMotion.matches || dragging || expressionName !== 'normal') return;
+    idleTimer = setTimeout(() => {
+      idleTimer = 0;
+      if (visible && !document.hidden && !dragging && expressionName === 'normal') setExpression('blink',170);
+    },5500 + Math.random()*2500);
+  }
+  function setExpression(name,duration = 0) {
+    clearTimeout(expressionTimer); expressionTimer = 0;
+    clearTimeout(idleTimer); idleTimer = 0;
+    if (name !== expressionName) {
+      expressionName = name;
+      drawExpression(name);
+      button.dataset.expression = name;
+      wake();
+    }
+    if (duration) {
+      expressionTimer = setTimeout(() => {
+        expressionTimer = 0;
+        setExpression('normal');
+      },duration);
+    } else if (name === 'normal') scheduleIdle();
+  }
+  function reactToTap(direction,x = 0,y = 0) {
+    const now = performance.now();
+    const doubleTap = now - lastTapTime < 420 && Math.hypot(x-lastTapX,y-lastTapY) < 45;
+    lastTapTime = doubleTap ? -Infinity : now;
+    lastTapX = x; lastTapY = y;
+    setExpression(doubleTap ? 'dizzy' : 'tap',doubleTap ? 2200 : 1200);
+    swing(direction);
+  }
 
   function resize() {
     const bounds = stage.getBoundingClientRect();
@@ -330,6 +416,7 @@ async function mountBadge() {
     if (!cardHit(event) || event.button !== 0) return;
     dragging = true; travel = 0;
     dragOrigin = { x:event.clientX, y:event.clientY, angle, twist };
+    clearTimeout(idleTimer); idleTimer = 0;
     button.setPointerCapture(event.pointerId);
     button.classList.add('is-dragging');
     wake();
@@ -338,6 +425,10 @@ async function mountBadge() {
     if (dragging) {
       const dx = event.clientX - dragOrigin.x, dy = event.clientY - dragOrigin.y;
       travel = Math.max(travel, Math.hypot(dx, dy));
+      if (travel >= 5) {
+        lastTapTime = -Infinity;
+        setExpression('drag');
+      }
       const worldPerPixel = 1 / pixelScale;
       targetAngle = clamp(dragOrigin.angle + dx * worldPerPixel / 3.2, -.3, .3);
       targetTwist = clamp(dragOrigin.twist + dx * .003, -.65, .65);
@@ -348,6 +439,9 @@ async function mountBadge() {
       const rect = button.getBoundingClientRect();
       targetTwist = .035 + ((event.clientX - rect.left) / rect.width - .5) * .15;
       targetTip = -((event.clientY - rect.top) / rect.height - .5) * .08;
+      if (!expressionTimer && ['normal','look-up'].includes(expressionName)) {
+        setExpression(event.clientY < rect.top + rect.height*.48 ? 'look-up' : 'normal');
+      }
       wake();
     }
   });
@@ -356,19 +450,40 @@ async function mountBadge() {
     dragging = false; button.classList.remove('is-dragging');
     if (button.hasPointerCapture(event.pointerId)) button.releasePointerCapture(event.pointerId);
     targetAngle = restAngle; targetTwist = .035; targetTip = 0;
-    if (travel < 5 && event.type !== 'pointercancel') swing(event.clientX < stage.getBoundingClientRect().left + stageWidth / 2 ? -1 : 1);
-    else wake();
+    if (travel < 5 && event.type !== 'pointercancel') {
+      reactToTap(event.clientX < stage.getBoundingClientRect().left + stageWidth / 2 ? -1 : 1,event.clientX,event.clientY);
+    } else {
+      lastTapTime = -Infinity;
+      setExpression(event.type === 'pointercancel' ? 'normal' : 'drag',event.type === 'pointercancel' ? 0 : 650);
+      wake();
+    }
     dragOrigin = null;
   };
   button.addEventListener('pointerup', release);
   button.addEventListener('pointercancel', release);
   button.addEventListener('lostpointercapture', release);
+  button.addEventListener('dblclick', event => {
+    if (!cardHit(event) || travel >= 5) return;
+    event.preventDefault();
+    lastTapTime = -Infinity;
+    if (expressionName !== 'dizzy') swing(1);
+    setExpression('dizzy',2200);
+  });
   button.addEventListener('pointerleave', () => {
-    if (!dragging) { targetTwist = .035; targetTip = 0; wake(); }
+    if (!dragging) {
+      targetTwist = .035; targetTip = 0;
+      if (expressionName === 'look-up') setExpression('normal');
+      wake();
+    }
   });
   button.addEventListener('keydown', event => {
     if (['Enter', ' ', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
-      event.preventDefault(); swing(event.key === 'ArrowLeft' ? -1 : 1);
+      event.preventDefault();
+      if (event.key.startsWith('Arrow')) {
+        setExpression('drag',650);
+        lastTapTime = -Infinity;
+        swing(event.key === 'ArrowLeft' ? -1 : 1);
+      } else if (!event.repeat) reactToTap(1);
     }
   });
   renderer.domElement.addEventListener('webglcontextlost', event => {
@@ -383,17 +498,23 @@ async function mountBadge() {
   new ResizeObserver(resize).observe(firstScreen);
   new IntersectionObserver(entries => {
     visible = entries[0].isIntersecting;
-    if (visible) wake(); else { cancelAnimationFrame(frame); frame = 0; }
+    if (visible) { wake(); scheduleIdle(); } else {
+      cancelAnimationFrame(frame); frame = 0;
+      clearTimeout(idleTimer); idleTimer = 0;
+    }
   }, { rootMargin:'100px' }).observe(stage);
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) { cancelAnimationFrame(frame); frame = 0; } else wake();
+    if (document.hidden) { cancelAnimationFrame(frame); frame = 0; clearTimeout(idleTimer); idleTimer = 0; }
+    else { wake(); scheduleIdle(); }
   });
-  reducedMotion.addEventListener('change', wake);
+  reducedMotion.addEventListener('change', () => { wake(); scheduleIdle(); });
   resize();
   updateGeometry(0);
   stage.classList.add('badge-ready');
   firstScreen.classList.add('badge-scene-ready');
   button.dataset.renderer = 'webgl';
+  button.dataset.expression = 'normal';
+  scheduleIdle();
   if (!reducedMotion.matches) { velocity = -.12; twistVelocity = .1; wake(); }
 }
 
