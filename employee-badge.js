@@ -23,21 +23,22 @@ function roundedPath(PathType, x, y, width, height, radius) {
   return path;
 }
 
-async function makePrint() {
+async function makePrint(maxTextureSize) {
   const image = new Image();
   image.src = mascotUrl;
   await Promise.all([image.decode(), document.fonts.ready]);
   const canvas = document.createElement('canvas');
-  const resolution = 2048 / PRINT.height;
+  const textureHeight = Math.min(4096, maxTextureSize);
+  const resolution = textureHeight / PRINT.height;
   canvas.width = Math.round(PRINT.width * resolution);
-  canvas.height = 2048;
+  canvas.height = textureHeight;
   const ctx = canvas.getContext('2d');
   ctx.scale(resolution, resolution);
   ctx.fillStyle = '#fff';
   ctx.fillRect(0, 0, PRINT.width, PRINT.height);
   ctx.textBaseline = 'top';
-  ctx.fillStyle = '#111';
-  ctx.font = '200 9.831px "PingFang SC", "Helvetica Neue", Arial, sans-serif';
+  ctx.fillStyle = '#34383e';
+  ctx.font = '400 11.5px "PingFang SC", "Helvetica Neue", Arial, sans-serif';
   ctx.fillText('Yucean Design', 17.135, 44.241);
   ctx.textAlign = 'right';
   ctx.fillText('2026101522', PRINT.width - 17.135, 44.241);
@@ -74,6 +75,16 @@ function clothTextures() {
   ctx.fillStyle = '#ffffff24';
   ctx.fillRect(3, 0, 2, 1024);
   ctx.fillRect(123, 0, 2, 1024);
+  // Fade the actual ribbon's opacity, including its weave and edges.
+  ctx.globalCompositeOperation = 'destination-in';
+  const fade = ctx.createLinearGradient(0, 0, 0, 1024);
+  fade.addColorStop(0, 'rgba(0,0,0,0)');
+  fade.addColorStop(.2, 'rgba(0,0,0,0)');
+  fade.addColorStop(.48, 'rgba(0,0,0,.35)');
+  fade.addColorStop(.8, 'rgba(0,0,0,1)');
+  fade.addColorStop(1, 'rgba(0,0,0,1)');
+  ctx.fillStyle = fade;
+  ctx.fillRect(0, 0, 128, 1024);
   const texture = new THREE.CanvasTexture(cloth);
   texture.colorSpace = THREE.SRGBColorSpace;
   return texture;
@@ -82,11 +93,16 @@ function clothTextures() {
 async function mountBadge() {
   const renderer = new THREE.WebGLRenderer({ alpha:true, antialias:true, powerPreference:'low-power' });
   renderer.setClearColor(0x000000, 0);
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(3, Math.max(2, devicePixelRatio)));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.NoToneMapping;
   renderer.domElement.setAttribute('aria-hidden', 'true');
-  button.append(renderer.domElement);
+  const firstScreen = stage.closest('.first-screen');
+  const surface = document.createElement('div');
+  surface.className = 'badge-render-layer';
+  surface.setAttribute('aria-hidden', 'true');
+  surface.append(renderer.domElement);
+  firstScreen.append(surface);
   const scene = new THREE.Scene();
   const camera = new THREE.OrthographicCamera(-2.7, 2.7, 3.365, -3.365, .1, 50);
   camera.position.z = 16;
@@ -116,8 +132,9 @@ async function mountBadge() {
   const card = new THREE.Group();
   const body = new THREE.Mesh(bodyGeometry, pvc);
   card.add(body);
-  const print = await makePrint();
-  print.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+  const print = await makePrint(renderer.capabilities.maxTextureSize);
+  print.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  button.dataset.textureSize = print.image.width + 'x' + print.image.height;
   const faceGeometry = new THREE.ShapeGeometry(bodyShape, 32);
   const positions = faceGeometry.attributes.position;
   const uv = faceGeometry.attributes.uv;
@@ -184,7 +201,8 @@ async function mountBadge() {
   ribbonGeometry.setAttribute('uv', new THREE.BufferAttribute(ribbonUv, 2));
   ribbonGeometry.setIndex(ribbonIndices);
   const ribbon = new THREE.Mesh(ribbonGeometry, new THREE.MeshStandardMaterial({
-    map:clothTextures(), roughness:.9, metalness:.02, side:THREE.DoubleSide
+    map:clothTextures(), roughness:.9, metalness:.02, side:THREE.DoubleSide,
+    transparent:true, depthWrite:false
   }));
   ribbon.renderOrder = 2;
   scene.add(ribbon);
@@ -200,6 +218,7 @@ async function mountBadge() {
   let angle = -.012, velocity = 0, twist = .035, twistVelocity = 0, tip = 0, tipVelocity = 0;
   let targetAngle = -.012, targetTwist = .035, targetTip = 0;
   let stageWidth = 540, stageHeight = 673, worldHeight = 6.73;
+  let pixelScale = 100, anchorX = 0, anchorY = 3.365, strapLength = 1.4;
   let dragOrigin = null, travel = 0;
   const restAngle = -.012;
   const raycaster = new THREE.Raycaster(), pointer = new THREE.Vector2();
@@ -208,25 +227,36 @@ async function mountBadge() {
 
   function resize() {
     const bounds = stage.getBoundingClientRect();
+    const screenBounds = firstScreen.getBoundingClientRect();
+    const surfaceBounds = surface.getBoundingClientRect();
     stageWidth = bounds.width; stageHeight = bounds.height;
-    // Preserve the Figma card's physical size at desktop; fit shorter viewports and phones.
     const mobile = matchMedia('(max-width:720px)').matches;
-    const size = mobile ? Math.min(stageHeight / 6.45, stageWidth / 5.2) : Math.min(stageHeight / 6.73, stageWidth / 5.4);
-    worldHeight = stageHeight / size;
-    camera.left = -stageWidth / size / 2; camera.right = stageWidth / size / 2;
+    pixelScale = mobile
+      ? Math.min(stageHeight / 6.45, stageWidth / 5.2)
+      : clamp(screenBounds.height * .56, 360, 510) / h;
+    const anchorPx = mobile ? bounds.top - surfaceBounds.top : screenBounds.top - surfaceBounds.top + 70;
+    const slotPx = mobile ? anchorPx + 1.61 * pixelScale
+      : screenBounds.top - surfaceBounds.top + Math.max(130, screenBounds.height * .21) + PRINT.slotY / 100 * pixelScale;
+    strapLength = (slotPx - anchorPx) / pixelScale;
+    anchorX = (bounds.left + bounds.width / 2 - surfaceBounds.left - surfaceBounds.width / 2) / pixelScale;
+    worldHeight = surfaceBounds.height / pixelScale;
+    anchorY = worldHeight / 2 - anchorPx / pixelScale;
+    camera.left = -surfaceBounds.width / pixelScale / 2; camera.right = surfaceBounds.width / pixelScale / 2;
     camera.top = worldHeight / 2; camera.bottom = -worldHeight / 2;
     camera.updateProjectionMatrix();
-    renderer.setSize(stageWidth, stageHeight, false);
+    renderer.setSize(surfaceBounds.width, surfaceBounds.height, false);
+    button.dataset.cardPixels = Math.round(h * pixelScale);
+    const cardTop = surfaceBounds.top + slotPx - PRINT.slotY / 100 * pixelScale;
+    stage.style.setProperty('--badge-help-top', (cardTop - bounds.top + h * pixelScale + 14) + 'px');
     wake();
   }
 
   function updateGeometry(time) {
-    const anchorY = worldHeight / 2 + .015;
-    const length = 1.61;
-    pivot.position.set(Math.sin(angle) * length, anchorY - Math.cos(angle) * length, 0);
+    const length = strapLength;
+    pivot.position.set(anchorX + Math.sin(angle) * length, anchorY - Math.cos(angle) * length, 0);
     pivot.rotation.set(tip, twist, angle);
     shine.material.opacity = .14 + Math.min(.35, Math.abs(twist) * .6);
-    start.set(0, anchorY, -.015);
+    start.set(anchorX, anchorY, -.015);
     end.copy(pivot.position);
     end.z += .043;
     path.v0.copy(start);
@@ -290,7 +320,7 @@ async function mountBadge() {
     wake();
   }
   function cardHit(event) {
-    const rect = button.getBoundingClientRect();
+    const rect = renderer.domElement.getBoundingClientRect();
     pointer.set((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1);
     raycaster.setFromCamera(pointer, camera);
     return raycaster.intersectObjects([body, face], false).length > 0;
@@ -307,7 +337,7 @@ async function mountBadge() {
     if (dragging) {
       const dx = event.clientX - dragOrigin.x, dy = event.clientY - dragOrigin.y;
       travel = Math.max(travel, Math.hypot(dx, dy));
-      const worldPerPixel = worldHeight / stageHeight;
+      const worldPerPixel = 1 / pixelScale;
       targetAngle = clamp(dragOrigin.angle + dx * worldPerPixel / 3.2, -.3, .3);
       targetTwist = clamp(dragOrigin.twist + dx * .003, -.65, .65);
       targetTip = clamp(-dy * .002, -.22, .22);
@@ -343,9 +373,13 @@ async function mountBadge() {
   renderer.domElement.addEventListener('webglcontextlost', event => {
     event.preventDefault(); cancelAnimationFrame(frame); frame = 0;
     stage.classList.remove('badge-ready');
+    firstScreen.classList.remove('badge-scene-ready');
   });
-  renderer.domElement.addEventListener('webglcontextrestored', () => { stage.classList.add('badge-ready'); wake(); });
+  renderer.domElement.addEventListener('webglcontextrestored', () => {
+    stage.classList.add('badge-ready'); firstScreen.classList.add('badge-scene-ready'); wake();
+  });
   new ResizeObserver(resize).observe(stage);
+  new ResizeObserver(resize).observe(firstScreen);
   new IntersectionObserver(entries => {
     visible = entries[0].isIntersecting;
     if (visible) wake(); else { cancelAnimationFrame(frame); frame = 0; }
@@ -357,6 +391,7 @@ async function mountBadge() {
   resize();
   updateGeometry(0);
   stage.classList.add('badge-ready');
+  firstScreen.classList.add('badge-scene-ready');
   button.dataset.renderer = 'webgl';
   if (!reducedMotion.matches) { velocity = -.12; twistVelocity = .1; wake(); }
 }
