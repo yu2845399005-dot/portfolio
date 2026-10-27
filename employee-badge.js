@@ -91,7 +91,8 @@ function clothTextures() {
 }
 
 async function mountBadge() {
-  const renderer = new THREE.WebGLRenderer({ alpha:true, antialias:true, powerPreference:'low-power' });
+  // Keep the last crisp frame available while the animation sleeps.
+  const renderer = new THREE.WebGLRenderer({ alpha:true, antialias:true, preserveDrawingBuffer:true, powerPreference:'low-power' });
   renderer.setClearColor(0x000000, 0);
   renderer.setPixelRatio(Math.min(3, Math.max(2, devicePixelRatio)));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
