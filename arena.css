@@ -191,16 +191,16 @@ html[lang="en"] .project-intro { gap:110px; } html[lang="en"] .insight-word { fo
 #research .research-insight-emoji { display:inline-block; width:20px; height:20px; color:rgba(0,0,0,.6); font-size:20px; line-height:20px; }
 #research .research-insight p { margin-inline:48px; color:rgba(0,0,0,.6); font-size:14px; font-weight:400; line-height:20px; letter-spacing:0; }
 #research .research-insight-copy strong { color:rgba(0,0,0,.8); font-size:inherit; font-weight:500; }
-#research .research-goals { gap:60px; margin-top:48px; }
-#research .research-goals span { padding:16px 36px; border-radius:70px; background:#0064fa; color:#fff; font-size:18px; font-weight:500; line-height:25px; letter-spacing:0; }
+#research .research-goals { flex-wrap:wrap; gap:20px clamp(12px,calc((100% - 928px)/4),48px); margin-top:48px; }
+#research .research-goals span { max-width:100%; padding:16px 36px; border-radius:70px; background:#0064fa; color:#fff; font-size:28px; font-weight:500; line-height:39px; letter-spacing:0; text-align:center; }
 #research .research-goals b { width:20px; flex:0 0 20px; color:#fff; font-size:20px; font-weight:500; line-height:20px; }
 html[lang="en"] #research .interview-quotes { display:flex; flex-direction:column; gap:20px; aspect-ratio:auto; }
 html[lang="en"] #research .interview-quote:nth-child(n) { position:relative; left:auto; right:auto; top:auto; width:fit-content; max-width:100%; }
 html[lang="en"] #research .interview-quote p { min-width:0; white-space:normal; flex:1; }
 html[lang="en"] #research .interview-quote:nth-child(n+4) { align-self:flex-end; }
 html[lang="en"] #research .research-badges .badge strong { top:73%; font-size:3.511793cqw; white-space:normal; padding-inline:5%; }
-@media(max-width:1100px) { #research .research-visual { gap:80px; max-width:852px; } #research .research-goals { gap:20px; } #research .research-goals span { padding:14px 22px; font-size:15px; } }
-@media(max-width:680px) { #research .research-visual { grid-template-columns:minmax(0,1fr); justify-items:center; gap:36px; } #research .research-visual>div:first-child { width:min(100%,284.755px); } #research .research-visual>div:last-child { width:min(100%,487.677px); } #research .research-insight p { margin-inline:0; } #research .research-goals { gap:16px; } #research .research-goals span { padding:14px 22px; font-size:15px; } }
+@media(max-width:1100px) { #research .research-visual { gap:80px; max-width:852px; } #research .research-goals { gap:20px clamp(8px,calc((100% - 844px)/4),20px); } #research .research-goals span { padding:14px 22px; } }
+@media(max-width:680px) { #research .research-visual { grid-template-columns:minmax(0,1fr); justify-items:center; gap:36px; } #research .research-visual>div:first-child { width:min(100%,284.755px); } #research .research-visual>div:last-child { width:min(100%,487.677px); } #research .research-insight p { margin-inline:0; } #research .research-goals { gap:16px; } #research .research-goals span { padding:14px 22px; } }
 @media(max-width:440px) {
   #research .interview-quotes { display:flex; flex-direction:column; gap:20px; aspect-ratio:auto; }
   #research .interview-quote:nth-child(n) { position:relative; left:auto; right:auto; top:auto; width:fit-content; max-width:100%; font-size:12px; line-height:18px; --quote-line:18px; --quote-gap:10px; --quote-avatar:24px; --quote-avatar-width:25px; --quote-px:10px; --quote-py:6px; --quote-radius:10px; --quote-small-radius:5px; --quote-shadow:.5px; }
