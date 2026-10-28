@@ -22,8 +22,8 @@
 .contact-details { display:flex; flex-direction:column; align-items:flex-start; gap:100px; width:max-content; max-width:100%; }
 .contact-method { display:flex; align-items:flex-start; gap:24px; }
 .contact-method-copy { display:flex; flex-direction:column; align-items:flex-start; gap:21px; min-width:0; }
-.contact-method h2 { margin:0; color:#fff; font-family:"SF Pro", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; font-size:28px; font-weight:410; font-stretch:132%; font-variation-settings:"wdth" 132; line-height:33px; white-space:nowrap; }
-.contact-value { display:block; margin:0; padding:0 12px; border:0; border-radius:4px; background:transparent; color:rgba(255,255,255,.6); font-size:24px; font-weight:400; line-height:29px; text-align:left; white-space:nowrap; cursor:pointer; transition:color 180ms ease; }
+.contact-method h2 { margin:0; color:#fff; font-family:"SF Pro", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; font-size:24px; font-weight:410; font-stretch:132%; font-variation-settings:"wdth" 132; line-height:33px; white-space:nowrap; }
+.contact-value { display:block; margin:0; padding:0 12px; border:0; border-radius:4px; background:transparent; color:rgba(255,255,255,.6); font-size:20px; font-weight:400; line-height:29px; text-align:left; white-space:nowrap; cursor:pointer; transition:color 180ms ease; }
 .contact-value:hover { color:#fff; }
 .contact-value:focus-visible,.contact-topbar a:focus-visible,.contact-topbar button:focus-visible { outline:2px solid #808fff; outline-offset:6px; }
 .contact-icon { position:relative; display:block; flex:none; overflow:hidden; width:27.7607px; height:28px; }
@@ -37,8 +37,8 @@
 .contact-status.is-visible { opacity:1; transform:translate(-50%,0); }
 @media(max-width:1000px) {
   .contact-main { grid-template-columns:1fr 1fr; gap:60px; padding-inline:7%; }
-  .contact-value { font-size:20px; }
-  .contact-method h2 { font-size:25px; }
+  .contact-value { font-size:16px; }
+  .contact-method h2 { font-size:21px; }
   .contact-method { gap:18px; }
 }
 @media(max-width:760px) {
@@ -54,9 +54,9 @@
   .contact-qr { width:100%; height:auto; aspect-ratio:1; }
   .contact-details { width:min(320px,100%); gap:40px; }
   .contact-method { gap:20px; }
-  .contact-method h2 { font-size:25px; line-height:31px; }
+  .contact-method h2 { font-size:21px; line-height:31px; }
   .contact-method-copy { gap:15px; }
-  .contact-value { max-width:100%; padding-inline:0; font-size:20px; line-height:27px; overflow-wrap:anywhere; white-space:normal; }
+  .contact-value { max-width:100%; padding-inline:0; font-size:16px; line-height:27px; overflow-wrap:anywhere; white-space:normal; }
   .contact-glows { inset:-60px 0 0; }
   .contact-glow-blue { left:calc(50% - 440px); top:-140px; }
   .contact-glow-purple { left:calc(50% - 220px); top:400px; }
@@ -70,6 +70,6 @@
   .contact-title-row h1 { width:151px; font-size:44px; line-height:53px; }
   .contact-mascot { width:119px; }
   .contact-mascot img { transform:rotate(-.69deg) scale(.87); }
-  .contact-value { font-size:18px; }
+  .contact-value { font-size:14px; }
 }
 @media(prefers-reduced-motion:reduce) { .contact-value,.contact-status { transition:none; } }
