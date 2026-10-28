@@ -3,6 +3,8 @@ html.page-enter-pending { background:#000; }
 html.page-enter-pending body { visibility:hidden; }
 html.page-enter-pending .page-loader { visibility:visible; }
 html.page-loader-active { overflow:hidden; }
+/* Announce the destination heading without drawing a selection-like box. */
+h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus { outline:none; }
 .page-loader { position:fixed; inset:0; width:100vw; height:100dvh; max-width:none; max-height:none; margin:0; padding:0; border:0; overflow:hidden; background:#000; color:#fff; color-scheme:dark; }
 .page-loader::backdrop { background:transparent; }
 .page-loader:focus { outline:none; }
