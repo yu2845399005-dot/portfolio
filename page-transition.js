@@ -11,7 +11,6 @@
   };
   const PDF = './assets/resume/yuqiang-resume.pdf';
   const PAGES = new Set(['index.html','contact.html','onboarding.html','live-assistant.html','dialog-agent.html','arena.html','live-assistant-demo.html']);
-  const delay = ms => new Promise(resolve => setTimeout(resolve,ms));
   const storage = {
     set(ticket) { try { sessionStorage.setItem(KEY,JSON.stringify(ticket)); return true; } catch { return false; } },
     clear() { try { sessionStorage.removeItem(KEY); } catch { /* Storage is optional. */ } }
@@ -27,10 +26,8 @@
   const value = dialog.querySelector('.page-loader-value');
   const message = dialog.querySelector('.page-loader-message');
   const cancel = dialog.querySelector('.page-loader-cancel');
-  const artworkReady = Promise.allSettled([...dialog.querySelectorAll('img')].map(img => img.decode()));
   let active = null, serial = 0, progress = 0, bobAnimation = null, slowTimer = 0;
-  let preparation = null, resumeDialog = null;
-  const heroSelector = '.contact-qr img, .hero-stage, .arena-hero-art img, .project-hero img[width], .hero-image img';
+  let handoff = null, handoffTimer = 0, resumeDialog = null;
 
   const motion = async (element,frames,options) => {
     if (reduced.matches) return;
@@ -67,10 +64,10 @@
       requestAnimationFrame(tick);
     });
   }
-  function begin(initial = 0,controller = new AbortController()) {
+  function begin(initial = 0) {
     const id = ++serial;
     progress = 0;
-    active = {id,controller,trigger:document.activeElement};
+    active = {id,trigger:document.activeElement};
     dialog.getAnimations({subtree:true}).forEach(animation => animation.cancel());
     dialog.style.clipPath = ''; dialog.style.opacity = '';
     bob.style.visibility = ''; bob.style.transform = '';
@@ -92,111 +89,70 @@
   }
   function reset() {
     serial++;
-    active?.controller.abort(); active = null;
+    active = null;
+    clearTimeout(handoffTimer); handoff = null;
     clearTimeout(slowTimer);
     bobAnimation?.cancel(); bobAnimation = null;
     dialog.getAnimations({subtree:true}).forEach(animation => animation.cancel());
     if (dialog.open) dialog.close();
+    dialog.dataset.phase = 'idle';
     ROOT.classList.remove('page-loader-active','page-enter-pending');
     clearTimeout(window.__yuceanEntryFallback);
     storage.clear();
     document.dispatchEvent(new Event('yucean:page-revealed'));
   }
-  async function reveal(id,action) {
+  async function reveal(id) {
     if (id !== serial) return;
     clearTimeout(slowTimer); cancel.hidden = true;
     dialog.dataset.phase = 'complete';
-    await tweenProgress(100,reduced.matches ? 0 : 1000,id);
+    await tweenProgress(100,120,id);
     if (id !== serial) return;
     bobAnimation?.pause();
     const transform = getComputedStyle(bob).transform;
     bob.style.transform = transform;
     bobAnimation?.cancel(); bobAnimation = null;
-    await motion(bob,[{transform},{transform:'translateY(0) scale(1)'}],{duration:120,easing:'ease-out'});
-    bob.style.transform = 'translateY(0) scale(1)';
-    if (id !== serial) return;
-    await delay(reduced.matches ? 0 : 160);
-    await motion(bob,[{transform:'translateY(0) scale(1)'},{transform:'translateY(6px) scale(1.09,.91)'}],{duration:140,easing:'ease-in-out'});
+    await motion(bob,[{transform},{transform:'translateY(5px) scale(1.06,.94)'}],{duration:80,easing:'ease-in-out'});
     if (id !== serial) return;
     dialog.dataset.phase = 'departing';
     dots.style.opacity = '0'; value.style.opacity = '0';
-    await motion(bob,[
-      {transform:'translate(0,6px) scale(1.09,.91) rotate(0deg)',offset:0},
-      {transform:'translate(22px,-30px) scale(.94,1.06) rotate(4deg)',offset:.18},
-      {transform:`translate(${Math.min(innerWidth*.2,180)}px,${-innerHeight*.23}px) scale(1) rotate(15deg)`,offset:.55},
-      {transform:`translate(${Math.min(innerWidth*.5,460)}px,${-innerHeight*.7}px) scale(.76) rotate(25deg)`,offset:1}
-    ],{duration:520,easing:'cubic-bezier(.35,0,.75,1)'});
-    if (id !== serial) return;
-    bob.style.visibility = 'hidden';
-    action?.();
     ROOT.classList.remove('page-enter-pending');
-    dialog.dataset.phase = 'revealing';
     const main = document.querySelector('main,.contact-page');
-    if (main && !reduced.matches) motion(main,[{opacity:.76,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:420,easing:'cubic-bezier(.22,1,.36,1)'});
-    await motion(dialog,[{clipPath:'inset(0 0 0 0)'},{clipPath:'inset(0 0 100% 0)'}],{duration:340,easing:'cubic-bezier(.76,0,.24,1)'});
+    if (main && !reduced.matches) motion(main,[{opacity:.85,transform:'translateY(4px)'},{opacity:1,transform:'translateY(0)'}],{duration:240,easing:'cubic-bezier(.22,1,.36,1)'});
+    // The page reveals while the mascot leaves; neither waits for offscreen media.
+    await Promise.all([
+      motion(bob,[
+        {transform:'translate(0,5px) scale(1.06,.94) rotate(0deg)',offset:0},
+        {transform:'translate(18px,-26px) scale(.96,1.04) rotate(4deg)',offset:.22},
+        {transform:`translate(${Math.min(innerWidth*.4,360)}px,${-innerHeight*.65}px) scale(.8) rotate(22deg)`,offset:1}
+      ],{duration:260,easing:'cubic-bezier(.35,0,.75,1)'}),
+      motion(dialog,[{clipPath:'inset(0 0 0 0)'},{clipPath:'inset(0 0 100% 0)'}],{duration:260,easing:'cubic-bezier(.76,0,.24,1)'})
+    ]);
     if (id !== serial) return;
     const trigger = active?.trigger;
     reset();
-    if (!action && window.__yuceanIncoming) {
+    if (window.__yuceanIncoming) {
       const heading = document.querySelector('main h1,main h2,.contact-page h1');
       if (heading) { heading.tabIndex = -1; heading.focus({preventScroll:true}); }
     } else if (trigger?.isConnected) trigger.focus({preventScroll:true});
     window.__yuceanIncoming = null;
     return true;
   }
-  function failure(error,id) {
-    if (id !== serial) return;
-    if (error.name === 'AbortError') { reset(); return; }
-    bobAnimation?.cancel();
-    dialog.dataset.phase = 'error';
-    message.textContent = '暂时无法打开，请取消后重试。';
-    cancel.hidden = false;
-    ROOT.classList.remove('page-enter-pending');
-  }
-  function imageReady(url) {
-    const image = new Image(); image.src = url;
-    return image.decode();
-  }
-  async function preparePage(url,signal) {
-    const response = await fetch(url,{signal,credentials:'same-origin'});
-    if (!response.ok) throw new Error(`Page ${response.status}`);
-    const source = new DOMParser().parseFromString(await response.text(),'text/html');
-    const resources = [...source.querySelectorAll('link[rel="stylesheet"],script[src]')].map(el => new URL(el.getAttribute('href') || el.getAttribute('src'),url));
-    const images = [...source.querySelectorAll(heroSelector)].filter(img => img.getAttribute('src') && (Number(img.getAttribute('width')) >= 100 || img.matches('.contact-qr img,.hero-stage'))).slice(0,3);
-    await Promise.allSettled([
-      ...resources.filter(resource => resource.origin === location.origin).map(resource => fetch(resource,{signal,credentials:'same-origin'}).then(response => response.arrayBuffer())),
-      ...images.map(img => imageReady(new URL(img.getAttribute('src'),url).href))
-    ]);
-    if (signal.aborted) throw new DOMException('Aborted','AbortError');
-  }
-  async function pageReady() {
-    const images = [...document.querySelectorAll(heroSelector)].filter(img => img.getAttribute('src') && (Number(img.getAttribute('width')) >= 100 || img.matches('.contact-qr img,.hero-stage'))).slice(0,3);
-    await Promise.allSettled([document.fonts.ready,...images.map(img => img.decode()),artworkReady]);
-  }
-  async function navigate(url) {
-    if (active || preparation) return;
-    const controller = new AbortController();
-    preparation = controller;
-    let id = null;
-    const timeout = setTimeout(() => controller.abort(),14000);
-    try {
-      const ready = Promise.race([
-        preparePage(url,controller.signal),
-        new Promise((_,reject) => controller.signal.addEventListener('abort',() => reject(new DOMException('Aborted','AbortError')),{once:true}))
-      ]);
-      const fast = await Promise.race([ready.then(() => true),delay(320).then(() => false)]);
-      if (fast) { location.assign(url.href); return; }
-      id = begin(0,controller);
-      preparation = null;
-      await Promise.all([ready,tweenProgress(90,650,id),artworkReady]);
-      if (id !== serial) return;
-      const ticket = {to:url.href,at:Date.now(),progress:90};
-      if (storage.set(ticket)) { dialog.dataset.phase = 'handoff'; location.assign(url.href); }
-      else { await reveal(id); location.assign(url.href); }
-    } catch(error) {
-      if (id !== null) failure(error,id);
-      else if (error.name !== 'AbortError') location.assign(url.href);
-    } finally { clearTimeout(timeout); preparation = null; }
+  function navigate(url) {
+    if (active || handoff) return;
+    const ticket = {to:url.href,at:Date.now(),progress:0,shown:false};
+    if (storage.set(ticket)) {
+      handoff = ticket;
+      handoffTimer = setTimeout(() => {
+        if (handoff !== ticket) return;
+        const id = begin();
+        dialog.dataset.phase = 'handoff';
+        ticket.shown = true;
+        storage.set(ticket);
+        tweenProgress(85,2500,id);
+      },320);
+    }
+    // Start the browser's request immediately, without fetching the page twice.
+    try { location.assign(url.href); } catch { reset(); }
   }
   function showResume() {
     if (!resumeDialog) {
@@ -228,21 +184,30 @@
     event.preventDefault(); event.stopImmediatePropagation(); navigate(url);
   },true);
   const abort = () => {
-    // Once native navigation has started, let the incoming document finish the handoff.
-    if (dialog.dataset.phase === 'handoff') return;
+    if (dialog.dataset.phase === 'handoff') window.stop();
     const trigger=active?.trigger;
     reset();
     if(trigger?.isConnected) trigger.focus({preventScroll:true});
   };
   dialog.addEventListener('cancel',event => { event.preventDefault(); abort(); });
   cancel.addEventListener('click',abort);
+  window.addEventListener('pagehide',() => {
+    clearTimeout(handoffTimer);
+    if (handoff) storage.set({...handoff,progress:active ? Math.floor(progress) : 0});
+  });
   window.addEventListener('pageshow',event => { if (event.persisted) reset(); });
   window.YuceanTransition = {navigate:href => navigate(new URL(href,location.href)),get busy(){ return Boolean(active); }};
   if (window.__yuceanIncoming) {
+    const ticket = window.__yuceanIncoming;
     storage.clear();
-    const id = begin(90);
     clearTimeout(window.__yuceanEntryFallback);
-    const timeout = setTimeout(() => failure(new Error('Page readiness timeout'),id),14000);
-    pageReady().then(() => { clearTimeout(timeout); return reveal(id); }).catch(error => { clearTimeout(timeout); failure(error,id); });
+    if (ticket.slow) {
+      const id = begin(Math.min(90,Math.max(5,Number(ticket.progress) || 5)));
+      reveal(id);
+    } else {
+      ROOT.classList.remove('page-enter-pending');
+      window.__yuceanIncoming = null;
+      document.dispatchEvent(new Event('yucean:page-revealed'));
+    }
   }
 })();
