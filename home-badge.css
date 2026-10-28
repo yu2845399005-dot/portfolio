@@ -27,6 +27,7 @@
 .badge-fallback-strap { position:absolute; z-index:1; top:0; bottom:calc(78.35% - 18px); left:calc(50% - 12.5px); width:25px; background:linear-gradient(#000 18.916%,#fafafa); mask-image:linear-gradient(transparent 20%,#000 80%); }
 .badge-help { position:absolute; top:var(--badge-help-top,auto); bottom:auto; left:0; width:100%; margin:0; color:#ffffff70; font:400 12px/18px "Helvetica Neue",Arial,sans-serif; letter-spacing:.25px; text-align:center; opacity:0; pointer-events:none; transition:opacity .25s; }
 .badge-stage:hover .badge-help,.badge-stage:focus-within .badge-help { opacity:1; }
+.badge-interaction[data-entrance]:not([data-entrance="settled"])~.badge-help { opacity:0; }
 @media(min-width:721px) and (max-width:1440px) {
   .badge-home .hero-copy { width:52%; }
   .badge-home .eyebrow { font-size:clamp(30px,2.92vw,42px); line-height:1.2; }

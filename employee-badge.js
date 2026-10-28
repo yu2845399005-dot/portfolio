@@ -319,6 +319,7 @@ async function mountBadge() {
   let eyeTransition = null, eyeOpenness = 1;
   let squash = 0, squashVelocity = 0, lean = 0, leanVelocity = 0;
   let targetSquash = 0, targetLean = 0;
+  const entrance = {phase:'pending',y:0,velocity:0,gravity:0,age:0,bounces:0,greeted:false,bounceSpeed:0};
   let lastTapTime = -Infinity, lastTapX = 0, lastTapY = 0;
   const restAngle = -.012;
   const raycaster = new THREE.Raycaster(), pointer = new THREE.Vector2();
@@ -327,7 +328,7 @@ async function mountBadge() {
 
   function scheduleIdle() {
     clearTimeout(idleTimer);
-    if (!visible || document.hidden || reducedMotion.matches || dragging || expressionName !== 'normal') return;
+    if (!visible || document.hidden || reducedMotion.matches || dragging || expressionName !== 'normal' || entrance.phase !== 'settled') return;
     idleTimer = setTimeout(() => {
       idleTimer = 0;
       if (visible && !document.hidden && !dragging && expressionName === 'normal') {
@@ -391,6 +392,7 @@ async function mountBadge() {
     } else if (name === 'normal') scheduleIdle();
   }
   function reactToTap(direction,x = 0,y = 0) {
+    interruptEntrance();
     const now = performance.now();
     const doubleTap = now - lastTapTime < 420 && Math.hypot(x-lastTapX,y-lastTapY) < 45;
     lastTapTime = doubleTap ? -Infinity : now;
@@ -405,6 +407,56 @@ async function mountBadge() {
     leanVelocity = clamp(leanVelocity+direction*strength,-1.75,1.75);
     wake();
   }
+  function finishEntrance() {
+    entrance.phase = 'settled';
+    entrance.y = entrance.velocity = 0;
+    button.dataset.entrance = 'settled';
+    scheduleIdle();
+  }
+  function interruptEntrance() {
+    if (entrance.phase === 'settled' || entrance.phase === 'recovering') return;
+    // Hold its current position while grabbed, then ease into the resting length.
+    entrance.phase = 'recovering';
+    entrance.velocity = 0;
+    entrance.age = 0;
+    entrance.greeted = true;
+    button.dataset.entrance = 'recovering';
+  }
+  function updateEntrance(dt) {
+    if (entrance.phase === 'settled' || entrance.phase === 'pending') return;
+    if (reducedMotion.matches) { finishEntrance(); return; }
+    if (entrance.phase === 'recovering' && dragging) return;
+    entrance.age += dt;
+    if (entrance.phase === 'falling') {
+      entrance.velocity -= entrance.gravity*dt;
+      entrance.y += entrance.velocity*dt;
+      if (entrance.y <= 0) {
+        entrance.y = 0;
+        entrance.velocity = -entrance.bounceSpeed;
+        entrance.phase = 'rebounding'; entrance.age = 0;
+        velocity += .32; twistVelocity -= .18; tipVelocity += .06;
+        reactBody(-1,.7);
+        transitionEyes('normal');
+      }
+    } else {
+      const recovering = entrance.phase === 'recovering';
+      const oldVelocity = entrance.velocity;
+      entrance.velocity += -entrance.y*(recovering ? 80 : 110)*dt;
+      entrance.velocity *= Math.exp(-(recovering ? 18 : 5.4)*dt);
+      if (recovering) entrance.velocity = clamp(entrance.velocity,-500/pixelScale,500/pixelScale);
+      entrance.y += entrance.velocity*dt;
+      if (!recovering && oldVelocity < 0 && entrance.velocity >= 0) entrance.bounces++;
+      if (!recovering && !entrance.greeted && entrance.age > .55) {
+        entrance.greeted = true;
+        reactBody(1,.18);
+        transitionEyes('normal');
+      }
+      if ((entrance.age > 1.55 && Math.abs(entrance.y)*pixelScale < .3 && Math.abs(entrance.velocity)*pixelScale < 3) || entrance.age > 2.4) finishEntrance();
+    }
+    button.dataset.entrance = entrance.phase;
+    button.dataset.entranceOffset = (entrance.y*pixelScale).toFixed(1);
+    button.dataset.entranceBounces = entrance.bounces;
+  }
 
   function resize() {
     const bounds = stage.getBoundingClientRect();
@@ -412,6 +464,7 @@ async function mountBadge() {
     const surfaceBounds = surface.getBoundingClientRect();
     stageWidth = bounds.width; stageHeight = bounds.height;
     const mobile = matchMedia('(max-width:720px)').matches;
+    const previousScale = pixelScale;
     pixelScale = mobile
       ? Math.min(stageHeight / 6.45, stageWidth / 5.2)
       : clamp(screenBounds.height * .56, 360, 510) / h;
@@ -429,20 +482,33 @@ async function mountBadge() {
     button.dataset.cardPixels = Math.round(h * pixelScale);
     const cardTop = surfaceBounds.top + slotPx - PRINT.slotY / 100 * pixelScale;
     stage.style.setProperty('--badge-help-top', (cardTop - bounds.top + h * pixelScale + 14) + 'px');
+    const exploreTop = firstScreen.querySelector('.explore-wrap').getBoundingClientRect().top;
+    entrance.bounceSpeed = clamp((exploreTop-cardTop-h*pixelScale-16)*14,180,440)/pixelScale;
+    if (entrance.phase === 'pending') {
+      entrance.y = (cardTop-screenBounds.top+h*pixelScale+48)/pixelScale;
+      entrance.gravity = 2*entrance.y/(.62*.62);
+    } else if (entrance.phase !== 'settled') {
+      const ratio = previousScale/pixelScale;
+      entrance.y *= ratio; entrance.velocity *= ratio; entrance.gravity *= ratio;
+    }
     wake();
   }
 
   function updateGeometry(time) {
     const length = strapLength;
-    pivot.position.set(anchorX + Math.sin(angle) * length, anchorY - Math.cos(angle) * length, 0);
+    pivot.position.set(anchorX + Math.sin(angle) * length, anchorY - Math.cos(angle) * length + entrance.y, 0);
     pivot.rotation.set(tip, twist, angle);
     shine.material.opacity = .14 + Math.min(.35, Math.abs(twist) * .6);
     start.set(anchorX, anchorY, -.015);
     end.copy(pivot.position);
     end.z += .043;
+    const span = start.y-end.y;
+    const slack = Math.max(0,length-Math.max(0,span));
+    ribbon.visible = span > .01;
+    ribbon.material.opacity = clamp(span/Math.max(.25,length*.35),0,1);
     path.v0.copy(start);
-    path.v1.set(start.x + Math.sin(angle) * .18, start.y - length * .35, -.025);
-    path.v2.set(end.x - Math.sin(angle) * .12, end.y + .32, end.z + .06);
+    path.v1.set(start.x + Math.sin(angle) * .18 - slack*.3, start.y - Math.max(.08,span*.35), -.025);
+    path.v2.set(end.x - Math.sin(angle) * .12 + slack*.25, end.y + Math.min(.32,Math.max(.02,span*.5)), end.z + .06);
     path.v3.copy(end);
     const attribute = ribbonGeometry.attributes.position;
     for (let i = 0; i <= segments; i++) {
@@ -476,6 +542,7 @@ async function mountBadge() {
       speed *= Math.exp(-damping * dt);
       return [value + speed * dt, speed];
     };
+    updateEntrance(dt);
     if (!reducedMotion.matches) {
       [angle, velocity] = advance(angle, velocity, targetAngle, dragging ? 100 : 24, dragging ? 12 : 2.5);
       [twist, twistVelocity] = advance(twist, twistVelocity, targetTwist, dragging ? 70 : 19, 3.2);
@@ -488,7 +555,7 @@ async function mountBadge() {
       velocity = twistVelocity = tipVelocity = 0;
       squash = lean = squashVelocity = leanVelocity = 0;
     }
-    const moving = dragging || Math.abs(velocity) + Math.abs(twistVelocity) + Math.abs(tipVelocity) > .0007
+    const moving = entrance.phase !== 'settled' || dragging || Math.abs(velocity) + Math.abs(twistVelocity) + Math.abs(tipVelocity) > .0007
       || Math.abs(angle - targetAngle) + Math.abs(twist - targetTwist) + Math.abs(tip - targetTip) > .0005
       || Math.abs(squashVelocity)+Math.abs(leanVelocity) > .0005
       || Math.abs(squash-targetSquash)+Math.abs(lean-targetLean) > .0003;
@@ -502,7 +569,7 @@ async function mountBadge() {
     updateEyes(time);
     updateGeometry(time);
     button.dataset.state = dragging ? 'dragging' : moving ? 'swinging' : 'idle';
-    if ((moving || eyeTransition) && !reducedMotion.matches) frame = requestAnimationFrame(render);
+    if (!frame && (moving || eyeTransition) && !reducedMotion.matches) frame = requestAnimationFrame(render);
   }
 
   function wake() {
@@ -521,6 +588,7 @@ async function mountBadge() {
   }
   button.addEventListener('pointerdown', event => {
     if (!cardHit(event) || event.button !== 0) return;
+    interruptEntrance();
     dragging = true; travel = 0;
     dragOrigin = { x:event.clientX, y:event.clientY, angle, twist };
     clearTimeout(idleTimer); idleTimer = 0;
@@ -545,7 +613,7 @@ async function mountBadge() {
       targetTip = clamp(-dy * .002, -.22, .22);
       event.preventDefault();
       wake();
-    } else if (event.pointerType !== 'touch' && cardHit(event)) {
+    } else if (entrance.phase === 'settled' && event.pointerType !== 'touch' && cardHit(event)) {
       const rect = button.getBoundingClientRect();
       targetTwist = .035 + ((event.clientX - rect.left) / rect.width - .5) * .15;
       targetTip = -((event.clientY - rect.top) / rect.height - .5) * .08;
@@ -587,6 +655,7 @@ async function mountBadge() {
   button.addEventListener('keydown', event => {
     if (['Enter', ' ', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
       event.preventDefault();
+      interruptEntrance();
       if (event.key.startsWith('Arrow')) {
         setExpression('drag',650);
         lastTapTime = -Infinity;
@@ -620,12 +689,20 @@ async function mountBadge() {
   });
   reducedMotion.addEventListener('change', () => { wake(); scheduleIdle(); });
   resize();
+  if (reducedMotion.matches) finishEntrance();
+  else {
+    entrance.phase = 'falling';
+    angle = -.065; twist = .075; tip = -.02;
+    button.dataset.entrance = 'falling';
+    button.dataset.entranceOffset = (entrance.y*pixelScale).toFixed(1);
+  }
   updateGeometry(0);
   stage.classList.add('badge-ready');
   firstScreen.classList.add('badge-scene-ready');
   button.dataset.renderer = 'webgl';
   button.dataset.expression = 'normal';
   scheduleIdle();
+  wake();
 }
 
 if (stage && button) {
