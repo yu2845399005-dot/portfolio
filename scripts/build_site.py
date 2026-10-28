@@ -11,6 +11,7 @@ from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = (
     "index.html",
+    "contact.html",
     "onboarding.html",
     "live-assistant.html",
     "dialog-agent.html",
