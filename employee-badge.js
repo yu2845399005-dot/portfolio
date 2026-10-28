@@ -10,8 +10,6 @@ const EXPRESSION_ASSETS = {
   normal:'./assets/home-badge/expressions/26745.svg',
   dizzy:'./assets/home-badge/expressions/5838f.svg',
   drag:'./assets/home-badge/expressions/f095b.svg',
-  body:'./assets/home-badge/expressions/ac6d8.svg',
-  bodyShading:'./assets/home-badge/expressions/1bf6a.svg',
   leftMask:'./assets/home-badge/expressions/98fae.svg',
   leftEye:'./assets/home-badge/expressions/a225d.svg',
   rightMask:'./assets/home-badge/expressions/6b3a4.svg',
@@ -35,10 +33,30 @@ function roundedPath(PathType, x, y, width, height, radius) {
 }
 
 async function makePrint(maxTextureSize) {
+  let bodyImage;
+  const decodeSvg = async svg => {
+    const image = new Image();
+    const url = URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(svg)],{type:'image/svg+xml'}));
+    try { image.src = url; await image.decode(); return image; }
+    finally { URL.revokeObjectURL(url); }
+  };
   const images = Object.fromEntries(await Promise.all(Object.entries(EXPRESSION_ASSETS).map(async ([key,src]) => {
     const image = new Image();
-    image.src = src;
-    await image.decode();
+    if (['normal','dizzy','drag'].includes(key)) {
+      // Keep the original Figma eyes, but move the common body to the static print.
+      // This lets the eyelids move without re-uploading a 4K card every frame.
+      const response = await fetch(src);
+      if (!response.ok) throw new Error('Cannot load badge expression: ' + key);
+      const svg = new DOMParser().parseFromString(await response.text(),'image/svg+xml');
+      if (key === 'normal') {
+        const bodySvg = svg.cloneNode(true);
+        bodySvg.querySelectorAll('g[id^="Frame "]').forEach(eye => eye.remove());
+        bodyImage = await decodeSvg(bodySvg);
+      }
+      svg.getElementById('Vector 319')?.remove();
+      svg.getElementById('Vector 320')?.remove();
+      return [key,await decodeSvg(svg)];
+    } else { image.src = src; await image.decode(); }
     return [key,image];
   })));
   await document.fonts.ready;
@@ -61,6 +79,11 @@ async function makePrint(maxTextureSize) {
   ctx.font = '600 29.494px "PingFang SC", "Helvetica Neue", Arial, sans-serif';
   ctx.fillStyle = '#000';
   ctx.fillText('APIPKA', PRINT.width / 2, 369.516);
+  ctx.save();
+  ctx.translate(0,PRINT.artY);
+  ctx.scale(PRINT.width/104,PRINT.artHeight/80);
+  ctx.drawImage(bodyImage,0,0,104,80);
+  ctx.restore();
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
   // Compose the second face from the exact exported eye layers and Figma alpha masks.
@@ -80,27 +103,23 @@ async function makePrint(maxTextureSize) {
   };
   const leftEye = maskedEye(images.leftEye,images.leftMask,[37.94,24,16,16],[37.773,24.152,23.2292,12.8484]);
   const rightEye = maskedEye(images.rightEye,images.rightMask,[51.06,24,16,16],[49.997,23,18,14]);
-  function drawExpression(name) {
-    ctx.save();
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(0,PRINT.artY,PRINT.width,PRINT.artHeight);
-    ctx.translate(0,PRINT.artY);
-    ctx.scale(PRINT.width/104,PRINT.artHeight/80);
-    if (name === 'tap' || name === 'blink') {
-      ctx.drawImage(images.body,15.35055,0,73.2989,80);
-      ctx.drawImage(images.bodyShading,15.35055,0,73.2989,80);
-      for (const eye of [leftEye,rightEye]) ctx.drawImage(eye.image,eye.x,eye.y,eye.width,eye.height);
-    } else if (name === 'dizzy') {
-      ctx.drawImage(images.dizzy,0,0,104,80);
-      ctx.drawImage(images.spiral,54.5,27.5,9,8.50013);
+  const eyeTextures = Object.fromEntries(['normal','tap','dizzy','drag'].map(name => {
+    const layer = document.createElement('canvas');
+    layer.width = Math.min(1024,maxTextureSize);
+    layer.height = Math.round(layer.width*80/104);
+    const eyes = layer.getContext('2d');
+    eyes.scale(layer.width/104,layer.height/80);
+    if (name === 'tap') {
+      for (const eye of [leftEye,rightEye]) eyes.drawImage(eye.image,eye.x,eye.y,eye.width,eye.height);
     } else {
-      ctx.drawImage(name === 'drag' || name === 'look-up' ? images.drag : images.normal,0,0,104,80);
+      eyes.drawImage(images[name],0,0,104,80);
+      if (name === 'dizzy') eyes.drawImage(images.spiral,54.5,27.5,9,8.50013);
     }
-    ctx.restore();
-    texture.needsUpdate = true;
-  }
-  drawExpression('normal');
-  return {texture,drawExpression};
+    const eyeTexture = new THREE.CanvasTexture(layer);
+    eyeTexture.colorSpace = THREE.SRGBColorSpace;
+    return [name,eyeTexture];
+  }));
+  return {texture,eyeTextures};
 }
 
 function clothTextures() {
@@ -184,7 +203,7 @@ async function mountBadge() {
   const card = new THREE.Group();
   const body = new THREE.Mesh(bodyGeometry, pvc);
   card.add(body);
-  const {texture:print,drawExpression} = await makePrint(renderer.capabilities.maxTextureSize);
+  const {texture:print,eyeTextures} = await makePrint(renderer.capabilities.maxTextureSize);
   print.anisotropy = renderer.capabilities.getMaxAnisotropy();
   button.dataset.textureSize = print.image.width + 'x' + print.image.height;
   const faceGeometry = new THREE.ShapeGeometry(bodyShape, 32);
@@ -196,6 +215,20 @@ async function mountBadge() {
   const face = new THREE.Mesh(faceGeometry, new THREE.MeshBasicMaterial({ map:print, toneMapped:false }));
   face.position.z = .031;
   card.add(face);
+  const eyesPivot = new THREE.Group();
+  const artHeight = PRINT.artHeight/100;
+  eyesPivot.position.set(0,h/2-PRINT.artY/100-artHeight*32/80,.033);
+  const eyesMaterial = new THREE.MeshBasicMaterial({
+    map:eyeTextures.normal, transparent:true, depthWrite:false, toneMapped:false
+  });
+  const eyesMesh = new THREE.Mesh(new THREE.PlaneGeometry(w,artHeight),eyesMaterial);
+  eyesMesh.position.y = -artHeight*(.5-32/80);
+  eyesPivot.add(eyesMesh);
+  card.add(eyesPivot);
+  for (const eyeTexture of Object.values(eyeTextures)) {
+    eyeTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    renderer.initTexture(eyeTexture);
+  }
   const back = new THREE.Mesh(faceGeometry, new THREE.MeshPhysicalMaterial({
     color:0xf2f4f6, roughness:.4, clearcoat:.5, side:THREE.BackSide
   }));
@@ -273,6 +306,7 @@ async function mountBadge() {
   let pixelScale = 100, anchorX = 0, anchorY = 3.365, strapLength = 1.4;
   let dragOrigin = null, travel = 0;
   let expressionName = 'normal', expressionTimer = 0, idleTimer = 0;
+  let eyeTransition = null, eyeOpenness = 1;
   let lastTapTime = -Infinity, lastTapX = 0, lastTapY = 0;
   const restAngle = -.012;
   const raycaster = new THREE.Raycaster(), pointer = new THREE.Vector2();
@@ -284,15 +318,56 @@ async function mountBadge() {
     if (!visible || document.hidden || reducedMotion.matches || dragging || expressionName !== 'normal') return;
     idleTimer = setTimeout(() => {
       idleTimer = 0;
-      if (visible && !document.hidden && !dragging && expressionName === 'normal') setExpression('blink',170);
+      if (visible && !document.hidden && !dragging && expressionName === 'normal') {
+        transitionEyes('normal');
+        scheduleIdle();
+      }
     },5500 + Math.random()*2500);
+  }
+  function transitionEyes(name) {
+    if (reducedMotion.matches) {
+      eyesMaterial.map = eyeTextures[name];
+      eyesPivot.scale.y = eyeOpenness = 1;
+      eyeTransition = null;
+    } else if (eyeTransition?.phase === 'closing') {
+      // A second tap changes the destination of the current blink, not its clock.
+      eyeTransition.destination = name;
+    } else {
+      eyeTransition = {phase:'closing',start:performance.now(),from:eyeOpenness,destination:name};
+    }
+    wake();
+  }
+  function updateEyes(time) {
+    if (!eyeTransition) return;
+    if (reducedMotion.matches) {
+      eyesMaterial.map = eyeTextures[eyeTransition.destination];
+      eyesPivot.scale.y = eyeOpenness = 1;
+      eyeTransition = null;
+      return;
+    }
+    const elapsed = time-eyeTransition.start;
+    if (eyeTransition.phase === 'closing') {
+      const progress = clamp(elapsed/90,0,1);
+      eyeOpenness = eyeTransition.from*Math.cos(progress*Math.PI/2);
+      if (progress === 1) {
+        eyesMaterial.map = eyeTextures[eyeTransition.destination];
+        eyeTransition = {...eyeTransition,phase:'opening',start:time+20};
+      }
+    } else {
+      const progress = clamp(elapsed/170,0,1);
+      // Slow down into the final pose; the artwork never crossfades or doubles up.
+      eyeOpenness = 1-Math.pow(1-progress,3);
+      if (progress === 1) eyeTransition = null;
+    }
+    eyesPivot.scale.y = Math.max(.015,eyeOpenness);
+    button.dataset.eyeTransition = eyeTransition?.phase || 'settled';
   }
   function setExpression(name,duration = 0) {
     clearTimeout(expressionTimer); expressionTimer = 0;
     clearTimeout(idleTimer); idleTimer = 0;
     if (name !== expressionName) {
       expressionName = name;
-      drawExpression(name);
+      transitionEyes(name);
       button.dataset.expression = name;
       wake();
     }
@@ -300,7 +375,7 @@ async function mountBadge() {
       expressionTimer = setTimeout(() => {
         expressionTimer = 0;
         setExpression('normal');
-      },duration);
+      },duration+(reducedMotion.matches ? 0 : 280));
     } else if (name === 'normal') scheduleIdle();
   }
   function reactToTap(direction,x = 0,y = 0) {
@@ -391,11 +466,12 @@ async function mountBadge() {
       angle = targetAngle; twist = targetTwist; tip = targetTip;
       velocity = twistVelocity = tipVelocity = 0;
     }
+    updateEyes(time);
     updateGeometry(time);
     const moving = dragging || Math.abs(velocity) + Math.abs(twistVelocity) + Math.abs(tipVelocity) > .0007
       || Math.abs(angle - targetAngle) + Math.abs(twist - targetTwist) + Math.abs(tip - targetTip) > .0005;
     button.dataset.state = dragging ? 'dragging' : moving ? 'swinging' : 'idle';
-    if (moving && !reducedMotion.matches) frame = requestAnimationFrame(render);
+    if ((moving || eyeTransition) && !reducedMotion.matches) frame = requestAnimationFrame(render);
   }
 
   function wake() {
@@ -403,7 +479,7 @@ async function mountBadge() {
   }
   function swing(direction = 1) {
     targetAngle = restAngle; targetTwist = .035; targetTip = 0;
-    if (!reducedMotion.matches) { velocity = clamp(velocity + direction * 1.1, -1.4, 1.4); twistVelocity = clamp(twistVelocity + direction * .8, -1.1, 1.1); tipVelocity += .22; }
+    if (!reducedMotion.matches) { velocity = clamp(velocity + direction * .72, -1.05, 1.05); twistVelocity = clamp(twistVelocity + direction * .45, -.8, .8); tipVelocity += .12; }
     wake();
   }
   function cardHit(event) {
@@ -439,9 +515,7 @@ async function mountBadge() {
       const rect = button.getBoundingClientRect();
       targetTwist = .035 + ((event.clientX - rect.left) / rect.width - .5) * .15;
       targetTip = -((event.clientY - rect.top) / rect.height - .5) * .08;
-      if (!expressionTimer && ['normal','look-up'].includes(expressionName)) {
-        setExpression(event.clientY < rect.top + rect.height*.48 ? 'look-up' : 'normal');
-      }
+      // Hover only tilts the badge. Crossing an invisible boundary must not swap faces.
       wake();
     }
   });
@@ -472,7 +546,6 @@ async function mountBadge() {
   button.addEventListener('pointerleave', () => {
     if (!dragging) {
       targetTwist = .035; targetTip = 0;
-      if (expressionName === 'look-up') setExpression('normal');
       wake();
     }
   });
