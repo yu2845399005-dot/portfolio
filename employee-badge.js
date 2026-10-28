@@ -535,6 +535,7 @@ async function mountBadge() {
   function render(time) {
     frame = 0;
     if (!visible || document.hidden) return;
+    if (document.documentElement.classList.contains('page-enter-pending') && entrance.phase !== 'settled') return;
     const dt = Math.min((time - previous) / 1000 || .016, .032);
     previous = time;
     const advance = (value, speed, target, spring, damping) => {
@@ -575,6 +576,7 @@ async function mountBadge() {
   function wake() {
     if (!frame && visible && !document.hidden) { previous = performance.now(); frame = requestAnimationFrame(render); }
   }
+  document.addEventListener('yucean:page-revealed',wake);
   function swing(direction = 1) {
     targetAngle = restAngle; targetTwist = .035; targetTip = 0;
     if (!reducedMotion.matches) { velocity = clamp(velocity + direction * .72, -1.05, 1.05); twistVelocity = clamp(twistVelocity + direction * .45, -.8, .8); tipVelocity += .12; }

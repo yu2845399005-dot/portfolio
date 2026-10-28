@@ -1,0 +1,37 @@
+/* Original loader artwork and geometry: Figma 396:4070. */
+html.page-enter-pending { background:#000; }
+html.page-enter-pending body { visibility:hidden; }
+html.page-enter-pending .page-loader { visibility:visible; }
+html.page-loader-active { overflow:hidden; }
+.page-loader { position:fixed; inset:0; width:100vw; height:100dvh; max-width:none; max-height:none; margin:0; padding:0; border:0; overflow:hidden; background:#000; color:#fff; color-scheme:dark; }
+.page-loader::backdrop { background:transparent; }
+.page-loader:focus { outline:none; }
+.page-loader[open] { display:grid; place-items:center; }
+.page-loader-scene { position:relative; display:flex; width:104px; flex-direction:column; align-items:center; gap:11px; transform:translateY(-12px); }
+.page-loader-bob,.page-loader-faces { position:relative; width:104px; height:80px; }
+.page-loader-faces>img { position:absolute; left:0; top:0; width:auto; height:auto; max-width:none; opacity:0; transition:opacity 160ms ease; }
+.page-loader-faces>img.is-active { opacity:1; }
+.page-loader-dots { position:relative; width:94px; height:6px; }
+.page-loader-dots img { position:absolute; inset:0; width:auto; height:auto; max-width:none; opacity:0; transition:opacity 180ms ease; }
+.page-loader-dots img.is-active { opacity:1; }
+.page-loader-value { margin:0; color:#fff; font-family:"SF Pro",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif; font-size:20px; font-weight:540; font-stretch:132%; font-variation-settings:"wdth" 132; line-height:24px; letter-spacing:.4px; font-variant-numeric:tabular-nums; }
+.page-loader-message { position:absolute; top:calc(50% + 115px); left:24px; right:24px; margin:0; text-align:center; font:14px/22px -apple-system,BlinkMacSystemFont,Arial,sans-serif; color:#a8acb6; }
+.page-loader-message:empty { display:none; }
+.page-loader-cancel { position:absolute; bottom:max(24px,env(safe-area-inset-bottom)); left:50%; transform:translateX(-50%); padding:8px 16px; border:1px solid #34363d; border-radius:20px; background:#17181d; color:#c3c6d0; font:13px/20px -apple-system,BlinkMacSystemFont,Arial,sans-serif; cursor:pointer; }
+.page-loader-cancel[hidden] { display:none; }
+.page-loader-sr { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.resume-picker { position:fixed; inset:0; width:min(440px,calc(100vw - 40px)); max-height:calc(100dvh - 48px); margin:auto; padding:30px; overflow:auto; border:1px solid #e8e9ee; border-radius:24px; background:#fff; color:#17191f; box-shadow:0 20px 90px #0003; color-scheme:light; font-family:"SF Pro",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif; }
+.resume-picker::backdrop { background:#0009; -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+.resume-picker-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:26px; }
+.resume-picker-header h2 { margin:0; font-size:24px; line-height:30px; font-weight:550; color:#17191f; }
+.resume-picker-close { display:grid; place-items:center; width:32px; height:32px; padding:0; border:0; border-radius:50%; background:#f3f4f7; color:#565d69; font:22px/1 Arial,sans-serif; cursor:pointer; }
+.resume-file { display:flex; align-items:center; gap:16px; padding:20px 16px; border:1px solid #e8eaf1; border-radius:16px; background:#fafbfe; }
+.resume-file-icon { display:grid; place-items:center; flex:none; width:46px; height:58px; border:1px solid #d9def3; border-radius:9px; color:#7478d9; background:#f0f2ff; font-size:12px; font-weight:600; letter-spacing:.5px; }
+.resume-file-name { margin:0; font-size:17px; line-height:25px; color:#17191f; font-weight:500; }
+.resume-file-meta { margin:4px 0 0; color:#888e99; font-size:13px; line-height:20px; }
+.resume-picker-actions { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:24px; }
+.resume-picker-actions a { display:flex; align-items:center; justify-content:center; min-height:44px; padding:12px; border:1px solid #e1e4ec; border-radius:24px; background:#fff; color:#363b46; font-size:14px; line-height:20px; text-decoration:none; }
+.resume-picker-actions a[download] { border-color:#17191f; background:#17191f; color:#fff; }
+.resume-picker a:focus-visible,.resume-picker button:focus-visible,.page-loader-cancel:focus-visible { outline:2px solid #808fff; outline-offset:4px; }
+@media(max-width:440px) { .resume-picker { padding:24px; }.resume-picker-actions { gap:8px; } }
+@media(prefers-reduced-motion:reduce) { .page-loader-faces>img,.page-loader-dots img { transition:none; } }
