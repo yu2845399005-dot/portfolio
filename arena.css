@@ -192,7 +192,7 @@ html[lang="en"] .project-intro { gap:110px; } html[lang="en"] .insight-word { fo
 #research .research-insight p { margin-inline:48px; color:rgba(0,0,0,.6); font-size:14px; font-weight:400; line-height:20px; letter-spacing:0; }
 #research .research-insight-copy strong { color:rgba(0,0,0,.8); font-size:inherit; font-weight:500; }
 #research .research-goals { flex-wrap:wrap; gap:20px clamp(12px,calc((100% - 928px)/4),48px); margin-top:48px; }
-#research .research-goals span { max-width:100%; padding:16px 36px; border-radius:70px; background:#0064fa; color:#fff; font-size:28px; font-weight:500; line-height:39px; letter-spacing:0; text-align:center; }
+#research .research-goals span { max-width:100%; padding:16px 36px; border-radius:70px; background:#0064fa; color:#fff; font-size:14px; font-weight:500; line-height:20px; letter-spacing:0; text-align:center; }
 #research .research-goals b { width:20px; flex:0 0 20px; color:#fff; font-size:20px; font-weight:500; line-height:20px; }
 html[lang="en"] #research .interview-quotes { display:flex; flex-direction:column; gap:20px; aspect-ratio:auto; }
 html[lang="en"] #research .interview-quote:nth-child(n) { position:relative; left:auto; right:auto; top:auto; width:fit-content; max-width:100%; }
