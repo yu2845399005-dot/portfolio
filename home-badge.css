@@ -1,13 +1,13 @@
 /* Home 377:2805. The card artwork remains the original Figma SVG and native text. */
 .badge-home { --home-action-font-size:16px; }
-.badge-home .button,.badge-home .explore-link { font-size:var(--home-action-font-size); font-weight:400; }
+.badge-home .button,.badge-home .explore-link,.badge-home .intro { font-size:var(--home-action-font-size); font-weight:400; }
 .badge-home .first-screen { height:min(929px,100svh); min-height:680px; padding:0; }
 .badge-home .topbar { top:36px; height:48px; }
 .badge-home .brand { color:#fff; font-size:20px; font-weight:400; }
 .badge-home .hero-area { position:absolute; top:94px; bottom:23px; height:auto; }
 .badge-home .hero { height:calc(100% - 138px); padding:0; }
 .badge-home .hero-copy { top:calc(50% - 22px); left:6.25%; width:603px; transform:translateY(-18%); }
-.badge-home .intro { width:484.7458px; max-width:84.7458%; transform:scaleX(1.18); transform-origin:left top; font-weight:400; }
+.badge-home .intro { width:572px; max-width:100%; transform:none; font-family:inherit; font-variation-settings:normal; }
 .badge-home .explore-wrap { top:auto; bottom:0; height:128px; margin:0; }
 .badge-home .round-icon-black img { width:13.7143px; height:14.083px; max-width:none; }
 .badge-home .badge-stage { position:absolute; inset:0 0 auto auto; width:540px; height:100%; aspect-ratio:auto; margin:0; isolation:isolate; }
@@ -37,7 +37,7 @@
 }
 @media(max-width:1200px) and (min-width:721px) {
   .badge-home .hero-copy { width:52%; }
-  .badge-home .intro { width:min(84.7458%,440px); font-size:15px; }
+  .badge-home .intro { width:min(100%,520px); }
   .badge-home .badge-stage { right:-3%; width:43%; }
 }
 @media(max-width:720px) {
@@ -52,7 +52,7 @@
   .badge-home .hero-copy { position:relative; top:auto; left:auto; width:100%; transform:none; }
   .badge-home .eyebrow { font-size:34px; line-height:1.2; }
   .badge-home h1 { font-size:clamp(42px,10vw,62px); line-height:1.18; white-space:nowrap; }
-  .badge-home .intro { width:min(100%,500px); max-width:100%; transform:none; font-size:14px; line-height:21px; margin-top:22px; }
+  .badge-home .intro { width:min(100%,500px); max-width:100%; line-height:1.5; margin-top:22px; }
   .badge-home .badge-stage { position:relative; inset:auto; width:100%; height:360px; margin-top:16px; }
   .badge-home .explore-wrap { position:relative; inset:auto; height:auto; padding:20px 0 28px; }
   .badge-home .badge-fallback { transform:scale(.54); transform-origin:50% 0; height:665px; }
