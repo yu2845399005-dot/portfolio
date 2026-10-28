@@ -43,8 +43,7 @@ async function makePrint(maxTextureSize) {
   const images = Object.fromEntries(await Promise.all(Object.entries(EXPRESSION_ASSETS).map(async ([key,src]) => {
     const image = new Image();
     if (['normal','dizzy','drag'].includes(key)) {
-      // Keep the original Figma eyes, but move the common body to the static print.
-      // This lets the eyelids move without re-uploading a 4K card every frame.
+      // Separate original Figma body and eyes so both can move without changing the print.
       const response = await fetch(src);
       if (!response.ok) throw new Error('Cannot load badge expression: ' + key);
       const svg = new DOMParser().parseFromString(await response.text(),'image/svg+xml');
@@ -79,13 +78,14 @@ async function makePrint(maxTextureSize) {
   ctx.font = '600 29.494px "PingFang SC", "Helvetica Neue", Arial, sans-serif';
   ctx.fillStyle = '#000';
   ctx.fillText('APIPKA', PRINT.width / 2, 369.516);
-  ctx.save();
-  ctx.translate(0,PRINT.artY);
-  ctx.scale(PRINT.width/104,PRINT.artHeight/80);
-  ctx.drawImage(bodyImage,0,0,104,80);
-  ctx.restore();
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
+  const bodyCanvas = document.createElement('canvas');
+  bodyCanvas.width = Math.min(2048,maxTextureSize);
+  bodyCanvas.height = Math.round(bodyCanvas.width*80/104);
+  bodyCanvas.getContext('2d').drawImage(bodyImage,0,0,bodyCanvas.width,bodyCanvas.height);
+  const bodyTexture = new THREE.CanvasTexture(bodyCanvas);
+  bodyTexture.colorSpace = THREE.SRGBColorSpace;
   // Compose the second face from the exact exported eye layers and Figma alpha masks.
   const maskedEye = (eye, mask, imageRect, maskRect) => {
     const x = Math.min(imageRect[0], maskRect[0]), y = Math.min(imageRect[1], maskRect[1]);
@@ -119,7 +119,7 @@ async function makePrint(maxTextureSize) {
     eyeTexture.colorSpace = THREE.SRGBColorSpace;
     return [name,eyeTexture];
   }));
-  return {texture,eyeTextures};
+  return {texture,bodyTexture,eyeTextures};
 }
 
 function clothTextures() {
@@ -203,7 +203,7 @@ async function mountBadge() {
   const card = new THREE.Group();
   const body = new THREE.Mesh(bodyGeometry, pvc);
   card.add(body);
-  const {texture:print,eyeTextures} = await makePrint(renderer.capabilities.maxTextureSize);
+  const {texture:print,bodyTexture,eyeTextures} = await makePrint(renderer.capabilities.maxTextureSize);
   print.anisotropy = renderer.capabilities.getMaxAnisotropy();
   button.dataset.textureSize = print.image.width + 'x' + print.image.height;
   const faceGeometry = new THREE.ShapeGeometry(bodyShape, 32);
@@ -215,17 +215,27 @@ async function mountBadge() {
   const face = new THREE.Mesh(faceGeometry, new THREE.MeshBasicMaterial({ map:print, toneMapped:false }));
   face.position.z = .031;
   card.add(face);
-  const eyesPivot = new THREE.Group();
   const artHeight = PRINT.artHeight/100;
-  eyesPivot.position.set(0,h/2-PRINT.artY/100-artHeight*32/80,.033);
+  // Animate around the character's lower body, keeping text and the badge rigid.
+  const character = new THREE.Group();
+  character.position.set(0,h/2-PRINT.artY/100-artHeight*.82,.032);
+  const characterGeometry = new THREE.PlaneGeometry(w,artHeight);
+  const characterBody = new THREE.Mesh(characterGeometry,new THREE.MeshBasicMaterial({
+    map:bodyTexture,transparent:true,depthWrite:false,toneMapped:false
+  }));
+  characterBody.position.y = artHeight*(.82-.5);
+  character.add(characterBody);
+  card.add(character);
+  const eyesPivot = new THREE.Group();
+  eyesPivot.position.set(0,artHeight*(.82-32/80),.001);
   const eyesMaterial = new THREE.MeshBasicMaterial({
     map:eyeTextures.normal, transparent:true, depthWrite:false, toneMapped:false
   });
   const eyesMesh = new THREE.Mesh(new THREE.PlaneGeometry(w,artHeight),eyesMaterial);
   eyesMesh.position.y = -artHeight*(.5-32/80);
   eyesPivot.add(eyesMesh);
-  card.add(eyesPivot);
-  for (const eyeTexture of Object.values(eyeTextures)) {
+  character.add(eyesPivot);
+  for (const eyeTexture of [bodyTexture,...Object.values(eyeTextures)]) {
     eyeTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
     renderer.initTexture(eyeTexture);
   }
@@ -307,6 +317,8 @@ async function mountBadge() {
   let dragOrigin = null, travel = 0;
   let expressionName = 'normal', expressionTimer = 0, idleTimer = 0;
   let eyeTransition = null, eyeOpenness = 1;
+  let squash = 0, squashVelocity = 0, lean = 0, leanVelocity = 0;
+  let targetSquash = 0, targetLean = 0;
   let lastTapTime = -Infinity, lastTapX = 0, lastTapY = 0;
   const restAngle = -.012;
   const raycaster = new THREE.Raycaster(), pointer = new THREE.Vector2();
@@ -322,7 +334,7 @@ async function mountBadge() {
         transitionEyes('normal');
         scheduleIdle();
       }
-    },5500 + Math.random()*2500);
+    },4000 + Math.random()*3500);
   }
   function transitionEyes(name) {
     if (reducedMotion.matches) {
@@ -384,7 +396,14 @@ async function mountBadge() {
     lastTapTime = doubleTap ? -Infinity : now;
     lastTapX = x; lastTapY = y;
     setExpression(doubleTap ? 'dizzy' : 'tap',doubleTap ? 2200 : 1200);
+    reactBody(direction,doubleTap ? 1.35 : 1);
     swing(direction);
+  }
+  function reactBody(direction = 1,strength = 1) {
+    if (reducedMotion.matches) return;
+    squashVelocity = clamp(squashVelocity-1.25*strength,-1.75,1.75);
+    leanVelocity = clamp(leanVelocity+direction*strength,-1.75,1.75);
+    wake();
   }
 
   function resize() {
@@ -461,15 +480,27 @@ async function mountBadge() {
       [angle, velocity] = advance(angle, velocity, targetAngle, dragging ? 100 : 24, dragging ? 12 : 2.5);
       [twist, twistVelocity] = advance(twist, twistVelocity, targetTwist, dragging ? 70 : 19, 3.2);
       [tip, tipVelocity] = advance(tip, tipVelocity, targetTip, 30, 4);
+      [squash,squashVelocity] = advance(squash,squashVelocity,targetSquash,130,7);
+      [lean,leanVelocity] = advance(lean,leanVelocity,targetLean,100,6);
       if (Math.abs(angle) > .34) { angle = clamp(angle, -.34, .34); velocity *= -.3; }
     } else {
       angle = targetAngle; twist = targetTwist; tip = targetTip;
       velocity = twistVelocity = tipVelocity = 0;
+      squash = lean = squashVelocity = leanVelocity = 0;
     }
+    const moving = dragging || Math.abs(velocity) + Math.abs(twistVelocity) + Math.abs(tipVelocity) > .0007
+      || Math.abs(angle - targetAngle) + Math.abs(twist - targetTwist) + Math.abs(tip - targetTip) > .0005
+      || Math.abs(squashVelocity)+Math.abs(leanVelocity) > .0005
+      || Math.abs(squash-targetSquash)+Math.abs(lean-targetLean) > .0003;
+    if (!moving) {
+      squash = targetSquash; lean = targetLean;
+      squashVelocity = leanVelocity = 0;
+    }
+    character.scale.set(1/Math.sqrt(1+squash),1+squash,1);
+    character.rotation.z = lean;
+    button.dataset.bodyPose = squash.toFixed(3)+','+lean.toFixed(3);
     updateEyes(time);
     updateGeometry(time);
-    const moving = dragging || Math.abs(velocity) + Math.abs(twistVelocity) + Math.abs(tipVelocity) > .0007
-      || Math.abs(angle - targetAngle) + Math.abs(twist - targetTwist) + Math.abs(tip - targetTip) > .0005;
     button.dataset.state = dragging ? 'dragging' : moving ? 'swinging' : 'idle';
     if ((moving || eyeTransition) && !reducedMotion.matches) frame = requestAnimationFrame(render);
   }
@@ -503,7 +534,10 @@ async function mountBadge() {
       travel = Math.max(travel, Math.hypot(dx, dy));
       if (travel >= 5) {
         lastTapTime = -Infinity;
+        if (expressionName !== 'drag') reactBody(dx < 0 ? -1 : 1,.4);
         setExpression('drag');
+        targetSquash = clamp(-dy*.0003,-.045,.045);
+        targetLean = clamp(-dx*.0006,-.07,.07);
       }
       const worldPerPixel = 1 / pixelScale;
       targetAngle = clamp(dragOrigin.angle + dx * worldPerPixel / 3.2, -.3, .3);
@@ -524,6 +558,7 @@ async function mountBadge() {
     dragging = false; button.classList.remove('is-dragging');
     if (button.hasPointerCapture(event.pointerId)) button.releasePointerCapture(event.pointerId);
     targetAngle = restAngle; targetTwist = .035; targetTip = 0;
+    targetSquash = targetLean = 0;
     if (travel < 5 && event.type !== 'pointercancel') {
       reactToTap(event.clientX < stage.getBoundingClientRect().left + stageWidth / 2 ? -1 : 1,event.clientX,event.clientY);
     } else {
@@ -540,7 +575,7 @@ async function mountBadge() {
     if (!cardHit(event) || travel >= 5) return;
     event.preventDefault();
     lastTapTime = -Infinity;
-    if (expressionName !== 'dizzy') swing(1);
+    if (expressionName !== 'dizzy') { swing(1); reactBody(1,1.35); }
     setExpression('dizzy',2200);
   });
   button.addEventListener('pointerleave', () => {
@@ -556,6 +591,7 @@ async function mountBadge() {
         setExpression('drag',650);
         lastTapTime = -Infinity;
         swing(event.key === 'ArrowLeft' ? -1 : 1);
+        reactBody(event.key === 'ArrowLeft' ? -1 : 1);
       } else if (!event.repeat) reactToTap(1);
     }
   });
@@ -563,8 +599,10 @@ async function mountBadge() {
     event.preventDefault(); cancelAnimationFrame(frame); frame = 0;
     stage.classList.remove('badge-ready');
     firstScreen.classList.remove('badge-scene-ready');
+    stage.classList.add('badge-fallback-ready');
   });
   renderer.domElement.addEventListener('webglcontextrestored', () => {
+    stage.classList.remove('badge-fallback-ready');
     stage.classList.add('badge-ready'); firstScreen.classList.add('badge-scene-ready'); wake();
   });
   new ResizeObserver(resize).observe(stage);
@@ -588,13 +626,13 @@ async function mountBadge() {
   button.dataset.renderer = 'webgl';
   button.dataset.expression = 'normal';
   scheduleIdle();
-  if (!reducedMotion.matches) { velocity = -.12; twistVelocity = .1; wake(); }
 }
 
 if (stage && button) {
   mountBadge().catch(error => {
     // Keep the accessible HTML card visible if WebGL or its texture is unavailable.
     button.dataset.renderer = 'fallback';
+    stage.classList.add('badge-fallback-ready');
     button.addEventListener('click', () => {
       const card = stage.querySelector('.badge-fallback-card');
       card?.animate(reducedMotion.matches ? [{ opacity:1 }, { opacity:.9 }, { opacity:1 }] : [
