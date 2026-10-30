@@ -1,0 +1,1176 @@
+{
+  "assets/arena-project/02ec6.png": {
+    "width": 2552,
+    "height": 2282,
+    "originalBytes": 1321145,
+    "variants": [
+      {
+        "src": "./assets/image-previews/9e693bcd5e00-960.webp",
+        "width": 960,
+        "bytes": 74676
+      },
+      {
+        "src": "./assets/image-previews/9e693bcd5e00-2552.webp",
+        "width": 2552,
+        "bytes": 240184
+      }
+    ]
+  },
+  "assets/arena-project/06284.png": {
+    "width": 1024,
+    "height": 642,
+    "originalBytes": 129782,
+    "variants": [
+      {
+        "src": "./assets/image-previews/38a868c02c56-960.webp",
+        "width": 960,
+        "bytes": 44608
+      },
+      {
+        "src": "./assets/image-previews/38a868c02c56-1024.webp",
+        "width": 1024,
+        "bytes": 47516
+      }
+    ]
+  },
+  "assets/arena-project/0f553.png": {
+    "width": 1498,
+    "height": 602,
+    "originalBytes": 142148,
+    "variants": [
+      {
+        "src": "./assets/image-previews/363260070b07-960.webp",
+        "width": 960,
+        "bytes": 68074
+      },
+      {
+        "src": "./assets/image-previews/363260070b07-1498.webp",
+        "width": 1498,
+        "bytes": 139136
+      }
+    ]
+  },
+  "assets/arena-project/12b73.png": {
+    "width": 2880,
+    "height": 1804,
+    "originalBytes": 864766,
+    "variants": [
+      {
+        "src": "./assets/image-previews/389032b97328-960.webp",
+        "width": 960,
+        "bytes": 65150
+      },
+      {
+        "src": "./assets/image-previews/389032b97328-2656.webp",
+        "width": 2656,
+        "bytes": 252938
+      }
+    ]
+  },
+  "assets/arena-project/1cac7.png": {
+    "width": 2880,
+    "height": 1804,
+    "originalBytes": 863857,
+    "variants": [
+      {
+        "src": "./assets/image-previews/6232f1107930-960.webp",
+        "width": 960,
+        "bytes": 65992
+      },
+      {
+        "src": "./assets/image-previews/6232f1107930-2656.webp",
+        "width": 2656,
+        "bytes": 257490
+      }
+    ]
+  },
+  "assets/arena-project/4b502.png": {
+    "width": 2880,
+    "height": 1920,
+    "originalBytes": 873578,
+    "variants": [
+      {
+        "src": "./assets/image-previews/18c44294ffeb-960.webp",
+        "width": 960,
+        "bytes": 64228
+      },
+      {
+        "src": "./assets/image-previews/18c44294ffeb-2656.webp",
+        "width": 2656,
+        "bytes": 256098
+      }
+    ]
+  },
+  "assets/arena-project/5e4fa.png": {
+    "width": 4096,
+    "height": 3323,
+    "originalBytes": 1773885,
+    "variants": [
+      {
+        "src": "./assets/image-previews/96e05ca387b8-960.webp",
+        "width": 960,
+        "bytes": 44322
+      },
+      {
+        "src": "./assets/image-previews/96e05ca387b8-2656.webp",
+        "width": 2656,
+        "bytes": 178050
+      }
+    ]
+  },
+  "assets/arena-project/629c8.png": {
+    "width": 2880,
+    "height": 1804,
+    "originalBytes": 789158,
+    "variants": [
+      {
+        "src": "./assets/image-previews/402fccacede4-960.webp",
+        "width": 960,
+        "bytes": 52632
+      },
+      {
+        "src": "./assets/image-previews/402fccacede4-2656.webp",
+        "width": 2656,
+        "bytes": 201436
+      }
+    ]
+  },
+  "assets/arena-project/65f90.png": {
+    "width": 2552,
+    "height": 1824,
+    "originalBytes": 277861,
+    "variants": [
+      {
+        "src": "./assets/image-previews/a7a1af6d0cc7-960.webp",
+        "width": 960,
+        "bytes": 35086
+      },
+      {
+        "src": "./assets/image-previews/a7a1af6d0cc7-2552.webp",
+        "width": 2552,
+        "bytes": 117632
+      }
+    ]
+  },
+  "assets/arena-project/6c8c8.png": {
+    "width": 1530,
+    "height": 944,
+    "originalBytes": 364802,
+    "variants": [
+      {
+        "src": "./assets/image-previews/cc132d4ab0a3-960.webp",
+        "width": 960,
+        "bytes": 45160
+      },
+      {
+        "src": "./assets/image-previews/cc132d4ab0a3-1530.webp",
+        "width": 1530,
+        "bytes": 84874
+      }
+    ]
+  },
+  "assets/arena-project/721a4.png": {
+    "width": 2880,
+    "height": 1804,
+    "originalBytes": 863935,
+    "variants": [
+      {
+        "src": "./assets/image-previews/ebeccd08fefb-960.webp",
+        "width": 960,
+        "bytes": 65948
+      },
+      {
+        "src": "./assets/image-previews/ebeccd08fefb-2656.webp",
+        "width": 2656,
+        "bytes": 256892
+      }
+    ]
+  },
+  "assets/arena-project/74b71.png": {
+    "width": 2880,
+    "height": 1800,
+    "originalBytes": 895967,
+    "variants": [
+      {
+        "src": "./assets/image-previews/7b369f46d30c-960.webp",
+        "width": 960,
+        "bytes": 54352
+      },
+      {
+        "src": "./assets/image-previews/7b369f46d30c-2656.webp",
+        "width": 2656,
+        "bytes": 209250
+      }
+    ]
+  },
+  "assets/arena-project/86e6c.png": {
+    "width": 1024,
+    "height": 642,
+    "originalBytes": 126004,
+    "variants": [
+      {
+        "src": "./assets/image-previews/cd03a33b3f60-960.webp",
+        "width": 960,
+        "bytes": 38620
+      },
+      {
+        "src": "./assets/image-previews/cd03a33b3f60-1024.webp",
+        "width": 1024,
+        "bytes": 41328
+      }
+    ]
+  },
+  "assets/arena-project/94814.png": {
+    "width": 1400,
+    "height": 1920,
+    "originalBytes": 139426,
+    "variants": [
+      {
+        "src": "./assets/image-previews/bdabe65a7469-960.webp",
+        "width": 960,
+        "bytes": 60020
+      },
+      {
+        "src": "./assets/image-previews/bdabe65a7469-1400.webp",
+        "width": 1400,
+        "bytes": 95488
+      }
+    ]
+  },
+  "assets/arena-project/9c9c3.png": {
+    "width": 1024,
+    "height": 642,
+    "originalBytes": 126597,
+    "variants": [
+      {
+        "src": "./assets/image-previews/301fdffdb582-960.webp",
+        "width": 960,
+        "bytes": 42756
+      },
+      {
+        "src": "./assets/image-previews/301fdffdb582-1024.webp",
+        "width": 1024,
+        "bytes": 46880
+      }
+    ]
+  },
+  "assets/arena-project/a8804.png": {
+    "width": 2880,
+    "height": 1804,
+    "originalBytes": 803312,
+    "variants": [
+      {
+        "src": "./assets/image-previews/cbdfacf7d0bd-960.webp",
+        "width": 960,
+        "bytes": 55968
+      },
+      {
+        "src": "./assets/image-previews/cbdfacf7d0bd-2656.webp",
+        "width": 2656,
+        "bytes": 218070
+      }
+    ]
+  },
+  "assets/arena-project/e0de4.png": {
+    "width": 2456,
+    "height": 932,
+    "originalBytes": 160071,
+    "variants": [
+      {
+        "src": "./assets/image-previews/8b9a04319abe-960.webp",
+        "width": 960,
+        "bytes": 35180
+      },
+      {
+        "src": "./assets/image-previews/8b9a04319abe-2456.webp",
+        "width": 2456,
+        "bytes": 123600
+      }
+    ]
+  },
+  "assets/contact/contact-icons.png": {
+    "width": 1200,
+    "height": 600,
+    "originalBytes": 64452,
+    "variants": [
+      {
+        "src": "./assets/image-previews/eaccd214ca2d-960.webp",
+        "width": 960,
+        "bytes": 28352
+      },
+      {
+        "src": "./assets/image-previews/eaccd214ca2d-1200.webp",
+        "width": 1200,
+        "bytes": 29850
+      }
+    ]
+  },
+  "assets/dialog-agent-project/hd/background-assets-original.png": {
+    "width": 2880,
+    "height": 1800,
+    "originalBytes": 1104524,
+    "variants": [
+      {
+        "src": "./assets/image-previews/b422ec7a95cd-960.webp",
+        "width": 960,
+        "bytes": 38410
+      },
+      {
+        "src": "./assets/image-previews/b422ec7a95cd-2656.webp",
+        "width": 2656,
+        "bytes": 170318
+      }
+    ]
+  },
+  "assets/dialog-agent-project/hd/background-script-original.png": {
+    "width": 2892,
+    "height": 1800,
+    "originalBytes": 457943,
+    "variants": [
+      {
+        "src": "./assets/image-previews/0a58527628da-960.webp",
+        "width": 960,
+        "bytes": 65712
+      },
+      {
+        "src": "./assets/image-previews/0a58527628da-2656.webp",
+        "width": 2656,
+        "bytes": 280050
+      }
+    ]
+  },
+  "assets/dialog-agent-project/hd/background-video-original.png": {
+    "width": 2848,
+    "height": 1788,
+    "originalBytes": 627084,
+    "variants": [
+      {
+        "src": "./assets/image-previews/f90b7ffb230b-960.webp",
+        "width": 960,
+        "bytes": 36498
+      },
+      {
+        "src": "./assets/image-previews/f90b7ffb230b-2656.webp",
+        "width": 2656,
+        "bytes": 153416
+      }
+    ]
+  },
+  "assets/dialog-agent-project/hd/confirmation-original.png": {
+    "width": 882,
+    "height": 1893,
+    "originalBytes": 217088,
+    "variants": [
+      {
+        "src": "./assets/image-previews/dc793f2dce3b-882.webp",
+        "width": 882,
+        "bytes": 88818
+      }
+    ]
+  },
+  "assets/dialog-agent-project/hd/confirmation-revision.png": {
+    "width": 880,
+    "height": 1890,
+    "originalBytes": 230681,
+    "variants": [
+      {
+        "src": "./assets/image-previews/14753f61f8f9-880.webp",
+        "width": 880,
+        "bytes": 114078
+      }
+    ]
+  },
+  "assets/dialog-agent-project/hd/editor-changes-complete.png": {
+    "width": 2370,
+    "height": 1654,
+    "originalBytes": 596947,
+    "variants": [
+      {
+        "src": "./assets/image-previews/14e9175d9495-960.webp",
+        "width": 960,
+        "bytes": 69644
+      },
+      {
+        "src": "./assets/image-previews/14e9175d9495-2370.webp",
+        "width": 2370,
+        "bytes": 239852
+      }
+    ]
+  },
+  "assets/dialog-agent-project/hd/editor-quote-complete.png": {
+    "width": 2370,
+    "height": 1610,
+    "originalBytes": 621038,
+    "variants": [
+      {
+        "src": "./assets/image-previews/01fea75916f1-960.webp",
+        "width": 960,
+        "bytes": 74190
+      },
+      {
+        "src": "./assets/image-previews/01fea75916f1-2370.webp",
+        "width": 2370,
+        "bytes": 261942
+      }
+    ]
+  },
+  "assets/dialog-agent-project/hd/exploration-chat.png": {
+    "width": 729,
+    "height": 1416,
+    "originalBytes": 141654,
+    "variants": [
+      {
+        "src": "./assets/image-previews/98088a6d8e6c-729.webp",
+        "width": 729,
+        "bytes": 55964
+      }
+    ]
+  },
+  "assets/dialog-agent-project/hd/history-detail.png": {
+    "width": 622,
+    "height": 1336,
+    "originalBytes": 75301,
+    "variants": [
+      {
+        "src": "./assets/image-previews/35c11a4caa09-622.webp",
+        "width": 622,
+        "bytes": 41384
+      }
+    ]
+  },
+  "assets/dialog-agent-project/hd/history-editor.png": {
+    "width": 2115,
+    "height": 1336,
+    "originalBytes": 738412,
+    "variants": [
+      {
+        "src": "./assets/image-previews/ffa5249efb3b-960.webp",
+        "width": 960,
+        "bytes": 61156
+      },
+      {
+        "src": "./assets/image-previews/ffa5249efb3b-2115.webp",
+        "width": 2115,
+        "bytes": 174754
+      }
+    ]
+  },
+  "assets/dialog-agent-project/hd/loading-generation.png": {
+    "width": 882,
+    "height": 1893,
+    "originalBytes": 277803,
+    "variants": [
+      {
+        "src": "./assets/image-previews/6db31b381d60-882.webp",
+        "width": 882,
+        "bytes": 80540
+      }
+    ]
+  },
+  "assets/dialog-agent-project/hd/loading-references.png": {
+    "width": 880,
+    "height": 1894,
+    "originalBytes": 708817,
+    "variants": [
+      {
+        "src": "./assets/image-previews/0195da6d6834-880.webp",
+        "width": 880,
+        "bytes": 124172
+      }
+    ]
+  },
+  "assets/dialog-agent-project/hd/loading-revision.png": {
+    "width": 880,
+    "height": 1890,
+    "originalBytes": 208442,
+    "variants": [
+      {
+        "src": "./assets/image-previews/650f97fa2ddf-880.webp",
+        "width": 880,
+        "bytes": 89368
+      }
+    ]
+  },
+  "assets/dialog-agent-project/hd/reflection-chat.png": {
+    "width": 615,
+    "height": 1287,
+    "originalBytes": 176641,
+    "variants": [
+      {
+        "src": "./assets/image-previews/4cbd2102e2a9-615.webp",
+        "width": 615,
+        "bytes": 63186
+      }
+    ]
+  },
+  "assets/dialog-agent-project/retina/hero-stage.png": {
+    "width": 2656,
+    "height": 1250,
+    "originalBytes": 661919,
+    "variants": [
+      {
+        "src": "./assets/image-previews/57e7216abe7a-960.webp",
+        "width": 960,
+        "bytes": 33826
+      },
+      {
+        "src": "./assets/image-previews/57e7216abe7a-2656.webp",
+        "width": 2656,
+        "bytes": 164678
+      }
+    ]
+  },
+  "assets/dialog-agent-project/ui/23b7e.png": {
+    "width": 2892,
+    "height": 1800,
+    "originalBytes": 581825,
+    "variants": [
+      {
+        "src": "./assets/image-previews/ee1fa0024898-960.webp",
+        "width": 960,
+        "bytes": 59734
+      },
+      {
+        "src": "./assets/image-previews/ee1fa0024898-2656.webp",
+        "width": 2656,
+        "bytes": 259256
+      }
+    ]
+  },
+  "assets/dialog-agent-project/ui/367fb.png": {
+    "width": 2892,
+    "height": 1800,
+    "originalBytes": 296381,
+    "variants": [
+      {
+        "src": "./assets/image-previews/2fc5f560dfcf-960.webp",
+        "width": 960,
+        "bytes": 17734
+      },
+      {
+        "src": "./assets/image-previews/2fc5f560dfcf-2656.webp",
+        "width": 2656,
+        "bytes": 75642
+      }
+    ]
+  },
+  "assets/dialog-agent-project/ui/62de9.png": {
+    "width": 1200,
+    "height": 1799,
+    "originalBytes": 80745,
+    "variants": [
+      {
+        "src": "./assets/image-previews/7f3f402272bf-960.webp",
+        "width": 960,
+        "bytes": 74026
+      },
+      {
+        "src": "./assets/dialog-agent-project/ui/62de9.png",
+        "width": 1200,
+        "bytes": 80745
+      }
+    ]
+  },
+  "assets/dialog-agent-project/ui/65647.png": {
+    "width": 1624,
+    "height": 2236,
+    "originalBytes": 1028941,
+    "variants": [
+      {
+        "src": "./assets/image-previews/8d41d1e8d7df-960.webp",
+        "width": 960,
+        "bytes": 298926
+      },
+      {
+        "src": "./assets/image-previews/8d41d1e8d7df-1624.webp",
+        "width": 1624,
+        "bytes": 622240
+      }
+    ]
+  },
+  "assets/dialog-agent-project/ui/98be5.png": {
+    "width": 736,
+    "height": 987,
+    "originalBytes": 80206,
+    "variants": [
+      {
+        "src": "./assets/dialog-agent-project/ui/98be5.png",
+        "width": 736,
+        "bytes": 80206
+      }
+    ]
+  },
+  "assets/dialog-agent-project/ui/e3de0.png": {
+    "width": 1200,
+    "height": 1500,
+    "originalBytes": 218633,
+    "variants": [
+      {
+        "src": "./assets/image-previews/f4da886872ed-960.webp",
+        "width": 960,
+        "bytes": 211268
+      },
+      {
+        "src": "./assets/dialog-agent-project/ui/e3de0.png",
+        "width": 1200,
+        "bytes": 218633
+      }
+    ]
+  },
+  "assets/dialog-agent-project/ui/e4049.png": {
+    "width": 735,
+    "height": 926,
+    "originalBytes": 64169,
+    "variants": [
+      {
+        "src": "./assets/dialog-agent-project/ui/e4049.png",
+        "width": 735,
+        "bytes": 64169
+      }
+    ]
+  },
+  "assets/dialog-agent-project/ui/f7357.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 1734069,
+    "variants": [
+      {
+        "src": "./assets/image-previews/21f4b0c26eb7-96.webp",
+        "width": 96,
+        "bytes": 3164
+      },
+      {
+        "src": "./assets/image-previews/21f4b0c26eb7-192.webp",
+        "width": 192,
+        "bytes": 8950
+      }
+    ]
+  },
+  "assets/live-assistant-demo/ios-keyboard.png": {
+    "width": 1179,
+    "height": 2556,
+    "originalBytes": 250065,
+    "variants": [
+      {
+        "src": "./assets/image-previews/03b0513c82ae-960.webp",
+        "width": 960,
+        "bytes": 54968
+      },
+      {
+        "src": "./assets/image-previews/03b0513c82ae-1179.webp",
+        "width": 1179,
+        "bytes": 67652
+      }
+    ]
+  },
+  "assets/live-assistant-project/exact-2x/background-ai.png": {
+    "width": 2324,
+    "height": 899,
+    "originalBytes": 2288071,
+    "variants": [
+      {
+        "src": "./assets/image-previews/8f03f08eab8d-960.webp",
+        "width": 960,
+        "bytes": 96736
+      },
+      {
+        "src": "./assets/image-previews/8f03f08eab8d-2324.webp",
+        "width": 2324,
+        "bytes": 360756
+      }
+    ]
+  },
+  "assets/live-assistant-project/exact-2x/background-shift.png": {
+    "width": 2324,
+    "height": 798,
+    "originalBytes": 473449,
+    "variants": [
+      {
+        "src": "./assets/image-previews/00659c84f6a8-960.webp",
+        "width": 960,
+        "bytes": 11784
+      },
+      {
+        "src": "./assets/image-previews/00659c84f6a8-2324.webp",
+        "width": 2324,
+        "bytes": 40186
+      }
+    ]
+  },
+  "assets/live-assistant-project/exact-2x/background-what.png": {
+    "width": 2324,
+    "height": 1305,
+    "originalBytes": 618500,
+    "variants": [
+      {
+        "src": "./assets/image-previews/4730a3fd403b-960.webp",
+        "width": 960,
+        "bytes": 47480
+      },
+      {
+        "src": "./assets/image-previews/4730a3fd403b-2324.webp",
+        "width": 2324,
+        "bytes": 145698
+      }
+    ]
+  },
+  "assets/live-assistant-project/exact-2x/hero-stage.png": {
+    "width": 2656,
+    "height": 1250,
+    "originalBytes": 845690,
+    "variants": [
+      {
+        "src": "./assets/image-previews/63f7ba0a32a8-960.webp",
+        "width": 960,
+        "bytes": 22340
+      },
+      {
+        "src": "./assets/image-previews/63f7ba0a32a8-2656.webp",
+        "width": 2656,
+        "bytes": 89360
+      }
+    ]
+  },
+  "assets/live-assistant-project/exact-2x/ip-flow.png": {
+    "width": 2324,
+    "height": 1257,
+    "originalBytes": 256593,
+    "variants": [
+      {
+        "src": "./assets/image-previews/5430563f0dca-960.webp",
+        "width": 960,
+        "bytes": 22388
+      },
+      {
+        "src": "./assets/image-previews/5430563f0dca-2324.webp",
+        "width": 2324,
+        "bytes": 69906
+      }
+    ]
+  },
+  "assets/live-assistant-project/exact-2x/ip-origin.png": {
+    "width": 2324,
+    "height": 3109,
+    "originalBytes": 2289763,
+    "variants": [
+      {
+        "src": "./assets/image-previews/54a93f24ac9e-960.webp",
+        "width": 960,
+        "bytes": 44128
+      },
+      {
+        "src": "./assets/image-previews/54a93f24ac9e-2324.webp",
+        "width": 2324,
+        "bytes": 133316
+      }
+    ]
+  },
+  "assets/live-assistant-project/exact-2x/ip-states.png": {
+    "width": 2324,
+    "height": 1312,
+    "originalBytes": 478580,
+    "variants": [
+      {
+        "src": "./assets/image-previews/5c626982161a-960.webp",
+        "width": 960,
+        "bytes": 28628
+      },
+      {
+        "src": "./assets/image-previews/5c626982161a-2324.webp",
+        "width": 2324,
+        "bytes": 81126
+      }
+    ]
+  },
+  "assets/live-assistant-project/exact-2x/motion.png": {
+    "width": 2324,
+    "height": 1312,
+    "originalBytes": 346690,
+    "variants": [
+      {
+        "src": "./assets/image-previews/da2c21486ca5-960.webp",
+        "width": 960,
+        "bytes": 41754
+      },
+      {
+        "src": "./assets/image-previews/da2c21486ca5-2324.webp",
+        "width": 2324,
+        "bytes": 113566
+      }
+    ]
+  },
+  "assets/live-assistant-project/exact-2x/result-cards.png": {
+    "width": 2324,
+    "height": 484,
+    "originalBytes": 132376,
+    "variants": [
+      {
+        "src": "./assets/image-previews/37268b33e861-960.webp",
+        "width": 960,
+        "bytes": 14144
+      },
+      {
+        "src": "./assets/image-previews/37268b33e861-2324.webp",
+        "width": 2324,
+        "bytes": 40346
+      }
+    ]
+  },
+  "assets/live-assistant-project/exact-2x/solution-creator.png": {
+    "width": 2324,
+    "height": 1448,
+    "originalBytes": 1005677,
+    "variants": [
+      {
+        "src": "./assets/image-previews/8c37f9456b4c-960.webp",
+        "width": 960,
+        "bytes": 63686
+      },
+      {
+        "src": "./assets/image-previews/8c37f9456b4c-2324.webp",
+        "width": 2324,
+        "bytes": 210178
+      }
+    ]
+  },
+  "assets/live-assistant-project/exact-2x/solution-efficiency.png": {
+    "width": 2324,
+    "height": 1047,
+    "originalBytes": 569823,
+    "variants": [
+      {
+        "src": "./assets/image-previews/8f2ebbaf5d6f-960.webp",
+        "width": 960,
+        "bytes": 36910
+      },
+      {
+        "src": "./assets/image-previews/8f2ebbaf5d6f-2324.webp",
+        "width": 2324,
+        "bytes": 122470
+      }
+    ]
+  },
+  "assets/live-assistant-project/exact-2x/solution-roles.png": {
+    "width": 2324,
+    "height": 1183,
+    "originalBytes": 371634,
+    "variants": [
+      {
+        "src": "./assets/image-previews/cb2bee0662c0-960.webp",
+        "width": 960,
+        "bytes": 38256
+      },
+      {
+        "src": "./assets/image-previews/cb2bee0662c0-2324.webp",
+        "width": 2324,
+        "bytes": 117816
+      }
+    ]
+  },
+  "assets/live-assistant-project/exact-2x/solution-vip.png": {
+    "width": 2324,
+    "height": 1238,
+    "originalBytes": 1021997,
+    "variants": [
+      {
+        "src": "./assets/image-previews/159b55ade56a-960.webp",
+        "width": 960,
+        "bytes": 48420
+      },
+      {
+        "src": "./assets/image-previews/159b55ade56a-2324.webp",
+        "width": 2324,
+        "bytes": 150822
+      }
+    ]
+  },
+  "figma-assets/home-252/hd/arena-visual-3x.png": {
+    "width": 1833,
+    "height": 1143,
+    "originalBytes": 553443,
+    "variants": [
+      {
+        "src": "./assets/image-previews/0a33b404c025-960.webp",
+        "width": 960,
+        "bytes": 41864
+      },
+      {
+        "src": "./assets/image-previews/0a33b404c025-1833.webp",
+        "width": 1833,
+        "bytes": 102212
+      }
+    ]
+  },
+  "figma-assets/home-252/hd/live-assistant-visual-3x.png": {
+    "width": 1833,
+    "height": 1143,
+    "originalBytes": 922765,
+    "variants": [
+      {
+        "src": "./assets/image-previews/9da3843f241e-960.webp",
+        "width": 960,
+        "bytes": 33968
+      },
+      {
+        "src": "./assets/image-previews/9da3843f241e-1833.webp",
+        "width": 1833,
+        "bytes": 81426
+      }
+    ]
+  },
+  "figma-assets/home-252/hd/onboarding-visual-3x.png": {
+    "width": 1833,
+    "height": 1143,
+    "originalBytes": 578555,
+    "variants": [
+      {
+        "src": "./assets/image-previews/cde97c4fee4b-960.webp",
+        "width": 960,
+        "bytes": 39662
+      },
+      {
+        "src": "./assets/image-previews/cde97c4fee4b-1833.webp",
+        "width": 1833,
+        "bytes": 94148
+      }
+    ]
+  },
+  "figma-assets/home-252/hd/pippit-visual-3x.png": {
+    "width": 1833,
+    "height": 1143,
+    "originalBytes": 584343,
+    "variants": [
+      {
+        "src": "./assets/image-previews/77100019a5f0-960.webp",
+        "width": 960,
+        "bytes": 47784
+      },
+      {
+        "src": "./assets/image-previews/77100019a5f0-1833.webp",
+        "width": 1833,
+        "bytes": 127126
+      }
+    ]
+  },
+  "figma-assets/onboarding/sections/background-console.png": {
+    "width": 1313,
+    "height": 1012,
+    "originalBytes": 280003,
+    "variants": [
+      {
+        "src": "./assets/image-previews/d2e77010b8d1-960.webp",
+        "width": 960,
+        "bytes": 61212
+      },
+      {
+        "src": "./assets/image-previews/d2e77010b8d1-1313.webp",
+        "width": 1313,
+        "bytes": 93242
+      }
+    ]
+  },
+  "figma-assets/onboarding/sections/ds-output.png": {
+    "width": 2335,
+    "height": 904,
+    "originalBytes": 735143,
+    "variants": [
+      {
+        "src": "./assets/image-previews/6be16815ce71-960.webp",
+        "width": 960,
+        "bytes": 53766
+      },
+      {
+        "src": "./assets/image-previews/6be16815ce71-2335.webp",
+        "width": 2335,
+        "bytes": 164080
+      }
+    ]
+  },
+  "figma-assets/onboarding/sections/ds-overview.png": {
+    "width": 2324,
+    "height": 857,
+    "originalBytes": 320049,
+    "variants": [
+      {
+        "src": "./assets/image-previews/fa61c522eb6d-960.webp",
+        "width": 960,
+        "bytes": 32048
+      },
+      {
+        "src": "./assets/image-previews/fa61c522eb6d-2324.webp",
+        "width": 2324,
+        "bytes": 108512
+      }
+    ]
+  },
+  "figma-assets/onboarding/sections/ds-prompt.png": {
+    "width": 2324,
+    "height": 948,
+    "originalBytes": 980328,
+    "variants": [
+      {
+        "src": "./assets/image-previews/fbe38cd91c0a-960.webp",
+        "width": 960,
+        "bytes": 66832
+      },
+      {
+        "src": "./assets/image-previews/fbe38cd91c0a-2324.webp",
+        "width": 2324,
+        "bytes": 208380
+      }
+    ]
+  },
+  "figma-assets/onboarding/sections/ds-retouch.png": {
+    "width": 2335,
+    "height": 836,
+    "originalBytes": 751184,
+    "variants": [
+      {
+        "src": "./assets/image-previews/4cdc4cd752a9-960.webp",
+        "width": 960,
+        "bytes": 43650
+      },
+      {
+        "src": "./assets/image-previews/4cdc4cd752a9-2335.webp",
+        "width": 2335,
+        "bytes": 140542
+      }
+    ]
+  },
+  "figma-assets/onboarding/sections/ds-style.png": {
+    "width": 2339,
+    "height": 898,
+    "originalBytes": 522825,
+    "variants": [
+      {
+        "src": "./assets/image-previews/f73e1cffa0d2-960.webp",
+        "width": 960,
+        "bytes": 39098
+      },
+      {
+        "src": "./assets/image-previews/f73e1cffa0d2-2339.webp",
+        "width": 2339,
+        "bytes": 130376
+      }
+    ]
+  },
+  "figma-assets/onboarding/sections/hero.png": {
+    "width": 2656,
+    "height": 1250,
+    "originalBytes": 916806,
+    "variants": [
+      {
+        "src": "./assets/image-previews/62fc833a99c8-960.webp",
+        "width": 960,
+        "bytes": 40422
+      },
+      {
+        "src": "./assets/image-previews/62fc833a99c8-2656.webp",
+        "width": 2656,
+        "bytes": 157822
+      }
+    ]
+  },
+  "figma-assets/onboarding/sections/solution-01.png": {
+    "width": 2324,
+    "height": 1012,
+    "originalBytes": 254219,
+    "variants": [
+      {
+        "src": "./assets/image-previews/109d0623877c-960.webp",
+        "width": 960,
+        "bytes": 40280
+      },
+      {
+        "src": "./assets/image-previews/109d0623877c-2324.webp",
+        "width": 2324,
+        "bytes": 122014
+      }
+    ]
+  },
+  "figma-assets/onboarding/sections/solution-02.png": {
+    "width": 2324,
+    "height": 830,
+    "originalBytes": 138697,
+    "variants": [
+      {
+        "src": "./assets/image-previews/c179b010b507-960.webp",
+        "width": 960,
+        "bytes": 28078
+      },
+      {
+        "src": "./assets/image-previews/c179b010b507-2324.webp",
+        "width": 2324,
+        "bytes": 86510
+      }
+    ]
+  },
+  "figma-assets/onboarding/sections/solution-03.png": {
+    "width": 2324,
+    "height": 1012,
+    "originalBytes": 250181,
+    "variants": [
+      {
+        "src": "./assets/image-previews/1418a53deb57-960.webp",
+        "width": 960,
+        "bytes": 19416
+      },
+      {
+        "src": "./assets/image-previews/1418a53deb57-2324.webp",
+        "width": 2324,
+        "bytes": 57698
+      }
+    ]
+  },
+  "figma-assets/onboarding/sections/solution-04.png": {
+    "width": 2331,
+    "height": 1657,
+    "originalBytes": 409076,
+    "variants": [
+      {
+        "src": "./assets/image-previews/019df43c8cf8-960.webp",
+        "width": 960,
+        "bytes": 53230
+      },
+      {
+        "src": "./assets/image-previews/019df43c8cf8-2331.webp",
+        "width": 2331,
+        "bytes": 172792
+      }
+    ]
+  },
+  "figma-assets/onboarding/sections/solution-05.png": {
+    "width": 2328,
+    "height": 736,
+    "originalBytes": 352870,
+    "variants": [
+      {
+        "src": "./assets/image-previews/5beb862c2457-960.webp",
+        "width": 960,
+        "bytes": 34578
+      },
+      {
+        "src": "./assets/image-previews/5beb862c2457-2328.webp",
+        "width": 2328,
+        "bytes": 114572
+      }
+    ]
+  },
+  "figma-assets/onboarding/sections/solution-06.png": {
+    "width": 2324,
+    "height": 985,
+    "originalBytes": 948674,
+    "variants": [
+      {
+        "src": "./assets/image-previews/a54ced2448e3-960.webp",
+        "width": 960,
+        "bytes": 53500
+      },
+      {
+        "src": "./assets/image-previews/a54ced2448e3-2324.webp",
+        "width": 2324,
+        "bytes": 173900
+      }
+    ]
+  }
+}

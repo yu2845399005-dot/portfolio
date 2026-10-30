@@ -20,6 +20,7 @@ PAGES = (
 )
 TEXT_TYPES = {".html", ".css", ".js", ".svg"}
 ATTRIBUTES = re.compile(r'''\b(?:src|href|poster)\s*=\s*["']([^"']+)["']''', re.I)
+SRCSETS = re.compile(r'''\bsrcset\s*=\s*["']([^"']+)["']''', re.I)
 CSS_URLS = re.compile(r'''url\(\s*["']?([^\s)'"\n]+)["']?\s*\)''', re.I)
 JS_ASSETS = re.compile(r'''["'](\./(?:assets|figma-assets)/[^"']+)["']''')
 
@@ -38,6 +39,11 @@ def collect_files():
             continue
         content = source.read_text(encoding="utf-8")
         refs = ATTRIBUTES.findall(content)
+        # Copy every responsive candidate, not only the fallback in src.
+        if source.suffix == ".html":
+            refs += [candidate.strip().split()[0]
+                     for srcset in SRCSETS.findall(content)
+                     for candidate in srcset.split(",") if candidate.strip()]
         if source.suffix in {".html", ".css", ".svg"}:
             refs += CSS_URLS.findall(content)
         if source.suffix == ".js":
