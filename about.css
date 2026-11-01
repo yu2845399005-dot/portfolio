@@ -1,4 +1,4 @@
-/* One pinned About scene: single portrait → springing Live Photo fan. */
+/* Fixed About layout; only the side photos unfold and cycle through the preview. */
 .about-section { margin-top:160px; padding-top:56px; }
 .about-section .about-heading { height:auto; gap:12px; }
 .about-heading p { white-space:normal; }
@@ -7,8 +7,6 @@
 .about-copy h3 { margin:0; color:#fff; font-size:32px; font-weight:400; line-height:1.25; letter-spacing:.1px; }
 .about-copy-text { min-height:118px; }
 .about-copy-text p { max-width:340px; margin:24px 0 0; color:#ffffff66; font-size:16px; font-weight:400; line-height:1.65; }
-.life-copy:not(.copy-life) .about-copy-text { width:var(--intro-copy-width,100%); }
-.life-copy:not(.copy-life) .about-copy-text p { max-width:640px; }
 .about-actions { display:flex; flex-wrap:wrap; gap:16px; margin-top:72px; }
 .about-actions .button { display:inline-flex; width:max-content; }
 .life-track { --life-scene-height:clamp(660px,100svh,880px); --life-hold:300px; position:relative; }
@@ -26,13 +24,18 @@
 .live-photo-label { position:absolute; top:13px; left:13px; display:flex; align-items:center; gap:6px; padding:5px 7px; border-radius:5px; color:#fff; background:#0005; backdrop-filter:blur(8px); font-size:9px; line-height:1; letter-spacing:1px; opacity:0; transition:opacity .25s; pointer-events:none; }
 .live-photo-label i { width:9px; height:9px; border:1px solid currentColor; border-radius:50%; box-shadow:0 0 0 2px #fff5; }
 .life-card:hover .live-photo-label,.life-card:focus-visible .live-photo-label { opacity:1; }
+.life-card:not([data-side="center"]) .live-photo-label { display:none; }
+.life-preview-status { position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+@media (hover:hover) and (pointer:fine) {
+  .life-is-open .life-card[data-side="left"] { cursor:url("./assets/about/cursor-left.png") 32 32,w-resize; }
+  .life-is-open .life-card[data-side="right"] { cursor:url("./assets/about/cursor-right.png") 32 32,e-resize; }
+}
 .life-copy .about-actions { margin-top:64px; }
 /* The extra track distance produces the brief visual pause without intercepting scroll. */
 .about-motion .life-track { height:calc(var(--life-scene-height) + var(--life-hold)); }
 .about-motion .life-stage { position:sticky; top:0; height:var(--life-scene-height); }
-.about-motion .life-track:not(.life-is-open) .life-card { transform:translate(-50%,-50%) translate3d(var(--intro-photo-x,0px),-10px,0); }
+.about-motion .life-track:not(.life-is-open) .life-card { transform:translate(-50%,-50%) translate3d(0,-10px,0); }
 .about-motion .life-track:not(.life-is-open) .life-card:not([data-side="center"]) { opacity:0; pointer-events:none; }
-.about-motion .life-track:not(.life-is-open) .life-copy { transform:translateX(var(--intro-copy-x,0px)); }
 @media (max-width:1200px) and (min-width:721px) {
   .about-content { width:calc(100% - 96px); }
   .life-content { grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:48px; }
