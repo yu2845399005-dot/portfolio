@@ -1,0 +1,72 @@
+/* About: a quiet portrait, followed by a short pinned beat and a springing photo fan. */
+.about-section { margin-top:160px; padding-top:56px; }
+.about-section .about-heading { height:auto; gap:12px; }
+.about-heading p { white-space:normal; }
+.about-content { width:min(calc(100% - 140px),1162px); margin-inline:auto; }
+.about-intro { display:grid; grid-template-columns:300px minmax(0,1fr); align-items:center; gap:140px; min-height:650px; padding-block:74px 150px; }
+.about-portrait { width:300px; margin:0; aspect-ratio:3/4; overflow:hidden; border-radius:10px; background:#131716; }
+.about-portrait img { display:block; width:100%; height:100%; object-fit:cover; }
+.about-copy { min-width:0; }
+.about-copy h3 { margin:0; color:#fff; font-size:32px; font-weight:400; line-height:1.25; letter-spacing:.1px; }
+.about-copy > p { max-width:640px; margin:24px 0 0; color:#ffffff66; font-size:16px; font-weight:400; line-height:1.65; }
+.about-actions { display:flex; flex-wrap:wrap; gap:16px; margin-top:72px; }
+.about-actions .button { display:inline-flex; width:max-content; }
+.life-track { --life-scene-height:clamp(660px,100svh,880px); --life-hold:300px; position:relative; }
+.life-stage { display:flex; flex-direction:column; min-height:var(--life-scene-height); padding:64px 0 80px; }
+.life-content { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(0,1fr); align-items:center; gap:72px; flex:1; margin-top:36px; }
+.life-fan { --fan-spread:clamp(100px,12vw,173px); --card-width:clamp(190px,19.5vw,280px); position:relative; width:100%; height:490px; isolation:isolate; }
+.life-card { --x:0px; --y:-10px; --angle:0deg; --scale:1; position:absolute; top:50%; left:50%; z-index:3; display:block; width:var(--card-width); aspect-ratio:3/4; padding:0; border:1px solid #ffffff24; border-radius:13px; overflow:hidden; background:#172125; box-shadow:0 22px 70px #0009; transform:translate(-50%,-50%) translate3d(var(--x),var(--y),0) rotate(var(--angle)) scale(var(--scale)); cursor:pointer; -webkit-tap-highlight-color:transparent; transition:translate .4s cubic-bezier(.22,1,.36,1),box-shadow .4s; }
+.life-card[data-side="left"] { --x:calc(-1 * var(--fan-spread)); --y:30px; --angle:-12deg; --scale:.94; z-index:1; }
+.life-card[data-side="right"] { --x:var(--fan-spread); --y:30px; --angle:12deg; --scale:.94; z-index:2; }
+.life-card img,.life-card video { position:absolute; inset:0; display:block; width:100%; height:100%; border-radius:inherit; object-fit:cover; }
+.life-card video { opacity:0; transition:opacity .32s ease; pointer-events:none; }
+.life-card.is-playing video { opacity:1; }
+.life-card:hover,.life-card:focus-visible { translate:0 -9px; box-shadow:0 28px 80px #000b; }
+.life-card:focus-visible { outline:2px solid #fff; outline-offset:5px; }
+.live-photo-label { position:absolute; top:13px; left:13px; display:flex; align-items:center; gap:6px; padding:5px 7px; border-radius:5px; color:#fff; background:#0005; backdrop-filter:blur(8px); font-size:9px; line-height:1; letter-spacing:1px; opacity:0; transition:opacity .25s; pointer-events:none; }
+.live-photo-label i { width:9px; height:9px; border:1px solid currentColor; border-radius:50%; box-shadow:0 0 0 2px #fff5; }
+.life-card:hover .live-photo-label,.life-card:focus-visible .live-photo-label { opacity:1; }
+.life-copy > p { max-width:340px; }
+.life-copy .about-actions { margin-top:64px; }
+/* The extra track distance produces the brief visual pause without intercepting scroll. */
+.about-motion .life-track { height:calc(var(--life-scene-height) + var(--life-hold)); }
+.about-motion .life-stage { position:sticky; top:0; height:var(--life-scene-height); }
+.about-motion .about-intro .about-portrait { opacity:0; transform:translateY(30px) rotate(-3deg); transition:opacity .7s ease,transform .9s cubic-bezier(.22,1,.36,1); }
+.about-motion .about-intro .about-copy { opacity:0; transform:translateY(24px); transition:opacity .65s .1s ease,transform .85s .1s cubic-bezier(.22,1,.36,1); }
+.about-motion .about-intro.is-visible .about-portrait,.about-motion .about-intro.is-visible .about-copy { opacity:1; transform:none; }
+.about-motion .life-track:not(.life-is-open) .life-card { transform:translate(-50%,-50%) translate3d(0,18px,0) rotate(0deg) scale(.96); }
+.about-motion .life-track:not(.life-is-open) .life-card[data-side="left"] { transform:translate(-50%,-50%) translate3d(-7px,21px,0) rotate(-4deg) scale(.94); }
+.about-motion .life-track:not(.life-is-open) .life-card[data-side="right"] { transform:translate(-50%,-50%) translate3d(7px,21px,0) rotate(4deg) scale(.94); }
+@media (max-width:1200px) and (min-width:721px) {
+  .about-content { width:calc(100% - 96px); }
+  .about-intro { grid-template-columns:270px minmax(0,1fr); gap:80px; }
+  .about-portrait { width:270px; }
+  .life-content { grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:48px; }
+  .life-fan { --card-width:clamp(170px,19vw,235px); --fan-spread:clamp(90px,10vw,130px); }
+  .about-copy h3 { font-size:29px; }
+  .about-actions { gap:12px; }
+  .about-actions .button { font-size:14px; }
+}
+@media (max-width:720px) {
+  .about-section { margin-top:96px; padding-top:32px; }
+  .about-content { width:calc(100% - 48px); }
+  .about-section .section-heading p { font-size:13px; line-height:1.65; }
+  .about-intro { grid-template-columns:1fr; justify-items:center; gap:40px; padding:54px 0 100px; min-height:0; }
+  .about-portrait { width:min(66vw,300px); }
+  .about-copy { width:100%; text-align:center; }
+  .about-copy h3 { font-size:28px; }
+  .about-copy > p { margin:18px auto 0; max-width:360px; font-size:14px; }
+  .about-actions,.life-copy .about-actions { justify-content:center; margin-top:32px; gap:12px; }
+  .badge-home .about-actions .button { font-size:13px; min-height:42px; padding:12px 16px; }
+  .life-track { --life-scene-height:clamp(740px,100svh,880px); --life-hold:200px; }
+  .life-stage { padding:40px 0 56px; }
+  .life-content { grid-template-columns:1fr; grid-template-rows:minmax(0,1fr) auto; gap:12px; margin-top:24px; }
+  .life-fan { --card-width:clamp(144px,42vw,250px); --fan-spread:clamp(58px,18vw,115px); height:360px; }
+  .life-card { border-radius:10px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .about-motion .life-track { height:auto; }
+  .about-motion .life-stage { position:relative; height:auto; }
+  .about-motion .about-intro .about-portrait,.about-motion .about-intro .about-copy { opacity:1; transform:none; transition:none; }
+  .life-card,.life-card video { transition:none; }
+}

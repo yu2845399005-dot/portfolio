@@ -1,0 +1,27 @@
+{
+  "source": "User-supplied Live Photos; the edited IMG_E3044 variant is used for the portrait.",
+  "media": [
+    {
+      "video": "coast.mp4",
+      "codec": "H.264",
+      "audio": false,
+      "metadata": "camera identifiers and location removed",
+      "sizeBytes": 522258
+    },
+    {
+      "video": "seaside.mp4",
+      "codec": "H.264",
+      "audio": false,
+      "metadata": "camera identifiers and location removed",
+      "sizeBytes": 1325185
+    },
+    {
+      "video": "portrait.mp4",
+      "codec": "H.264",
+      "audio": false,
+      "metadata": "camera identifiers and location removed",
+      "sizeBytes": 716908
+    }
+  ],
+  "posters": "WebP stills, displayed before playback. Videos are loaded only near the About section."
+}
