@@ -4,7 +4,7 @@
 .restyle-page .project-back { gap:8px; padding:12px 16px; font-size:19px; color:#fff; }
 .restyle-back-icon { display:grid; place-items:center; width:24px; height:24px; border-radius:50%; color:#222; background:#fffc; font-size:18px; }
 .restyle-page .hero-heading h1 { font-weight:500; }
-.restyle-page .hero-heading p { color:#ffffff80; }
+.restyle-page .hero-heading p { margin-top:12px; color:#ffffff80; }
 .restyle-page .project-hero > .image-zoom-link { margin-top:24px; border-radius:0; }
 .restyle-page .project-hero > .restyle-hero-stage { margin-top:24px; }
 .restyle-page .project-hero .restyle-hero-stage { width:100%; height:auto; margin:0; border-radius:0; }
@@ -25,6 +25,8 @@
 .restyle-page .restyle-background .case-stack { gap:140px; }
 .restyle-page .major-section { padding-top:200px; }
 .restyle-page .block-heading h3 { font-weight:600; }
+/* Figma heading stack: 8px from title to supporting copy. */
+.restyle-page .block-heading p { margin:8px 0 0; }
 .restyle-page .block-heading { margin-bottom:32px; }
 .restyle-page #platform .block-heading { margin-bottom:48px; }
 .restyle-page #workflow-research .block-heading,.restyle-page #interviews .block-heading { margin-bottom:52px; }
@@ -54,6 +56,8 @@
 .interview-grid > div { min-width:0; }
 .research-summary-fit { margin-top:52px; }
 .research-conclusion { width:974.958px; margin:0 auto; padding:9.819px 31.911px; border-radius:22.092px; background:#fff; color:#000; font-size:18px; line-height:25px; white-space:nowrap; }
+/* Figma 413:24135: header → body 32; body padding 20; lead → photos 54; photos → metrics 42. */
+.restyle-page [data-node-id="413:24139"] { gap:42px; padding-block:20px; }
 .restyle-page [data-node-id="413:24140"] { gap:54px; }
 .restyle-page .localization-lead { display:flex; justify-content:center; align-items:center; gap:12px; font-size:18px; line-height:25px; font-weight:500; white-space:nowrap; }
 .localization-lead i { color:#ffffff4d; font-style:normal; font-weight:400; }
@@ -73,6 +77,8 @@
 .competitor-notes > div > div > div:last-child [data-node-id] { width:100%; }
 .competitor-notes [data-node-id] { max-width:100%; white-space:normal; }
 .competitor-notes p { line-height:1.6; }
+.restyle-page .competitor-note-label { color:#fff; }
+.restyle-page .competitor-note-body { color:#ffffffb3; }
 .directions { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); align-items:center; text-align:center; gap:48px; padding:120px 0; }
 .directions strong { display:block; font-size:54px; font-weight:500; line-height:1.4; background:linear-gradient(207.75deg,#fff 21.391%,#8043fa 120.62%); -webkit-background-clip:text; background-clip:text; color:transparent; }
 .directions p { margin-top:23.924px; color:#ffffff80; font-size:16px; line-height:22px; }
@@ -134,7 +140,7 @@
 @media(max-width:860px) {
   .restyle-page .project-back { padding-left:0; font-size:15px; }
   .restyle-page .hero-heading h1 { font-size:20px; line-height:28px; }
-  .restyle-page .hero-heading p { font-size:12px; gap:8px; }
+  .restyle-page .hero-heading p { margin-top:8px; font-size:12px; gap:8px; }
   .restyle-page .hero-heading > div:last-child { display:none; }
   .restyle-intro { grid-template-columns:minmax(0,1fr); gap:56px; padding:80px 0; }
   .restyle-intro-story { min-height:0; gap:48px; }

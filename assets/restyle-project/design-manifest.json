@@ -2,11 +2,12 @@
   "fileKey": "4bmmmr2N1cVT5buACnuZgG",
   "nodeId": "413:23369",
   "exports": {
-    "413:23493": "node-413-23493.png",
-    "413:23818": "node-413-23818.png",
+    "413:23493": "stage-script-4x.png",
+    "413:23818": "stage-assets-4x.png",
     "413:24865": "node-413-24865.png",
-    "413:23473": "node-413-23473.png",
+    "413:23473": "platform-3x.png",
     "413:23390": "hero-2x.png"
   },
-  "source": "Exact Figma assets; native case-study copy and layout; original PNGs retained for zoom."
+  "source": "Exact Figma assets; native case-study copy and layout; original PNGs retained for zoom.",
+  "imagePreviews": "Lossless WebP UI previews from Figma source pixels; 3x platform render; PNG originals on zoom."
 }
