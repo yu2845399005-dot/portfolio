@@ -10,7 +10,7 @@
     dotsFocus:'./assets/page-loader/dots-focus.svg', dotsReady:'./assets/page-loader/dots-ready.svg'
   };
   const PDF = './assets/resume/yuqiang-resume.pdf';
-  const PAGES = new Set(['index.html','contact.html','onboarding.html','live-assistant.html','dialog-agent.html','arena.html','live-assistant-demo.html']);
+  const PAGES = new Set(['index.html','contact.html','onboarding.html','live-assistant.html','dialog-agent.html','arena.html','restyle.html','live-assistant-demo.html']);
   const storage = {
     set(ticket) { try { sessionStorage.setItem(KEY,JSON.stringify(ticket)); return true; } catch { return false; } },
     clear() { try { sessionStorage.removeItem(KEY); } catch { /* Storage is optional. */ } }

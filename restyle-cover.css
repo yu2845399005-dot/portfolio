@@ -1,0 +1,4 @@
+/* Reuse the new case study's exact Figma monitor artwork in the existing Work grid. */
+.work-visual.restyle-cover { position:relative; overflow:hidden; background:linear-gradient(57.395deg,#000 3.305%,#241950 85.801%); }
+.restyle-cover-monitor { position:absolute; width:82%; height:calc(82% * 1.255); left:9%; top:8%; overflow:hidden; }
+.work-visual.restyle-cover .restyle-cover-monitor img { position:absolute; max-width:none; width:124.9%; height:129.84%; left:-13.82%; top:-29.83%; object-fit:fill; }
