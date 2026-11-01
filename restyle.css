@@ -56,8 +56,8 @@
 .interview-grid > div { min-width:0; }
 .research-summary-fit { margin-top:52px; }
 .research-conclusion { width:974.958px; margin:0 auto; padding:9.819px 31.911px; border-radius:22.092px; background:#fff; color:#000; font-size:18px; line-height:25px; white-space:nowrap; }
-/* Figma 413:24135: header → body 32; body padding 20; lead → photos 54; photos → metrics 42. */
-.restyle-page [data-node-id="413:24139"] { gap:42px; padding-block:20px; }
+/* Figma 413:24135: header → body 32; body top padding 50, bottom 0; lead → photos 54; photos → metrics 42. */
+.restyle-page [data-node-id="413:24139"] { gap:42px; padding:50px 0 0; }
 .restyle-page [data-node-id="413:24140"] { gap:54px; }
 .restyle-page .localization-lead { display:flex; justify-content:center; align-items:center; gap:12px; font-size:18px; line-height:25px; font-weight:500; white-space:nowrap; }
 .localization-lead i { color:#ffffff4d; font-style:normal; font-weight:400; }
