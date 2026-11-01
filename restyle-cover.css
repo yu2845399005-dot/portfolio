@@ -1,2 +1,2 @@
-/* Center the monitor in the Work card's 611:381 crop. Its Figma center is x=634.36/1328. */
-.restyle-work-card .work-visual > img { object-fit:cover; object-position:40.9% center; }
+/* Figma 236:62954: the exported Work cover already includes its 611:381 composition. */
+.restyle-work-card .work-visual > img { object-fit:cover; object-position:center; }
