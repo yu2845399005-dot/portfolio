@@ -24,6 +24,7 @@ ATTRIBUTES = re.compile(r'''\b(?:src|href|poster)\s*=\s*["']([^"']+)["']''', re.
 SRCSETS = re.compile(r'''\bsrcset\s*=\s*["']([^"']+)["']''', re.I)
 CSS_URLS = re.compile(r'''url\(\s*["']?([^\s)'"\n]+)["']?\s*\)''', re.I)
 JS_ASSETS = re.compile(r'''["'](\./(?:assets|figma-assets)/[^"']+)["']''')
+JS_IMPORTS = re.compile(r'''\b(?:from\s*|import\s*(?:\(\s*)?)["'](\.{1,2}/[^"']+)["']''')
 
 
 def collect_files():
@@ -48,7 +49,7 @@ def collect_files():
         if source.suffix in {".html", ".css", ".svg"}:
             refs += CSS_URLS.findall(content)
         if source.suffix == ".js":
-            refs += JS_ASSETS.findall(content)
+            refs += JS_ASSETS.findall(content) + JS_IMPORTS.findall(content)
         for ref in refs:
             # Template markup uses assets from the literal JS asset map above.
             if source.suffix == ".js" and "${" in ref:

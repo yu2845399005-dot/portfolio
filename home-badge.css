@@ -10,24 +10,38 @@
 .badge-home .intro { width:572px; max-width:100%; transform:none; font-family:inherit; font-variation-settings:normal; }
 .badge-home .explore-wrap { top:auto; bottom:0; height:128px; margin:0; }
 .badge-home .round-icon-black img { width:13.7143px; height:14.083px; max-width:none; }
-.badge-home .badge-stage { position:absolute; inset:0 0 auto auto; width:540px; height:100%; aspect-ratio:auto; margin:0; isolation:isolate; }
+.badge-home .badge-stage {
+  --badge-card-height: clamp(360px, 56svh, 510px);
+  --badge-card-top: max(36px, calc(min(929px, 100svh) * .21 - 94px));
+  --badge-strap-top: -24px;
+  position:absolute; inset:0 0 auto auto; width:540px; height:100%; aspect-ratio:auto; margin:0; isolation:isolate; }
 .badge-interaction { position:relative; display:block; width:100%; height:100%; margin:0; padding:0; border:0; background:transparent; cursor:grab; -webkit-tap-highlight-color:transparent; touch-action:pan-y; outline-offset:-24px; }
 .badge-interaction.is-dragging { cursor:grabbing; touch-action:none; }
 .badge-interaction:focus-visible { outline:none; }
 .badge-interaction:focus-visible~.badge-help { color:#fff; text-decoration:underline; text-underline-offset:4px; }
 .badge-render-layer { position:absolute; z-index:2; top:-160px; left:0; width:100%; height:calc(100% + 320px); pointer-events:none; }
-.badge-render-layer canvas { display:block; width:100%; height:100%; opacity:0; pointer-events:none; transition:opacity .24s ease; }
+.badge-render-layer canvas { display:block; width:100%; height:100%; opacity:0; pointer-events:none;  }
 .badge-scene-ready .badge-render-layer canvas { opacity:1; }
-.badge-fallback { position:absolute; inset:0; pointer-events:none; perspective:1000px; visibility:hidden; opacity:0; }
-.badge-fallback-ready .badge-fallback { visibility:visible; opacity:1; }
-.badge-ready .badge-fallback { opacity:0; }
-.badge-fallback-card { position:absolute; top:21.65%; left:calc(50% - 155.9525px); display:block; width:311.905px; height:454.7px; border-radius:19.663px; background:#fff; color:#000; box-shadow:1px 2px 0 #bac1cc,3px 4px 0 #68717b,12px 20px 25px #0008; transform:rotate(-.69deg); transform-origin:50% 17.62px; }
-.badge-print-meta { position:absolute; top:44.241px; left:17.135px; right:17.135px; display:flex; justify-content:space-between; font:400 11.5px/16px "PingFang SC",Arial,sans-serif; color:#34383e; }
-.badge-home .badge-mascot { position:absolute; top:93.915px; left:0; width:311.905px; height:239.927px; }
-.badge-print-name { position:absolute; top:369.516px; width:100%; left:0; text-align:center; font:600 29.494px/41px "PingFang SC",Arial,sans-serif; }
-.badge-fallback-slot { position:absolute; top:10.25px; left:calc(50% - 24.578px); width:49.156px; height:14.747px; border-radius:24.578px; background:#141619; box-shadow:0 1px 1px #fff,0 0 0 2px #d5d8dc,inset 0 2px 3px #000b; }
-.badge-fallback-strap { position:absolute; z-index:1; top:0; bottom:calc(78.35% - 18px); left:calc(50% - 12.5px); width:25px; background:linear-gradient(#000 18.916%,#fafafa); mask-image:linear-gradient(transparent 20%,#000 80%); }
-.badge-help { position:absolute; top:var(--badge-help-top,auto); bottom:auto; left:0; width:100%; margin:0; color:#ffffff70; font:400 12px/18px "Helvetica Neue",Arial,sans-serif; letter-spacing:.25px; text-align:center; opacity:0; pointer-events:none; transition:opacity .25s; }
+.badge-fallback { position:absolute; inset:0; pointer-events:none; perspective:1000px; }
+.badge-ready .badge-fallback { visibility:hidden; }
+.badge-fallback-card {
+  position:absolute; top:var(--badge-card-top); left:calc(50% - var(--badge-card-height) * .343);
+  display:block; height:var(--badge-card-height); aspect-ratio:311.905 / 454.7;
+  border-radius:calc(var(--badge-card-height) * .043); background:#fff; color:#000;
+  box-shadow:1px 2px 0 #bac1cc,3px 4px 0 #68717b,12px 20px 25px #0008;
+  transform:rotate(-.69deg); transform-origin:50% 3.876%;
+}
+.badge-print-meta { position:absolute; top:9.73%; inset-inline:5.49%; display:flex; justify-content:space-between; font:400 calc(var(--badge-card-height) * .0253)/1.4 "PingFang SC",Arial,sans-serif; color:#34383e; }
+.badge-home .badge-mascot { position:absolute; top:20.65%; left:0; width:100%; height:52.76%; }
+.badge-print-name { position:absolute; top:81.27%; width:100%; left:0; text-align:center; font:600 calc(var(--badge-card-height) * .06486)/1.4 "PingFang SC",Arial,sans-serif; }
+.badge-fallback-slot { position:absolute; top:2.25%; left:42.12%; width:15.76%; height:3.24%; border-radius:999px; background:#141619; box-shadow:0 1px 1px #fff,0 0 0 2px #d5d8dc,inset 0 2px 3px #000b; }
+.badge-fallback-strap {
+  position:absolute; z-index:1; top:var(--badge-strap-top); left:calc(50% - var(--badge-card-height) * .0275);
+  width:calc(var(--badge-card-height) * .055);
+  height:calc(var(--badge-card-top) - var(--badge-strap-top) + var(--badge-card-height) * .052);
+  background:linear-gradient(#000 18.916%,#fafafa); mask-image:linear-gradient(transparent 20%,#000 80%);
+}
+.badge-help { position:absolute; top:var(--badge-help-top,calc(var(--badge-card-top) + var(--badge-card-height) + 14px)); bottom:auto; left:0; width:100%; margin:0; color:#ffffff70; font:400 12px/18px "Helvetica Neue",Arial,sans-serif; letter-spacing:.25px; text-align:center; opacity:0; pointer-events:none; transition:opacity .25s; }
 .badge-stage:hover .badge-help,.badge-stage:focus-within .badge-help { opacity:1; }
 .badge-interaction[data-entrance]:not([data-entrance="settled"])~.badge-help { opacity:0; }
 @media(min-width:721px) and (max-width:1440px) {
@@ -53,7 +67,11 @@
   .badge-home .eyebrow { font-size:34px; line-height:1.2; }
   .badge-home h1 { font-size:clamp(42px,10vw,62px); line-height:1.18; white-space:nowrap; }
   .badge-home .intro { width:min(100%,500px); max-width:100%; line-height:1.5; margin-top:22px; }
-  .badge-home .badge-stage { position:relative; inset:auto; width:100%; height:360px; margin-top:16px; }
+  .badge-home .badge-stage {
+    --badge-card-height:min(254px, 76vw);
+    --badge-card-top:calc(var(--badge-card-height) * .315);
+    --badge-strap-top:0px;
+    position:relative; inset:auto; width:100%; height:360px; margin-top:16px; }
   .badge-home .explore-wrap { position:relative; inset:auto; height:auto; padding:20px 0 28px; }
   .badge-home .badge-fallback { transform:scale(.54); transform-origin:50% 0; height:665px; }
   .badge-home .badge-help { bottom:auto; font-size:11px; }

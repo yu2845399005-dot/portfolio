@@ -64,6 +64,16 @@
   }
 
   if (motionVideos.length) {
+    const posterObserver = new IntersectionObserver(entries => {
+      entries.forEach(({ target, isIntersecting }) => {
+        if (!isIntersecting) return;
+        target.poster = target.dataset.poster;
+        posterObserver.unobserve(target);
+      });
+    }, { rootMargin: "400px 0px" });
+
+    motionVideos.filter(video => video.dataset.poster).forEach(video => posterObserver.observe(video));
+
     const setMotionPlayback = (motionVideo, isVisible) => {
       if (isVisible && !document.hidden) motionVideo.play().catch(() => {});
       else motionVideo.pause();

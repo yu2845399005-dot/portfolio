@@ -1,4 +1,4 @@
-import * as THREE from './assets/vendor/three.module.min.js';
+let THREE;
 
 const stage = document.querySelector('[data-badge-stage]');
 const button = stage?.querySelector('.badge-interaction');
@@ -16,7 +16,7 @@ const EXPRESSION_ASSETS = {
   rightEye:'./assets/home-badge/expressions/d2974.svg',
   spiral:'./assets/home-badge/expressions/6fa09.svg'
 };
-const clamp = THREE.MathUtils.clamp;
+const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
 function roundedPath(PathType, x, y, width, height, radius) {
   const path = new PathType();
@@ -58,9 +58,8 @@ async function makePrint(maxTextureSize) {
     } else { image.src = src; await image.decode(); }
     return [key,image];
   })));
-  await document.fonts.ready;
   const canvas = document.createElement('canvas');
-  const textureHeight = Math.min(4096, maxTextureSize);
+  const textureHeight = Math.min(1536, maxTextureSize);
   const resolution = textureHeight / PRINT.height;
   canvas.width = Math.round(PRINT.width * resolution);
   canvas.height = textureHeight;
@@ -81,7 +80,7 @@ async function makePrint(maxTextureSize) {
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
   const bodyCanvas = document.createElement('canvas');
-  bodyCanvas.width = Math.min(2048,maxTextureSize);
+  bodyCanvas.width = Math.min(1024,maxTextureSize);
   bodyCanvas.height = Math.round(bodyCanvas.width*80/104);
   bodyCanvas.getContext('2d').drawImage(bodyImage,0,0,bodyCanvas.width,bodyCanvas.height);
   const bodyTexture = new THREE.CanvasTexture(bodyCanvas);
@@ -105,7 +104,7 @@ async function makePrint(maxTextureSize) {
   const rightEye = maskedEye(images.rightEye,images.rightMask,[51.06,24,16,16],[49.997,23,18,14]);
   const eyeTextures = Object.fromEntries(['normal','tap','dizzy','drag'].map(name => {
     const layer = document.createElement('canvas');
-    layer.width = Math.min(1024,maxTextureSize);
+    layer.width = Math.min(768,maxTextureSize);
     layer.height = Math.round(layer.width*80/104);
     const eyes = layer.getContext('2d');
     eyes.scale(layer.width/104,layer.height/80);
@@ -164,16 +163,15 @@ async function mountBadge() {
   // Keep the last crisp frame available while the animation sleeps.
   const renderer = new THREE.WebGLRenderer({ alpha:true, antialias:true, preserveDrawingBuffer:true, powerPreference:'low-power' });
   renderer.setClearColor(0x000000, 0);
-  renderer.setPixelRatio(Math.min(3, Math.max(2, devicePixelRatio)));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.NoToneMapping;
   renderer.domElement.setAttribute('aria-hidden', 'true');
   const firstScreen = stage.closest('.first-screen');
+  const fallbackCard = stage.querySelector('.badge-fallback-card');
   const surface = document.createElement('div');
   surface.className = 'badge-render-layer';
   surface.setAttribute('aria-hidden', 'true');
   surface.append(renderer.domElement);
-  firstScreen.append(surface);
   const scene = new THREE.Scene();
   const camera = new THREE.OrthographicCamera(-2.7, 2.7, 3.365, -3.365, .1, 50);
   camera.position.z = 16;
@@ -203,7 +201,15 @@ async function mountBadge() {
   const card = new THREE.Group();
   const body = new THREE.Mesh(bodyGeometry, pvc);
   card.add(body);
-  const {texture:print,bodyTexture,eyeTextures} = await makePrint(renderer.capabilities.maxTextureSize);
+  let printAssets;
+  try {
+    printAssets = await makePrint(renderer.capabilities.maxTextureSize);
+  } catch (error) {
+    renderer.dispose();
+    renderer.forceContextLoss();
+    throw error;
+  }
+  const {texture:print,bodyTexture,eyeTextures} = printAssets;
   print.anisotropy = renderer.capabilities.getMaxAnisotropy();
   button.dataset.textureSize = print.image.width + 'x' + print.image.height;
   const faceGeometry = new THREE.ShapeGeometry(bodyShape, 32);
@@ -312,14 +318,14 @@ async function mountBadge() {
   let frame = 0, previous = 0, visible = true, dragging = false;
   let angle = -.012, velocity = 0, twist = .035, twistVelocity = 0, tip = 0, tipVelocity = 0;
   let targetAngle = -.012, targetTwist = .035, targetTip = 0;
-  let stageWidth = 540, stageHeight = 673, worldHeight = 6.73;
+  let stageWidth = 540, worldHeight = 6.73;
   let pixelScale = 100, anchorX = 0, anchorY = 3.365, strapLength = 1.4;
   let dragOrigin = null, travel = 0;
   let expressionName = 'normal', expressionTimer = 0, idleTimer = 0;
   let eyeTransition = null, eyeOpenness = 1;
   let squash = 0, squashVelocity = 0, lean = 0, leanVelocity = 0;
   let targetSquash = 0, targetLean = 0;
-  const entrance = {phase:'pending',y:0,velocity:0,gravity:0,age:0,bounces:0,greeted:false,bounceSpeed:0};
+  const entrance = {phase:'pending',y:0,velocity:0,age:0,bounces:0,greeted:false};
   let lastTapTime = -Infinity, lastTapX = 0, lastTapY = 0;
   const restAngle = -.012;
   const raycaster = new THREE.Raycaster(), pointer = new THREE.Vector2();
@@ -427,32 +433,19 @@ async function mountBadge() {
     if (reducedMotion.matches) { finishEntrance(); return; }
     if (entrance.phase === 'recovering' && dragging) return;
     entrance.age += dt;
-    if (entrance.phase === 'falling') {
-      entrance.velocity -= entrance.gravity*dt;
-      entrance.y += entrance.velocity*dt;
-      if (entrance.y <= 0) {
-        entrance.y = 0;
-        entrance.velocity = -entrance.bounceSpeed;
-        entrance.phase = 'rebounding'; entrance.age = 0;
-        velocity += .32; twistVelocity -= .18; tipVelocity += .06;
-        reactBody(-1,.7);
-        transitionEyes('normal');
-      }
-    } else {
-      const recovering = entrance.phase === 'recovering';
-      const oldVelocity = entrance.velocity;
-      entrance.velocity += -entrance.y*(recovering ? 80 : 110)*dt;
-      entrance.velocity *= Math.exp(-(recovering ? 18 : 5.4)*dt);
-      if (recovering) entrance.velocity = clamp(entrance.velocity,-500/pixelScale,500/pixelScale);
-      entrance.y += entrance.velocity*dt;
-      if (!recovering && oldVelocity < 0 && entrance.velocity >= 0) entrance.bounces++;
-      if (!recovering && !entrance.greeted && entrance.age > .55) {
-        entrance.greeted = true;
-        reactBody(1,.18);
-        transitionEyes('normal');
-      }
-      if ((entrance.age > 1.55 && Math.abs(entrance.y)*pixelScale < .3 && Math.abs(entrance.velocity)*pixelScale < 3) || entrance.age > 2.4) finishEntrance();
+    const recovering = entrance.phase === 'recovering';
+    const oldVelocity = entrance.velocity;
+    entrance.velocity += -entrance.y*(recovering ? 80 : 110)*dt;
+    entrance.velocity *= Math.exp(-(recovering ? 18 : 5.4)*dt);
+    if (recovering) entrance.velocity = clamp(entrance.velocity,-500/pixelScale,500/pixelScale);
+    entrance.y += entrance.velocity*dt;
+    if (!recovering && oldVelocity < 0 && entrance.velocity >= 0) entrance.bounces++;
+    if (!recovering && !entrance.greeted && entrance.age > .55) {
+      entrance.greeted = true;
+      reactBody(1,.18);
+      transitionEyes('normal');
     }
+    if ((entrance.age > 1.55 && Math.abs(entrance.y)*pixelScale < .3 && Math.abs(entrance.velocity)*pixelScale < 3) || entrance.age > 2.4) finishEntrance();
     button.dataset.entrance = entrance.phase;
     button.dataset.entranceOffset = (entrance.y*pixelScale).toFixed(1);
     button.dataset.entranceBounces = entrance.bounces;
@@ -462,15 +455,12 @@ async function mountBadge() {
     const bounds = stage.getBoundingClientRect();
     const screenBounds = firstScreen.getBoundingClientRect();
     const surfaceBounds = surface.getBoundingClientRect();
-    stageWidth = bounds.width; stageHeight = bounds.height;
+    stageWidth = bounds.width;
     const mobile = matchMedia('(max-width:720px)').matches;
     const previousScale = pixelScale;
-    pixelScale = mobile
-      ? Math.min(stageHeight / 6.45, stageWidth / 5.2)
-      : clamp(screenBounds.height * .56, 360, 510) / h;
+    pixelScale = fallbackCard.offsetHeight / h;
     const anchorPx = mobile ? bounds.top - surfaceBounds.top : screenBounds.top - surfaceBounds.top + 70;
-    const slotPx = mobile ? anchorPx + 1.61 * pixelScale
-      : screenBounds.top - surfaceBounds.top + Math.max(130, screenBounds.height * .21) + PRINT.slotY / 100 * pixelScale;
+    const slotPx = bounds.top - surfaceBounds.top + fallbackCard.offsetTop + PRINT.slotY / 100 * pixelScale;
     strapLength = (slotPx - anchorPx) / pixelScale;
     anchorX = (bounds.left + bounds.width / 2 - surfaceBounds.left - surfaceBounds.width / 2) / pixelScale;
     worldHeight = surfaceBounds.height / pixelScale;
@@ -478,18 +468,17 @@ async function mountBadge() {
     camera.left = -surfaceBounds.width / pixelScale / 2; camera.right = surfaceBounds.width / pixelScale / 2;
     camera.top = worldHeight / 2; camera.bottom = -worldHeight / 2;
     camera.updateProjectionMatrix();
+    const canvasPixels = surfaceBounds.width * surfaceBounds.height;
+    const pixelRatio = Math.min(devicePixelRatio, 2, Math.sqrt(4000000 / canvasPixels));
+    if (renderer.getPixelRatio() !== pixelRatio) renderer.setPixelRatio(pixelRatio);
     renderer.setSize(surfaceBounds.width, surfaceBounds.height, false);
     button.dataset.cardPixels = Math.round(h * pixelScale);
     const cardTop = surfaceBounds.top + slotPx - PRINT.slotY / 100 * pixelScale;
     stage.style.setProperty('--badge-help-top', (cardTop - bounds.top + h * pixelScale + 14) + 'px');
-    const exploreTop = firstScreen.querySelector('.explore-wrap').getBoundingClientRect().top;
-    entrance.bounceSpeed = clamp((exploreTop-cardTop-h*pixelScale-16)*14,180,440)/pixelScale;
-    if (entrance.phase === 'pending') {
-      entrance.y = (cardTop-screenBounds.top+h*pixelScale+48)/pixelScale;
-      entrance.gravity = 2*entrance.y/(.62*.62);
-    } else if (entrance.phase !== 'settled') {
+    if (entrance.phase === 'rebounding' || entrance.phase === 'recovering') {
       const ratio = previousScale/pixelScale;
-      entrance.y *= ratio; entrance.velocity *= ratio; entrance.gravity *= ratio;
+      entrance.y *= ratio;
+      entrance.velocity *= ratio;
     }
     wake();
   }
@@ -670,11 +659,14 @@ async function mountBadge() {
     event.preventDefault(); cancelAnimationFrame(frame); frame = 0;
     stage.classList.remove('badge-ready');
     firstScreen.classList.remove('badge-scene-ready');
-    stage.classList.add('badge-fallback-ready');
+    button.dataset.renderer = 'fallback';
   });
   renderer.domElement.addEventListener('webglcontextrestored', () => {
-    stage.classList.remove('badge-fallback-ready');
-    stage.classList.add('badge-ready'); firstScreen.classList.add('badge-scene-ready'); wake();
+    updateGeometry(performance.now());
+    stage.classList.add('badge-ready');
+    firstScreen.classList.add('badge-scene-ready');
+    button.dataset.renderer = 'webgl';
+    wake();
   });
   new ResizeObserver(resize).observe(stage);
   new ResizeObserver(resize).observe(firstScreen);
@@ -690,13 +682,13 @@ async function mountBadge() {
     else { wake(); scheduleIdle(); }
   });
   reducedMotion.addEventListener('change', () => { wake(); scheduleIdle(); });
+  firstScreen.append(surface);
   resize();
   if (reducedMotion.matches) finishEntrance();
   else {
-    entrance.phase = 'falling';
-    angle = -.065; twist = .075; tip = -.02;
-    button.dataset.entrance = 'falling';
-    button.dataset.entranceOffset = (entrance.y*pixelScale).toFixed(1);
+    entrance.phase = 'rebounding';
+    entrance.velocity = -90 / pixelScale;
+    button.dataset.entrance = 'rebounding';
   }
   updateGeometry(0);
   stage.classList.add('badge-ready');
@@ -708,20 +700,48 @@ async function mountBadge() {
 }
 
 if (stage && button) {
-  mountBadge().catch(error => {
-    // Keep the accessible HTML card visible if WebGL or its texture is unavailable.
-    button.dataset.renderer = 'fallback';
-    stage.classList.add('badge-fallback-ready');
-    button.addEventListener('click', () => {
-      const card = stage.querySelector('.badge-fallback-card');
-      card?.animate(reducedMotion.matches ? [{ opacity:1 }, { opacity:.9 }, { opacity:1 }] : [
+  let loading = false;
+  const enhance = async () => {
+    if (loading) return;
+    loading = true;
+    try {
+      THREE = await import('./assets/vendor/three.module.min.js');
+      await mountBadge();
+    } catch {
+      // The HTML card remains usable when the module, assets, or WebGL fail.
+    }
+  };
+
+  button.addEventListener('click', () => {
+    if (button.dataset.renderer === 'webgl') return;
+    const card = stage.querySelector('.badge-fallback-card');
+    if (!reducedMotion.matches) {
+      card?.animate([
         { transform:'rotate(-.69deg) rotateY(0deg)' },
         { transform:'rotate(-9deg) rotateY(12deg)', offset:.25 },
         { transform:'rotate(7deg) rotateY(-8deg)', offset:.5 },
         { transform:'rotate(-3deg) rotateY(4deg)', offset:.75 },
         { transform:'rotate(-.69deg) rotateY(0deg)' }
-      ], { duration:reducedMotion.matches ? 200 : 1100, easing:'ease-out' });
-    });
-    console.warn('Badge uses the HTML fallback:', error.message);
+      ], { duration:850, easing:'ease-out' });
+    }
+    enhance();
   });
+
+  const connection = navigator.connection;
+  if (!connection?.saveData && !['slow-2g', '2g'].includes(connection?.effectiveType)) {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        const enhanceIfVisible = () => {
+          const bounds = stage.getBoundingClientRect();
+          if (bounds.bottom > 0 && bounds.top < innerHeight) enhance();
+          else if (!loading) observer.observe(stage);
+        };
+        if (typeof requestIdleCallback === 'function') requestIdleCallback(enhanceIfVisible, {timeout:800});
+        else setTimeout(enhanceIfVisible, 120);
+      }));
+    });
+    observer.observe(stage);
+  }
 }

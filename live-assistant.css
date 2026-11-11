@@ -89,6 +89,7 @@ img { display: block; max-width: 100%; }
 .motion-demo-slot--first { left: 0; }
 .motion-demo-slot--second { left: 36.5318417%; }
 .motion-demo-slot--third { left: 73.0636833%; }
+.motion-demo-slot:has(video[data-poster]:not([poster])) { visibility: hidden; }
 .motion-demo {
   width: 100%;
   height: 100%;
