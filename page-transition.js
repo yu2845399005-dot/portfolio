@@ -180,7 +180,8 @@
     const url = new URL(link.href,location.href);
     if (url.origin !== location.origin) return;
     if (url.pathname === location.pathname && url.search === location.search) return;
-    if (!PAGES.has(url.pathname.split('/').pop())) return;
+    const isHome = url.pathname === new URL('./', location.href).pathname;
+    if (!isHome && !PAGES.has(url.pathname.split('/').pop())) return;
     event.preventDefault(); event.stopImmediatePropagation(); navigate(url);
   },true);
   const abort = () => {

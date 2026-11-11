@@ -1,4 +1,12 @@
 (() => {
+  // Keep old bookmarks working while showing the shorter homepage address.
+  const url = new URL(location.href);
+  if (/^https?:$/.test(url.protocol) && url.pathname.endsWith("/index.html")) {
+    url.pathname = url.pathname.slice(0, -"index.html".length);
+    url.searchParams.delete("v");
+    history.replaceState(history.state, "", url);
+  }
+
   const experienceList = document.querySelector(".experience-list");
   const experienceItems = [...document.querySelectorAll("[data-experience-item]")];
   if (!experienceList || !experienceItems.length) return;

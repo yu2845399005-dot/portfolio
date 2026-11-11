@@ -58,7 +58,9 @@ def collect_files():
                 continue
             if url.path.startswith("/"):
                 raise SystemExit(f"Root-relative URL breaks project hosting: {ref} in {source.name}")
-            target = (source.parent / unquote(url.path)).resolve()
+            target = source.parent / unquote(url.path)
+            if url.path.endswith("/"):
+                target /= "index.html"
             pending.append(target)
     return sorted(files)
 
