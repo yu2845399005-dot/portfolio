@@ -41,7 +41,12 @@
 .platform-overview > .design-fit { width:100%; }
 .stage-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px 32px; margin-top:36px; }
 .stage { display:grid; grid-row:span 2; grid-template-rows:subgrid; align-items:start; }
+.stage-heading { min-height:47px; }
+.stage-heading * { white-space:normal!important; }
+.stage-heading > div { height:auto; }
+.stage-heading p { line-height:1.4; }
 .stage .product-capture { width:100%; height:auto; border-radius:5.27px; }
+.stage-heading > div > div:last-child { font-size:13px; }
 .restyle-page figcaption { margin-top:15.79px; font-size:14px; line-height:20px; color:#ffffff80; text-align:center; }
 .restyle-page .product-capture { border-radius:8px; }
 .flow-scroll { overflow-x:auto; scrollbar-width:thin; scrollbar-color:#5e40df #161219; }
@@ -100,11 +105,14 @@
 .figma-detail-fit { width:100%; }
 .restyle-page .figma-detail-fit .design-canvas > div { min-height:0; }
 .design-detail { min-width:0; }
-.detail-heading { margin-bottom:36px; }
+.detail-heading > div { width:100%; height:auto; }
+.detail-heading [data-node-id] { max-width:100%; white-space:normal; }
+.detail-heading > div > div:first-child { font-size:18px; line-height:25px; font-weight:500; }
+.detail-heading > div > div:last-child { font-size:14px; line-height:20px; }
+.detail-heading { margin-bottom:32px; }
 .parsing-row .detail-heading { margin-bottom:48.033px; }
 .parsing-row .design-fit + .design-fit { margin-top:48.033px; }
 .asset-row .detail-heading { margin-bottom:27.457px; }
-.asset-row + .asset-row .detail-heading { margin-bottom:57.528px; }
 .asset-paths { display:grid; grid-template-columns:283.528fr 231.421fr; align-items:center; gap:31.379px; margin-top:57.528px; }
 .asset-paths > div { min-width:0; max-width:100%; }
 .asset-paths [data-node-id] { max-width:100%; }
@@ -147,9 +155,13 @@
   .platform-overview { grid-template-columns:1fr; gap:40px; }
   .platform-overview > .design-fit { max-width:382px; justify-self:center; }
   .stage-grid { grid-template-columns:1fr; gap:32px; }
+  .stage-heading { min-height:0; }
+  .stage-heading > div { width:100%; }
+  .stage-heading > div > div:first-child { font-size:16px; }
   .interview-grid { grid-template-columns:1fr; gap:40px; }
   .interview-grid > div { min-width:0; max-width:548px; width:100%; justify-self:center; }
   .research-summary-fit { margin-top:36px; }
+  .research-summary-fit > .design-canvas { width:100%!important; zoom:1!important; }
   .research-conclusion { width:100%; margin:0; white-space:normal; font-size:15px; line-height:1.65; padding:14px 20px; }
   .tad > div { display:grid; gap:12px; font-size:14px; }
   .competitor-gallery { grid-template-columns:1fr; gap:20px; }
