@@ -4,6 +4,7 @@
   const toggle = document.querySelector(".language-toggle");
   const back = document.querySelector(".project-back");
   const languageParts = toggle.querySelectorAll("span");
+  const backgroundTranslation = document.querySelector(".background-translation");
   const translated = document.querySelectorAll("[data-zh][data-en]");
   let frame = 0;
   let active = -1;
@@ -34,6 +35,7 @@
     translated.forEach(element => {
       element.textContent = element.dataset[language];
     });
+    backgroundTranslation.lang = english ? "zh-CN" : "en";
     links.forEach(link => {
       const label = english ? link.dataset.labelEn : link.dataset.labelZh;
       link.title = label;
