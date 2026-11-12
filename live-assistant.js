@@ -1,98 +1,68 @@
 (() => {
-  const railSteps = [...document.querySelectorAll(".rail-bars button")];
-  const languageToggle = document.querySelector(".language-toggle");
-  const motionVideos = [...document.querySelectorAll("[data-motion-video]")];
-  const languageParts = languageToggle ? [...languageToggle.querySelectorAll("span")] : [];
-  const targets = railSteps
-    .map((step) => document.getElementById(step.dataset.target))
-    .filter(Boolean);
-  let activeIndex = 0;
-  let ticking = false;
+  const links = Array.from(document.querySelectorAll(".progress-rail a"));
+  const targets = links.map(link => document.getElementById(link.hash.slice(1)));
+  const toggle = document.querySelector(".language-toggle");
+  const back = document.querySelector(".project-back");
+  const languageParts = toggle.querySelectorAll("span");
+  const translated = document.querySelectorAll("[data-zh][data-en]");
+  let frame = 0;
+  let active = -1;
 
-  const setActive = (index) => {
-    activeIndex = Math.max(0, Math.min(railSteps.length - 1, index));
-    railSteps.forEach((step, stepIndex) => {
-      const active = stepIndex === activeIndex;
-      step.classList.toggle("active", active);
-      if (active) step.setAttribute("aria-current", "step");
-      else step.removeAttribute("aria-current");
-    });
-  };
-
-  const updateProgress = () => {
-    const marker = window.scrollY + window.innerHeight * 0.42;
+  function updateProgress() {
+    frame = 0;
+    const marker = window.innerHeight * 0.42;
     let next = 0;
     targets.forEach((target, index) => {
-      if (target.offsetTop <= marker) next = index;
+      if (target && target.getBoundingClientRect().top <= marker) next = index;
     });
-    setActive(next);
-    ticking = false;
-  };
+    if (document.scrollingElement.scrollHeight - window.scrollY - window.innerHeight <= 2) {
+      next = links.length - 1;
+    }
+    if (next === active) return;
+    links[active]?.removeAttribute("aria-current");
+    links[next]?.setAttribute("aria-current", "location");
+    active = next;
+  }
 
-  const requestProgressUpdate = () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(updateProgress);
-  };
+  function queueProgress() {
+    if (!frame) frame = requestAnimationFrame(updateProgress);
+  }
 
-  railSteps.forEach((step) => {
-    step.addEventListener("click", () => {
-      const target = document.getElementById(step.dataset.target);
-      if (!target) return;
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+  function setLanguage(language) {
+    const english = language === "en";
+    document.documentElement.lang = english ? "en" : "zh-CN";
+    translated.forEach(element => {
+      element.textContent = element.dataset[language];
     });
+    links.forEach(link => {
+      const label = english ? link.dataset.labelEn : link.dataset.labelZh;
+      link.title = label;
+      link.setAttribute("aria-label", label);
+    });
+    back.setAttribute("aria-label", english ? "Back to work" : "返回作品列表");
+    toggle.setAttribute("aria-label", english ? "切换到中文" : "Switch to English");
+    languageParts[0].classList.toggle("language-active", !english);
+    languageParts[2].classList.toggle("language-active", english);
+    queueProgress();
+  }
+
+  let language = "zh";
+  try {
+    if (localStorage.getItem("portfolio-language") === "en") language = "en";
+  } catch {
+    // The language switch also works when storage is unavailable.
+  }
+  setLanguage(language);
+  toggle.addEventListener("click", () => {
+    language = language === "zh" ? "en" : "zh";
+    setLanguage(language);
+    try {
+      localStorage.setItem("portfolio-language", language);
+    } catch {
+      // Keep the selected language for the current page.
+    }
   });
 
-  const setLanguage = (language) => {
-    const next = language === "en" ? "en" : "zh";
-    document.documentElement.lang = next === "zh" ? "zh-CN" : "en";
-    document.querySelectorAll("[data-zh][data-en]").forEach((element) => {
-      element.textContent = element.dataset[next];
-    });
-    if (languageToggle && languageParts.length === 3) {
-      languageParts[0].classList.toggle("language-active", next === "zh");
-      languageParts[2].classList.toggle("language-active", next === "en");
-      languageToggle.setAttribute("aria-label", next === "zh" ? "Switch to English" : "切换到中文");
-    }
-    localStorage.setItem("portfolio-language", next);
-  };
-
-  if (languageToggle) {
-    languageToggle.addEventListener("click", () => {
-      setLanguage(document.documentElement.lang.startsWith("zh") ? "en" : "zh");
-    });
-  }
-
-  if (motionVideos.length) {
-    const posterObserver = new IntersectionObserver(entries => {
-      entries.forEach(({ target, isIntersecting }) => {
-        if (!isIntersecting) return;
-        target.poster = target.dataset.poster;
-        posterObserver.unobserve(target);
-      });
-    }, { rootMargin: "400px 0px" });
-
-    motionVideos.filter(video => video.dataset.poster).forEach(video => posterObserver.observe(video));
-
-    const setMotionPlayback = (motionVideo, isVisible) => {
-      if (isVisible && !document.hidden) motionVideo.play().catch(() => {});
-      else motionVideo.pause();
-    };
-    const motionObserver = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => setMotionPlayback(entry.target, entry.isIntersecting)),
-      { threshold: 0.12 }
-    );
-    motionVideos.forEach((motionVideo) => motionObserver.observe(motionVideo));
-    document.addEventListener("visibilitychange", () => {
-      motionVideos.forEach((motionVideo) => {
-        const rect = motionVideo.getBoundingClientRect();
-        setMotionPlayback(motionVideo, rect.top < window.innerHeight && rect.bottom > 0);
-      });
-    });
-  }
-
-  setLanguage(localStorage.getItem("portfolio-language") || "zh");
-  updateProgress();
-  window.addEventListener("scroll", requestProgressUpdate, { passive: true });
-  window.addEventListener("resize", requestProgressUpdate);
+  window.addEventListener("scroll", queueProgress, { passive: true });
+  window.addEventListener("resize", queueProgress);
 })();

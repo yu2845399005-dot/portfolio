@@ -1,148 +1,225 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
-  <meta name="description" content="TikTok AI LIVE Assistant — UX, AI visual and motion design case study." />
+  <meta name="description" content="TikTok AI LIVE Assistant — a case study in AI visuals, motion, and creator support." />
   <title>TikTok AI LIVE Assistant — Yucean Design</title>
-    <link rel="stylesheet" href="./page-transition.css?v=20261028-2" />
-    <script src="./page-transition-boot.js?v=20261028-fast-3"></script>
-    <script src="./page-transition.js?v=20261111-short-home" defer></script>
-  <link rel="stylesheet" href="./live-assistant.css?v=20261111-fast-posters" />
-  <script src="./live-assistant.js?v=20261111-fast-posters" defer></script>
+  <link rel="stylesheet" href="./page-transition.css?v=20261028-2" />
+  <script src="./page-transition-boot.js?v=20261028-fast-3"></script>
+  <script src="./page-transition.js?v=20261111-short-home" defer></script>
+  <link rel="stylesheet" href="./live-assistant-case.css?v=626-1" />
+  <script src="./live-assistant.js?v=626-1" defer></script>
 </head>
-<body>
+<body class="live-case">
   <header class="project-bar">
-    <a class="project-back" href="./#work" aria-label="返回作品列表"><img src="./figma-assets/onboarding/sections/back-icon.png" width="24" height="24" alt="" /><span data-zh="TikTok AI 直播助手设计" data-en="TikTok AI LIVE Assistant Design">TikTok AI 直播助手设计</span></a>
-    <button class="language-toggle" type="button" aria-label="Switch to English"><span class="language-active">中</span><span>/</span><span>EN</span></button>
+    <a class="project-back" href="./#work" aria-label="返回作品列表">
+      <img src="./assets/live-assistant-project/revised/back.svg" alt="" />
+      <span data-zh="TikTok AI 直播助手设计" data-en="TikTok AI LIVE Assistant Design">TikTok AI 直播助手设计</span>
+    </a>
+    <button class="language-toggle" type="button" aria-label="Switch to English"><span class="language-active">中</span><span aria-hidden="true">/</span><span>EN</span></button>
   </header>
-
   <main>
-    <section class="project-hero" id="overview">
+    <section class="project-hero" id="overview" aria-labelledby="project-title">
       <div class="hero-heading">
-        <div><h1 data-zh="TikTok AI 直播助手设计" data-en="TikTok AI LIVE Assistant Design">TikTok AI 直播助手设计</h1><p>TikTok LIVE UX Project <i></i> Montion Design</p></div>
-        <div class="live-brand"><img src="./figma-assets/tiktok-work-icon.png" alt="" /><img src="./assets/live-assistant-project/live-logo.svg" alt="TikTok LIVE" /></div>
+        <div>
+          <h1 id="project-title" data-zh="TikTok AI 直播助手设计" data-en="TikTok AI LIVE Assistant Design">TikTok AI 直播助手设计</h1>
+          <p>TikTok LIVE UX Project <i aria-hidden="true"></i> Motion Design</p>
+        </div>
+        <div class="live-brand"><img src="./assets/live-assistant-project/revised/tiktok-mark.webp" width="96" height="110" alt="" decoding="async" loading="lazy" /><img src="./assets/live-assistant-project/revised/tiktok-live-wordmark.svg" alt="TikTok LIVE" decoding="async" loading="lazy" /></div>
       </div>
-      <img data-full-src="./assets/live-assistant-project/exact-2x/hero-stage.png" srcset="./assets/image-previews/63f7ba0a32a8-960.webp 960w, ./assets/image-previews/63f7ba0a32a8-2656.webp 2656w" sizes="(max-width: 860px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 112px), 1328px" decoding="async" fetchpriority="high" class="hero-stage" src="./assets/image-previews/63f7ba0a32a8-2656.webp" width="2656" height="1250" alt="TikTok AI LIVE Assistant hero visual" />
+      <div class="hero-stage">
+        <p aria-hidden="true">TikTok AI LIVE ASSISTANT</p>
+        <img src="./assets/live-assistant-project/revised/cover-phone.webp" srcset="./assets/live-assistant-project/revised/cover-phone-small.webp 640w, ./assets/live-assistant-project/revised/cover-phone.webp 1250w" sizes="(max-width: 1440px) 53vw, 762px" width="1250" height="1776" alt="TikTok LIVE Assistant on a phone held in one hand" decoding="async" fetchpriority="high" />
+      </div>
     </section>
-
     <div class="project-body">
-      <aside class="progress-rail" aria-label="项目阅读进度"><div class="rail-bars">
-        <button class="active" type="button" data-target="project-intro" aria-label="项目简介"></button>
-        <button type="button" data-target="background" aria-label="Background"></button>
-        <button type="button" data-target="background-what" aria-label="Assistant 是什么"></button>
-        <button type="button" data-target="background-ai" aria-label="AI 功能升级"></button>
-        <button type="button" data-target="background-shift" aria-label="服务模式重构"></button>
-        <button type="button" data-target="ai-ip" aria-label="AI IP Design"></button>
-        <button type="button" data-target="ip-origin" aria-label="IP 视觉来源"></button>
-        <button type="button" data-target="ip-states" aria-label="AI 状态"></button>
-        <button type="button" data-target="motion" aria-label="Motion Design"></button>
-        <button type="button" data-target="solution" aria-label="Solution"></button>
-        <button type="button" data-target="solution-creator" aria-label="主播身份"></button>
-        <button type="button" data-target="solution-vip" aria-label="金主身份"></button>
-        <button type="button" data-target="solution-roles" aria-label="双重身份"></button>
-        <button type="button" data-target="solution-efficiency" aria-label="服务效率"></button>
-        <button type="button" data-target="ai-experience" aria-label="AI 体验升级"></button>
-        <button type="button" data-target="result" aria-label="Result"></button>
-      </div></aside>
-
+      <nav class="progress-rail" aria-label="项目目录">
+        <a href="#project-intro" data-label-zh="项目简介" data-label-en="Overview" aria-label="项目简介" title="项目简介"></a>
+        <a href="#background" data-label-zh="背景" data-label-en="Background" aria-label="背景" title="背景"></a>
+        <a href="#background-ai" data-label-zh="升级目标" data-label-en="Goals" aria-label="升级目标" title="升级目标"></a>
+        <a href="#research" data-label-zh="调研" data-label-en="Research" aria-label="调研" title="调研"></a>
+        <a href="#competitive" data-label-zh="竞品分析" data-label-en="Competitive research" aria-label="竞品分析" title="竞品分析"></a>
+        <a href="#strategy" data-label-zh="设计策略" data-label-en="Strategy" aria-label="设计策略" title="设计策略"></a>
+        <a href="#ai-ip" data-label-zh="AI 视觉升级" data-label-en="AI Visual Refresh" aria-label="AI 视觉升级" title="AI 视觉升级"></a>
+        <a href="#ip-states" data-label-zh="形象设计" data-label-en="Character design" aria-label="形象设计" title="形象设计"></a>
+        <a href="#motion" data-label-zh="动效设计" data-label-en="Motion" aria-label="动效设计" title="动效设计"></a>
+        <a href="#solution" data-label-zh="方案" data-label-en="Solution" aria-label="方案" title="方案"></a>
+        <a href="#solution-vip" data-label-zh="推荐入口" data-label-en="Suggested prompts" aria-label="推荐入口" title="推荐入口"></a>
+        <a href="#ai-experience" data-label-zh="多模态输入" data-label-en="Multimodal input" aria-label="多模态输入" title="多模态输入"></a>
+        <a href="#solution-efficiency" data-label-zh="解答反馈" data-label-en="Progress feedback" aria-label="解答反馈" title="解答反馈"></a>
+        <a href="#response-design" data-label-zh="内容设计" data-label-en="Response design" aria-label="内容设计" title="内容设计"></a>
+        <a href="#result" data-label-zh="结果" data-label-en="Result" aria-label="结果" title="结果"></a>
+      </nav>
       <div class="project-content">
-        <section class="project-intro" id="project-intro" data-progress>
-          <div class="intro-story">
-            <div><div class="intro-brand"><img src="./figma-assets/tiktok-work-icon.png" alt="" /><img src="./assets/live-assistant-project/intro-logo.svg" alt="TikTok LIVE" /></div><h2 data-zh="TikTok AI直播助手设计" data-en="TikTok AI LIVE Assistant Design">TikTok AI直播助手设计</h2><div class="project-tags"><span data-zh="体验升级" data-en="Experience Upgrade">体验升级</span><span data-zh="机制设计" data-en="Mechanism Design">机制设计</span><span>AI Visual</span><span data-zh="动效设计" data-en="Motion Design">动效设计</span></div></div>
-            <div><div class="pink-rule"></div><p data-zh="TikTok LIVE Assistant 体验设计主要将主播服务路径拆解为触达、价值感知、授权转化与持续服务等关键阶段，并针对不同层级主播的差异化诉求，整合成长建议、主播周报与专属客服，通过智能化、分层化的服务机制提升主播问题解决效率" data-en="The TikTok LIVE Assistant experience breaks creator service into discovery, value perception, authorization, and continuous support. It combines growth recommendations, weekly reports, and dedicated support through intelligent, tiered services.">TikTok LIVE Assistant 体验设计主要将主播服务路径拆解为触达、价值感知、授权转化与持续服务等关键阶段，并针对不同层级主播的差异化诉求，整合成长建议、主播周报与专属客服，通过智能化、分层化的服务机制提升主播问题解决效率</p></div>
-          </div>
-          <dl class="project-facts"><div><dt data-zh="项目时长" data-en="Duration">项目时长</dt><dd>2025.11 — 2026.01</dd></div><div><dt data-zh="项目角色" data-en="Role">项目角色</dt><dd data-zh="产品体验设计" data-en="Product Experience Design">产品体验设计</dd></div><div><dt data-zh="项目技能" data-en="Skills">项目技能</dt><dd>AI Visual<br />UX Design<br />AI Interactive Prototype</dd></div></dl>
-        </section>
-
-        <section class="case-section background-section" id="background" data-progress>
-          <h2>Background</h2>
-          <div class="case-stack gap-140">
-            <article class="case-block" id="background-what" data-progress>
-              <header class="block-heading"><h3 data-zh="TikTok LIVE Assistant 是什么" data-en="What is TikTok LIVE Assistant?">TikTok LIVE Assistant 是什么</h3><p data-zh="TikTok LIVE Assistant 是在 C 端内一个长期存在的助手入口。用户既可以在这里接收主播报告、VIP 权益与活动邀约等消息，也可以围绕这些内容继续提问并获得帮助" data-en="TikTok LIVE Assistant is a persistent assistant entry point in the consumer app. Users receive creator reports, VIP benefits, and invitations, then continue the conversation for help.">TikTok LIVE Assistant 是在 C 端内一个长期存在的助手入口。用户既可以在这里接收主播报告、VIP 权益与活动邀约等消息，也可以围绕这些内容继续提问并获得帮助</p></header>
-              <img data-full-src="./assets/live-assistant-project/exact-2x/background-what.png" srcset="./assets/image-previews/4730a3fd403b-960.webp 960w, ./assets/image-previews/4730a3fd403b-2324.webp 2324w" sizes="(max-width: 860px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 278px), 1162px" decoding="async" loading="lazy" class="figma-visual gap-48" src="./assets/image-previews/4730a3fd403b-2324.webp" width="2324" height="1305" alt="LIVE Assistant platform touchpoints and support questions" />
-            </article>
-            <article class="case-block" id="background-ai" data-progress>
-              <header class="block-heading"><h3 data-zh="TikTok LIVE Assistant 引入AI功能升级" data-en="Upgrading TikTok LIVE Assistant with AI">TikTok LIVE Assistant 引入AI功能升级</h3><p data-zh="Q3业务在引入AI功能之后，平台面临了许多的体验问题的升级" data-en="After introducing AI in Q3, the platform needed to upgrade several experience areas.">Q3业务在引入AI功能之后，平台面临了许多的体验问题的升级</p></header>
-              <img data-full-src="./assets/live-assistant-project/exact-2x/background-ai.png" srcset="./assets/image-previews/8f03f08eab8d-960.webp 960w, ./assets/image-previews/8f03f08eab8d-2324.webp 2324w" sizes="(max-width: 860px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 278px), 1162px" decoding="async" loading="lazy" class="figma-visual gap-32" src="./assets/image-previews/8f03f08eab8d-2324.webp" width="2324" height="899" alt="Professional LIVE guidance, viewer service, and creator service" />
-            </article>
-            <article class="case-block" id="background-shift" data-progress>
-              <header class="block-heading tall"><h3 data-zh="TikTok LIVE Assistant AI 能力升级，推动服务模式重构" data-en="AI capabilities reshape the LIVE Assistant service model">TikTok LIVE Assistant AI 能力升级，推动服务模式重构</h3><p data-zh="过去，BOT 负责标准回复，AI 主要用于检索用户记录并辅助人工判断，复杂问题仍需逐层转交。随着 AI 具备上下文理解、综合分析与自主判断能力，服务模式可以从“分层承接”转向“AI 优先分析与闭环，人工处理高风险及例外问题”" data-en="Previously, bots handled standard replies while AI supported retrieval and human judgment. As AI gains contextual understanding and autonomous reasoning, the model shifts toward AI-first resolution with people handling high-risk exceptions.">过去，BOT 负责标准回复，AI 主要用于检索用户记录并辅助人工判断，复杂问题仍需逐层转交。随着 AI 具备上下文理解、综合分析与自主判断能力，服务模式可以从“分层承接”转向“AI 优先分析与闭环，人工处理高风险及例外问题”</p></header>
-              <img data-full-src="./assets/live-assistant-project/exact-2x/background-shift.png" srcset="./assets/image-previews/00659c84f6a8-960.webp 960w, ./assets/image-previews/00659c84f6a8-2324.webp 2324w" sizes="(max-width: 860px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 278px), 1162px" decoding="async" loading="lazy" class="figma-visual gap-32" src="./assets/image-previews/00659c84f6a8-2324.webp" width="2324" height="798" alt="Service model restructuring diagram" />
-            </article>
+        <section class="project-intro" id="project-intro" aria-label="项目简介">
+          <div class="intro-grid">
+            <div><div class="live-brand"><img src="./assets/live-assistant-project/revised/tiktok-mark.webp" width="96" height="110" alt="" decoding="async" loading="lazy" /><img src="./assets/live-assistant-project/revised/tiktok-live-wordmark.svg" alt="TikTok LIVE" decoding="async" loading="lazy" /></div><h2 data-zh="TikTok AI 直播助手设计" data-en="TikTok AI LIVE Assistant Design">TikTok AI 直播助手设计</h2><ul class="project-tags"><li data-zh="体验升级" data-en="Experience Upgrade">体验升级</li><li data-zh="机制设计" data-en="Service Design">机制设计</li><li data-zh="AI Visual" data-en="AI Visual">AI Visual</li><li data-zh="动效设计" data-en="Motion Design">动效设计</li></ul><span class="pink-rule" aria-hidden="true"></span><p data-zh="这次升级将 TikTok 直播助手从消息入口扩展为 AI 服务。主播可以从直播周报进入助手，继续查询直播表现、获取经营建议或处理申诉。高价值付费用户则能直达 VIP 权益和专属支持。" data-en="This upgrade extends TikTok’s LIVE Assistant from an inbox touchpoint into an AI-powered service. Creators can follow up on their LIVE reports, get growth advice, or resolve appeals. VIP users can reach benefits and dedicated support directly.">这次升级将 TikTok 直播助手从消息入口扩展为 AI 服务。主播可以从直播周报进入助手，继续查询直播表现、获取经营建议或处理申诉。高价值付费用户则能直达 VIP 权益和专属支持。</p></div>
+            <dl class="project-facts"><div><dt data-zh="项目时长" data-en="Duration">项目时长</dt><dd>2025.11 — 2026.01</dd></div><div><dt data-zh="项目角色" data-en="Role">项目角色</dt><dd data-zh="产品体验设计" data-en="Product Experience Design">产品体验设计</dd></div><div><dt data-zh="项目技能" data-en="Skills">项目技能</dt><dd>AI Visual<br />UX Design<br />AI Interactive Prototype</dd></div></dl>
           </div>
         </section>
-
-        <section class="case-section ai-ip-section" id="ai-ip" data-progress>
-          <h2>AI IP Design</h2>
-          <div class="case-stack gap-120">
-            <article class="case-block"><header class="block-heading"><h3>TikTok LIVE ASSISTANT AI IP</h3><p data-zh="当 AI 从辅助检索升级为自主分析与解决，用户面对的不再只是一个问答入口，而是一个能够理解、判断并推动问题解决的服务主体" data-en="As AI evolves from retrieval support to autonomous analysis and resolution, it becomes a service presence that understands, decides, and moves problems toward resolution.">当 AI 从辅助检索升级为自主分析与解决，用户面对的不再只是一个问答入口，而是一个能够理解、判断并推动问题解决的服务主体</p></header><img data-full-src="./assets/live-assistant-project/exact-2x/ip-flow.png" srcset="./assets/image-previews/5430563f0dca-960.webp 960w, ./assets/image-previews/5430563f0dca-2324.webp 2324w" sizes="(max-width: 860px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 278px), 1162px" decoding="async" loading="lazy" class="figma-visual gap-32" src="./assets/image-previews/5430563f0dca-2324.webp" width="2324" height="1257" alt="AI IP design development flow" /></article>
-            <article class="case-block" id="ip-origin" data-progress><header class="block-heading"><h3 data-zh="从“回复”中提取 IP" data-en="Deriving the IP from “reply”">从“回复”中提取 IP</h3><p data-zh="客服服务的核心动作是回应，因此形象从直播弹幕与客服回复气泡中自然生长" data-en="Because response is the core action of support, the character naturally grows from LIVE comments and support reply bubbles.">客服服务的核心动作是回应，因此形象从直播弹幕与客服回复气泡中自然生长</p></header><div class="visual-crop ip-origin-crop gap-82"><img data-full-src="./assets/live-assistant-project/exact-2x/ip-origin.png" srcset="./assets/image-previews/54a93f24ac9e-960.webp 960w, ./assets/image-previews/54a93f24ac9e-2324.webp 2324w" sizes="(max-width: 860px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 278px), 1162px" decoding="async" loading="lazy" src="./assets/image-previews/54a93f24ac9e-2324.webp" width="2324" height="3109" alt="AI character form, brand color, and final visual exploration" /></div></article>
-            <article class="case-block" id="ip-states" data-progress><header class="block-heading"><h3 data-zh="将 AI 工作状态转化为表情" data-en="Turn AI work states into expressions">将 AI 工作状态转化为表情</h3><p data-zh="以输入点阵作为视觉语言，通过位置、数量与运动变化，表达等待、理解、分析和回应等不同状态" data-en="A dot-based visual language changes position, count, and motion to communicate waiting, understanding, analysis, and response.">以输入点阵作为视觉语言，通过位置、数量与运动变化，表达等待、理解、分析和回应等不同状态</p></header><img data-full-src="./assets/live-assistant-project/exact-2x/ip-states.png" srcset="./assets/image-previews/5c626982161a-960.webp 960w, ./assets/image-previews/5c626982161a-2324.webp 2324w" sizes="(max-width: 860px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 278px), 1162px" decoding="async" loading="lazy" class="figma-visual gap-32" src="./assets/image-previews/5c626982161a-2324.webp" width="2324" height="1312" alt="Default, thinking, searching, and answering states" /></article>
-            <article class="case-block" id="motion" data-progress>
-              <header class="block-heading"><h3>Motion Design</h3><p data-zh="表情系统延续对话场景中的输入点阵，以两个点构成角色的基础眼睛，并通过数量、位置与运动节奏的变化，表达等待、思考、检索与回复等状态。" data-en="The expression system extends the typing dots: two points form the basic eyes, while count, position, and rhythm express waiting, thinking, searching, and replying.">表情系统延续对话场景中的输入点阵，以两个点构成角色的基础眼睛，并通过数量、位置与运动节奏的变化，表达等待、思考、检索与回复等状态。</p></header>
-              <div class="motion-visual gap-32">
-                <img data-full-src="./assets/live-assistant-project/exact-2x/motion.png" srcset="./assets/image-previews/da2c21486ca5-960.webp 960w, ./assets/image-previews/da2c21486ca5-2324.webp 2324w" sizes="(max-width: 860px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 278px), 1162px" decoding="async" loading="lazy" src="./assets/image-previews/da2c21486ca5-2324.webp" width="2324" height="1312" alt="Three LIVE Assistant motion design states" />
-                <div class="motion-demo-slot motion-demo-slot--first">
-                  <video class="motion-demo" data-motion-video muted loop playsinline preload="none" data-poster="./assets/live-assistant-project/media/live-assistant-motion-benefits-poster.jpg" aria-label="LIVE Assistant benefits motion demo">
-                    <source src="./assets/live-assistant-project/media/live-assistant-motion-benefits.mp4" type="video/mp4" />
-                  </video>
-                </div>
-                <div class="motion-demo-slot motion-demo-slot--second">
-                  <video class="motion-demo" data-motion-video muted loop playsinline preload="none" data-poster="./assets/live-assistant-project/media/live-assistant-motion-poster.jpg" aria-label="LIVE Assistant home motion demo">
-                    <source src="./assets/live-assistant-project/media/live-assistant-motion.mp4" type="video/mp4" />
-                  </video>
-                </div>
-                <div class="motion-demo-slot motion-demo-slot--third">
-                  <video class="motion-demo" data-motion-video muted loop playsinline preload="none" data-poster="./assets/live-assistant-project/media/live-assistant-motion-conversation-poster.jpg" aria-label="LIVE Assistant conversation motion demo">
-                    <source src="./assets/live-assistant-project/media/live-assistant-motion-conversation.mp4" type="video/mp4" />
-                  </video>
-                </div>
-              </div>
-            </article>
-          </div>
+        <section class="case-section" id="background" aria-labelledby="background-title">
+        <h2 id="background-title">Background</h2>
+        <article class="case-block " id="background-what">
+        <header class="case-heading"><h3 data-zh="TikTok LIVE Assistant 是什么" data-en="What is TikTok LIVE Assistant?">TikTok LIVE Assistant 是什么</h3><p data-zh="直播服务入口" data-en="A dedicated entry point for LIVE support">直播服务入口</p></header><div class="background-intro">
+          <figure><img src="./assets/live-assistant-project/revised/intro.webp" width="720" height="1488" alt="Assistant conversation" decoding="async" loading="lazy" /></figure>
+          <div><div class="live-brand"><img src="./assets/live-assistant-project/revised/tiktok-mark.webp" width="96" height="110" alt="" decoding="async" loading="lazy" /><img src="./assets/live-assistant-project/revised/tiktok-live-wordmark.svg" alt="TikTok LIVE" decoding="async" loading="lazy" /></div><h4>TIKTOK LIVE ASSISTANT</h4><p data-zh="TikTok LIVE Assistant 是直播场景中的常驻服务入口。主播在这里接收周报、活动邀约和经营建议，高价值付费用户可以查看 VIP 权益。用户也可以围绕收到的内容继续提问或办理相关事项。" data-en="TikTok LIVE Assistant is a permanent support entry point. Creators receive weekly reports, invitations, and growth advice, while VIP users can access their benefits. Both can ask follow-up questions or take action in the same conversation.">TikTok LIVE Assistant 是直播场景中的常驻服务入口。主播在这里接收周报、活动邀约和经营建议，高价值付费用户可以查看 VIP 权益。用户也可以围绕收到的内容继续提问或办理相关事项。</p></div>
+        </div>
+        </article>
+        <article class="case-block " id="background-ai">
+        <header class="case-heading"><h3 data-zh="为什么需要体验升级？" data-en="Why upgrade the experience?">为什么需要体验升级？</h3><p data-zh="引入 AI 后，助手可以结合直播和账号信息给出更具体的回应。设计需要让用户知道它能做什么，并在原有服务路径里顺手用起来。" data-en="With AI, the assistant can use LIVE and account context to offer more relevant answers. The design makes these capabilities visible and easy to use in existing support flows.">引入 AI 后，助手可以结合直播和账号信息给出更具体的回应。设计需要让用户知道它能做什么，并在原有服务路径里顺手用起来。</p></header><div class="creator-grid">
+          <div><img src="./assets/live-assistant-project/revised/creator-insights.webp" width="668" height="445" alt="Understand LIVE performance" decoding="async" loading="lazy" /><h4 data-zh="看懂直播表现" data-en="Understand LIVE performance">看懂直播表现</h4><p data-zh="汇总直播数据，帮助主播快速找到变化。" data-en="Summarize LIVE data to highlight what changed.">汇总直播数据，帮助主播快速找到变化。</p></div>
+          <div><img src="./assets/live-assistant-project/revised/creator-guidance.webp" width="445" height="668" alt="Get tailored advice" decoding="async" loading="lazy" /><h4 data-zh="获得专业建议" data-en="Get tailored advice">获得专业建议</h4><p data-zh="结合直播表现，给出可以尝试的下一步。" data-en="Use LIVE performance to suggest actionable next steps.">结合直播表现，给出可以尝试的下一步。</p></div>
+          <div><img src="./assets/live-assistant-project/revised/creator-support.webp" width="668" height="445" alt="Resolve issues faster" decoding="async" loading="lazy" /><h4 data-zh="更快解决问题" data-en="Resolve issues faster">更快解决问题</h4><p data-zh="解释规则与账号状态，并提供相关办理入口。" data-en="Explain policies and account status, then surface relevant actions.">解释规则与账号状态，并提供相关办理入口。</p></div>
+        </div><div class="goal-grid">
+          <div><h4 data-zh="「业务目标」" data-en="Business goal">「业务目标」</h4><p data-zh="建立 AI 直播服务能力，提高自助解决问题的效率。" data-en="Build AI-powered LIVE support and improve self-service resolution.">建立 AI 直播服务能力，提高自助解决问题的效率。</p></div>
+          <div><h4 data-zh="「设计目标」" data-en="Design goal">「设计目标」</h4><p data-zh="让 AI 能力和处理状态可感知，让回答更易读、更容易采取行动。" data-en="Make AI capabilities and progress visible, and make answers easier to understand and act on.">让 AI 能力和处理状态可感知，让回答更易读、更容易采取行动。</p></div>
+        </div>
+        </article>
         </section>
-
-        <section class="case-section solution-section" id="solution" data-progress>
-          <h2>Solution</h2>
-          <div class="case-stack gap-120">
-            <article class="case-block user-segments">
-              <div id="solution-creator" data-progress><header class="block-heading"><h3 data-zh="用户分层One：主播身份 - 平台触达主播报告" data-en="Segment One: creator — platform report touchpoint">用户分层One：主播身份 - 平台触达主播报告</h3><p data-zh="主播如何首次发现 AI LIVE Assistant, 并推动平台触达主播" data-en="How creators first discover AI LIVE Assistant through a platform touchpoint.">主播如何首次发现 AI LIVE Assistant, 并推动平台触达主播</p></header><img data-full-src="./assets/live-assistant-project/exact-2x/solution-creator.png" srcset="./assets/image-previews/8c37f9456b4c-960.webp 960w, ./assets/image-previews/8c37f9456b4c-2324.webp 2324w" sizes="(max-width: 860px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 278px), 1162px" decoding="async" loading="lazy" class="figma-visual gap-32" src="./assets/image-previews/8c37f9456b4c-2324.webp" width="2324" height="1448" alt="Creator weekly report onboarding flow" /></div>
-              <div id="solution-vip" data-progress><header class="block-heading"><h3 data-zh="用户分层Two：金主身份 - 快速申诉" data-en="Segment Two: viewer — fast appeal">用户分层Two：金主身份 - 快速申诉</h3><p data-zh="新框架下金主用户如何感知VIP权益" data-en="How VIP viewers discover support benefits in the new framework.">新框架下金主用户如何感知VIP权益</p></header><img data-full-src="./assets/live-assistant-project/exact-2x/solution-vip.png" srcset="./assets/image-previews/159b55ade56a-960.webp 960w, ./assets/image-previews/159b55ade56a-2324.webp 2324w" sizes="(max-width: 860px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 278px), 1162px" decoding="async" loading="lazy" class="figma-visual gap-32" src="./assets/image-previews/159b55ade56a-2324.webp" width="2324" height="1238" alt="VIP benefits and dedicated support flow" /></div>
-            </article>
-            <article class="case-block" id="solution-roles" data-progress><header class="block-heading"><h3 data-zh="用户分层Three：即是主播，又是金主" data-en="Segment Three: both creator and viewer">用户分层Three：即是主播，又是金主</h3><p data-zh="VIP 作为跨角色的服务身份保持稳定视觉识别；主播或消费身份只影响内容与权益推荐，避免双重身份用户在不同场景中频繁切换形象。" data-en="VIP remains a stable cross-role service identity, while creator or viewer status only changes content and benefit recommendations.">VIP 作为跨角色的服务身份保持稳定视觉识别；主播或消费身份只影响内容与权益推荐，避免双重身份用户在不同场景中频繁切换形象。</p></header><img data-full-src="./assets/live-assistant-project/exact-2x/solution-roles.png" srcset="./assets/image-previews/cb2bee0662c0-960.webp 960w, ./assets/image-previews/cb2bee0662c0-2324.webp 2324w" sizes="(max-width: 860px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 278px), 1162px" decoding="async" loading="lazy" class="figma-visual gap-32" src="./assets/image-previews/cb2bee0662c0-2324.webp" width="2324" height="1183" alt="Before and after dual-role assistant framework" /></article>
-            <article class="case-block" id="solution-efficiency" data-progress><header class="block-heading"><h3 data-zh="LIVE Assistant 助手服务效率" data-en="LIVE Assistant service efficiency">LIVE Assistant 助手服务效率</h3><p data-zh="目前咨询问题转人工率高达百分之70%" data-en="Up to 70% of inquiries currently reach human support.">目前咨询问题转人工率高达百分之70%</p></header><img data-full-src="./assets/live-assistant-project/exact-2x/solution-efficiency.png" srcset="./assets/image-previews/8f2ebbaf5d6f-960.webp 960w, ./assets/image-previews/8f2ebbaf5d6f-2324.webp 2324w" sizes="(max-width: 860px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 278px), 1162px" decoding="async" loading="lazy" class="figma-visual gap-32" src="./assets/image-previews/8f2ebbaf5d6f-2324.webp" width="2324" height="1047" alt="Before and after service efficiency model" /></article>
-            <article class="case-block" id="ai-experience" data-progress>
-              <header class="block-heading"><h3 data-zh="AI体验升级" data-en="AI experience upgrade">AI体验升级</h3><p data-zh="引入AI功能后, 我们希望整个流程更加智能" data-en="After introducing AI, the entire service flow becomes more intelligent.">引入AI功能后, 我们希望整个流程更加智能</p></header>
-              <div class="ai-experience-visual gap-32">
-                <div class="ai-experience-video-slot ai-experience-video-slot--first">
-                  <video class="ai-experience-video" data-motion-video muted loop playsinline preload="none" aria-label="Prompt guidance interaction demo">
-                    <source src="./assets/live-assistant-project/media/ai-experience-prompt.mp4" type="video/mp4" />
-                  </video>
-                </div>
-                <div class="ai-experience-video-slot ai-experience-video-slot--second">
-                  <video class="ai-experience-video" data-motion-video muted loop playsinline preload="none" aria-label="Voice input interaction demo">
-                    <source src="./assets/live-assistant-project/media/ai-experience-voice.mp4" type="video/mp4" />
-                  </video>
-                </div>
-                <div class="ai-experience-video-slot ai-experience-video-slot--third">
-                  <video class="ai-experience-video" data-motion-video muted loop playsinline preload="none" aria-label="Negative feedback interaction demo">
-                    <source src="./assets/live-assistant-project/media/ai-experience-feedback.mp4" type="video/mp4" />
-                  </video>
-                </div>
-                <span class="ai-experience-caption ai-experience-caption--first" data-zh="引导词" data-en="Prompt guidance">引导词</span>
-                <span class="ai-experience-caption ai-experience-caption--second" data-zh="语音输入" data-en="Voice input">语音输入</span>
-                <span class="ai-experience-caption ai-experience-caption--third" data-zh="负反馈" data-en="Negative feedback">负反馈</span>
-              </div>
-            </article>
-          </div>
+        <section class="case-section" id="research" aria-labelledby="research-title">
+        <h2 id="research-title">Design Research</h2>
+        <article class="case-block " id="interviews">
+        <header class="case-heading"><h3 data-zh="用户调研" data-en="User interviews">用户调研</h3><p data-zh="访谈了 10 多位 TikTok 主播和高价值付费用户，了解他们如何查看直播表现、咨询规则和使用权益。" data-en="We interviewed more than 10 TikTok creators and VIP users about LIVE performance, policy questions, and benefits.">访谈了 10 多位 TikTok 主播和高价值付费用户，了解他们如何查看直播表现、咨询规则和使用权益。</p></header><div class="interviews">
+          <div class="interview"><figure><img src="./assets/live-assistant-project/revised/interview-creator.webp" width="420" height="420" alt="TikTok creator" decoding="async" loading="lazy" /><figcaption data-zh="TikTok 主播" data-en="TikTok creator">TikTok 主播</figcaption></figure><div><p data-zh="😀 周报和活动邀约都能很快找到。" data-en="😀 Weekly reports and invitations are easy to find.">😀 周报和活动邀约都能很快找到。</p><p data-zh="😡 直播政策看不懂时，经常只能找人工客服。" data-en="😡 When LIVE policies are unclear, I often need a human agent.">😡 直播政策看不懂时，经常只能找人工客服。</p></div></div>
+          <div class="interview"><figure><img src="./assets/live-assistant-project/revised/interview-vip.webp" width="420" height="420" alt="VIP user" decoding="async" loading="lazy" /><figcaption data-zh="VIP 用户" data-en="VIP user">VIP 用户</figcaption></figure><div><p data-zh="😀 能很快找到专属客服。" data-en="😀 I can quickly reach dedicated support.">😀 能很快找到专属客服。</p><p data-zh="😡 经常忘记自己还有哪些权益。" data-en="😡 I often forget which benefits I can use.">😡 经常忘记自己还有哪些权益。</p></div></div>
+          <div class="interview"><figure><img src="./assets/live-assistant-project/revised/interview-dual-role.webp" width="420" height="420" alt="Creator and VIP user" decoding="async" loading="lazy" /><figcaption data-zh="主播兼 VIP 用户" data-en="Creator and VIP user">主播兼 VIP 用户</figcaption></figure><div><p data-zh="😀 两类服务分开，比较容易理解。" data-en="😀 Separate services are easy to understand.">😀 两类服务分开，比较容易理解。</p><p data-zh="😡 遇到问题要来回切换会话，很费时间。" data-en="😡 Switching between conversations takes time.">😡 遇到问题要来回切换会话，很费时间。</p></div></div>
+        </div><div class="research-insight"><p data-zh="🔔 调研总结：主播需要读得懂、能照做的建议；VIP 用户需要及时看到可用权益；拥有双重身份的用户希望减少会话切换。" data-en="🔔 Research takeaway: creators need actionable advice, VIP users need visible benefits, and users with both roles need fewer conversation switches.">🔔 调研总结：主播需要读得懂、能照做的建议；VIP 用户需要及时看到可用权益；拥有双重身份的用户希望减少会话切换。</p><img src="./assets/live-assistant-project/revised/insight-underline.svg" alt="" decoding="async" loading="lazy" /></div>
+        </article>
+        <article class="case-block " id="competitive">
+        <header class="case-heading"><h3 data-zh="竞品分析核心目标" data-en="Competitive research">竞品分析核心目标</h3><p data-zh="用同一个直播经营问题测试四款 AI 助手，对比如何引导提问、反馈进度和呈现可执行建议。" data-en="We tested four AI assistants with the same LIVE growth question, comparing question prompts, progress feedback, and actionable recommendations.">用同一个直播经营问题测试四款 AI 助手，对比如何引导提问、反馈进度和呈现可执行建议。</p></header><div class="app-icons">
+          <figure><img src="./assets/live-assistant-project/revised/app-f29da.webp" width="180" height="180" alt="Doubao" decoding="async" loading="lazy" /><figcaption data-zh="豆包" data-en="Doubao">豆包</figcaption></figure>
+          <figure><img src="./assets/live-assistant-project/revised/app-afd90.webp" width="180" height="180" alt="DeepSeek" decoding="async" loading="lazy" /><figcaption data-zh="DeepSeek" data-en="DeepSeek">DeepSeek</figcaption></figure>
+          <figure><img src="./assets/live-assistant-project/revised/app-ddb9f.webp" width="180" height="180" alt="ChatGPT" decoding="async" loading="lazy" /><figcaption data-zh="ChatGPT" data-en="ChatGPT">ChatGPT</figcaption></figure>
+          <figure><img src="./assets/live-assistant-project/revised/app-5c15f.webp" width="180" height="180" alt="Qwen" decoding="async" loading="lazy" /><figcaption data-zh="千问" data-en="Qwen">千问</figcaption></figure>
+        </div><div class="tad"><h4 data-zh="✦ TAD 竞品分析法" data-en="✦ TAD research framework">✦ TAD 竞品分析法</h4><div class="tad-grid">
+          <p data-zh="T · 任务：如何提升直播间观看人数？" data-en="T · Task: How can I increase LIVE viewership?">T · 任务：如何提升直播间观看人数？</p>
+          <p data-zh="A · 分析：比较入口、反馈、内容与操作路径。" data-en="A · Analysis: Compare entry, feedback, content, and actions.">A · 分析：比较入口、反馈、内容与操作路径。</p>
+          <p data-zh="D · 设计：提炼适用于直播服务的方案。" data-en="D · Design: Apply findings to LIVE support.">D · 设计：提炼适用于直播服务的方案。</p>
+        </div></div><div class="competitor-grid">
+          <div><figure><img src="./assets/live-assistant-project/revised/comparison-69283.webp" width="640" height="1391" alt="Doubao" decoding="async" loading="lazy" /><figcaption data-zh="豆包" data-en="Doubao">豆包</figcaption></figure><h4 data-zh="重点前置，语气友好" data-en="Friendly tone and clear priorities">重点前置，语气友好</h4><p data-zh="结论与建议分层，配有抖音视频案例。回答较长，视频入口出现得较晚。" data-en="Prioritized recommendations and Douyin examples. Long answers place video links further down.">结论与建议分层，配有抖音视频案例。回答较长，视频入口出现得较晚。</p></div>
+          <div><figure><img src="./assets/live-assistant-project/revised/comparison-42000.webp" width="640" height="1391" alt="Qwen" decoding="async" loading="lazy" /><figcaption data-zh="千问" data-en="Qwen">千问</figcaption></figure><h4 data-zh="资料可追溯，入口较密" data-en="Clear sources, many entry points">资料可追溯，入口较密</h4><p data-zh="提供分析摘要与相关内容卡，但多个入口会分散对当前任务的注意力。" data-en="Analysis summaries and related cards add context, but compete with the main task.">提供分析摘要与相关内容卡，但多个入口会分散对当前任务的注意力。</p></div>
+          <div><figure><img src="./assets/live-assistant-project/revised/comparison-49cb7.webp" width="640" height="1391" alt="ChatGPT" decoding="async" loading="lazy" /><figcaption data-zh="ChatGPT" data-en="ChatGPT">ChatGPT</figcaption></figure><h4 data-zh="表达丰富，移动端阅读有负担" data-en="Rich explanations, harder to scan on mobile">表达丰富，移动端阅读有负担</h4><p data-zh="图示、表格和来源有助于理解。移动端的表格换行会增加阅读成本。" data-en="Visuals, tables, and sources aid understanding. Wrapped tables are harder to scan on phones.">图示、表格和来源有助于理解。移动端的表格换行会增加阅读成本。</p></div>
+          <div><figure><img src="./assets/live-assistant-project/revised/comparison-13dd9.webp" width="640" height="1391" alt="DeepSeek" decoding="async" loading="lazy" /><figcaption data-zh="DeepSeek" data-en="DeepSeek">DeepSeek</figcaption></figure><h4 data-zh="层次清楚，长文较难扫读" data-en="Clear hierarchy, long passages">层次清楚，长文较难扫读</h4><p data-zh="思考摘要和正文区分清楚。正文段落偏长，结论容易被埋没。" data-en="Separates reasoning from the response. Long passages can bury the main conclusion.">思考摘要和正文区分清楚。正文段落偏长，结论容易被埋没。</p></div>
+        </div><div class="research-insight"><p data-zh="🔔 竞品洞察：结论应出现在回答开头，依据和查询过程按需展开，相关操作紧跟建议。" data-en="🔔 Competitive insight: Lead with the answer, let users expand the evidence and progress details, and put actions next to the advice.">🔔 竞品洞察：结论应出现在回答开头，依据和查询过程按需展开，相关操作紧跟建议。</p><img src="./assets/live-assistant-project/revised/insight-underline.svg" alt="" decoding="async" loading="lazy" /></div>
+        </article>
+        <article class="case-block " id="strategy">
+        <header class="case-heading"><h3 data-zh="设计策略" data-en="Design strategy">设计策略</h3><p data-zh="让用户看得懂助手的状态、拿得到有用的回答，并能从符合身份的入口继续操作。" data-en="Make the assistant’s state recognizable, answers actionable, and service entry points relevant to each role.">让用户看得懂助手的状态、拿得到有用的回答，并能从符合身份的入口继续操作。</p></header><div class="strategy-grid">
+          <div><h4 data-zh="AI 体验升级" data-en="AI Visual Refresh">AI 体验升级</h4><p>AI Visual Refresh</p></div>
+          <div><h4 data-zh="内容设计优化" data-en="Response Design">内容设计优化</h4><p>Response Design</p></div>
+          <div><h4 data-zh="分层服务路径" data-en="Tailored Support Flows">分层服务路径</h4><p>Tailored Support Flows</p></div>
+        </div>
+        </article>
         </section>
-
-        <section class="case-section result-section" id="result" data-progress>
-          <h2>Result</h2>
-          <header class="block-heading"><h3 data-zh="TikTok AI LIVE Assistant设计结果" data-en="TikTok AI LIVE Assistant design outcomes">TikTok AI LIVE Assistant设计结果</h3><p data-zh="TikTok AI LIVE Assistant上线后并没有第一时间拿到详细的数据反馈" data-en="Detailed quantitative feedback was not immediately available after launch.">TikTok AI LIVE Assistant上线后并没有第一时间拿到详细的数据反馈</p></header>
-          <img data-full-src="./assets/live-assistant-project/exact-2x/result-cards.png" srcset="./assets/image-previews/37268b33e861-960.webp 960w, ./assets/image-previews/37268b33e861-2324.webp 2324w" sizes="(max-width: 860px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 278px), 1162px" decoding="async" loading="lazy" class="figma-visual gap-32" src="./assets/image-previews/37268b33e861-2324.webp" width="2324" height="484" alt="Tiered service, efficiency balance, and AI experience outcomes" />
+        <section class="case-section" id="ai-ip" aria-labelledby="ai-ip-title">
+        <h2 id="ai-ip-title">AI Visual Refresh</h2>
+        <article class="case-block " id="ip-origin">
+        <header class="case-heading"><h3 data-zh="TikTok LIVE Assistant AI 形象" data-en="TikTok LIVE Assistant character">TikTok LIVE Assistant AI 形象</h3><p data-zh="当助手开始分析直播表现并协助用户解决问题，形象和状态反馈可以让用户感知它正在做什么。" data-en="As the assistant starts analyzing LIVE performance and helping users resolve issues, its character and states make that work visible.">当助手开始分析直播表现并协助用户解决问题，形象和状态反馈可以让用户感知它正在做什么。</p></header><div class="origin-grid">
+          <div><h4 data-zh="客服触点" data-en="Support touchpoint">客服触点</h4><p data-zh="对话与回应" data-en="Conversation and response">对话与回应</p></div>
+          <div><h4 data-zh="语义提取" data-en="Visual cues">语义提取</h4><p data-zh="从客服回复和弹幕中提取沟通、回应的线索。" data-en="Find cues for conversation and response.">从客服回复和弹幕中提取沟通、回应的线索。</p></div>
+          <div><h4 data-zh="轮廓构建" data-en="Silhouette">轮廓构建</h4><p data-zh="用圆润主体和对话尾巴建立轮廓。" data-en="Build a soft body with a speech-bubble tail.">用圆润主体和对话尾巴建立轮廓。</p></div>
+          <div><h4 data-zh="品牌注入" data-en="Brand color">品牌注入</h4><p data-zh="用 TikTok 的青色与粉色建立品牌关联。" data-en="Use TikTok cyan and pink to connect the assistant to the brand.">用 TikTok 的青色与粉色建立品牌关联。</p></div>
+          <div><h4 data-zh="状态延展" data-en="State design">状态延展</h4><p data-zh="从输入点阵延展出思考、检索和回复。" data-en="Adapt typing dots into thinking, searching, and answering.">从输入点阵延展出思考、检索和回复。</p></div>
+          <div><h4 data-zh="AI 形象" data-en="AI character">AI 形象</h4><p data-zh="可感知的服务状态" data-en="Recognizable service states">可感知的服务状态</p></div>
+        </div>
+        </article>
+        <article class="case-block " id="ip-states">
+        <header class="case-heading"><h3 data-zh="从对话气泡到 AI 形象" data-en="From speech bubble to AI character">从对话气泡到 AI 形象</h3><p data-zh="从圆角气泡出发，保留对话尾巴，再用圆润轮廓和品牌色形成易识别的角色。" data-en="Start with a rounded speech bubble, retain the tail, and use a softer silhouette and brand colors to create a recognizable character.">从圆角气泡出发，保留对话尾巴，再用圆润轮廓和品牌色形成易识别的角色。</p></header><div class="shape-grid">
+          <i></i>
+          <i></i>
+          <img src="./assets/live-assistant-project/revised/outline-refinement.svg" alt="" decoding="async" loading="lazy" />
+          <img src="./assets/live-assistant-project/revised/outline-final.svg" alt="" decoding="async" loading="lazy" />
+        </div><p class="center-note" data-zh="保留对话的视觉线索，让新形象仍然像一个可以交流的助手。" data-en="The silhouette keeps a visual link to conversation.">保留对话的视觉线索，让新形象仍然像一个可以交流的助手。</p><div class="palette-grid">
+          <div class="swatches"><span>#FFFFFF</span><span>#00F2EA</span><span>#FF004F</span></div>
+          <div class="palette-mascot"><img src="./assets/live-assistant-project/revised/palette-character.webp" width="250" height="250" alt="LIVE Assistant character" decoding="async" loading="lazy" /><span>#00F2EA</span><span>#FFFFFF</span><span>#FF004F</span></div>
+        </div><p class="center-note" data-zh="沿用 TikTok 青、粉与白色，让助手在不同界面中保持一致的辨识度。" data-en="TikTok cyan, pink, and white keep the assistant recognizable across surfaces.">沿用 TikTok 青、粉与白色，让助手在不同界面中保持一致的辨识度。</p><div class="mascot-poster"><p aria-hidden="true">LIVE ASSISTANT</p><img src="./assets/live-assistant-project/revised/brand-character.webp" width="287" height="288" alt="LIVE Assistant character" decoding="async" loading="lazy" /><span><img src="./assets/live-assistant-project/revised/searching-icon.webp" width="42" height="42" alt="" decoding="async" loading="lazy" /> Searching…</span><span><img src="./assets/live-assistant-project/revised/thinking-icon.webp" width="51" height="51" alt="" decoding="async" loading="lazy" /> Thinking…</span></div>
+        </article>
+        <article class="case-block " id="motion">
+        <header class="case-heading"><h3 data-zh="IP MOTION DESIGN" data-en="IP MOTION DESIGN">IP MOTION DESIGN</h3><p data-zh="表情帮助用户辨认状态，动效在开始处理、等待和完成时给出反馈。" data-en="Expressions make states recognizable, and motion signals when work begins, progresses, or finishes.">表情帮助用户辨认状态，动效在开始处理、等待和完成时给出反馈。</p></header><div class="motion-grid">
+          <figure class="pose-sheet"><img src="./assets/live-assistant-project/revised/character-poses.webp" width="900" height="600" alt="Motion states" decoding="async" loading="lazy" /><figcaption data-zh="动效设计" data-en="Motion states">动效设计</figcaption></figure>
+          <div class="phone-pair">
+          <figure><img src="./assets/live-assistant-project/revised/motion-home.webp" width="720" height="1488" alt="Home" decoding="async" loading="lazy" /><figcaption data-zh="首页" data-en="Home">首页</figcaption></figure>
+          <figure><img src="./assets/live-assistant-project/revised/motion-empty.webp" width="720" height="1488" alt="Loading state" decoding="async" loading="lazy" /><figcaption data-zh="加载状态" data-en="Loading state">加载状态</figcaption></figure>
+        </div>
+        </div>
+        </article>
+        <article class="case-block " id="motion-delivery">
+        <header class="case-heading"><h3 data-zh="MORE THAN ANIMATION" data-en="MORE THAN ANIMATION">MORE THAN ANIMATION</h3><p data-zh="把动效拆成可复用的状态，和研发明确每种状态的触发条件与切换方式，方便在不同服务场景落地。" data-en="Package motion as reusable states and document their triggers and transitions for consistent implementation across support scenarios.">把动效拆成可复用的状态，和研发明确每种状态的触发条件与切换方式，方便在不同服务场景落地。</p></header><div class="delivery-grid">
+          <figure><img src="./assets/live-assistant-project/revised/motion-library.webp" width="1200" height="900" alt="Motion asset library" decoding="async" loading="lazy" /><figcaption data-zh="状态资产" data-en="Motion asset library">状态资产</figcaption></figure>
+          <figure><img src="./assets/live-assistant-project/revised/motion-handoff.webp" width="1450" height="805" alt="Code handoff" decoding="async" loading="lazy" /><figcaption data-zh="代码交付" data-en="Code handoff">代码交付</figcaption></figure>
+        </div>
+        </article>
+        </section>
+        <section class="case-section" id="solution" aria-labelledby="solution-title">
+        <h2 id="solution-title">Solution</h2>
+        <article class="case-block " id="solution-creator">
+        <header class="case-heading"><h3 data-zh="FROM INBOX TO FIRST USE" data-en="FROM INBOX TO FIRST USE">FROM INBOX TO FIRST USE</h3><p data-zh="从一条直播周报开始，让主播知道助手能帮自己做什么。" data-en="Use a LIVE report to show creators what the assistant can do for them.">从一条直播周报开始，让主播知道助手能帮自己做什么。</p></header><div class="solution-split">
+          <div><p data-zh="用「本周直播周报」作为触发点，首次引导把使用价值说清楚，并减少从看到消息到开始使用的步骤。" data-en="The weekly report provides a prompt, the onboarding explains the value, and a direct path makes it easier to get started.">用「本周直播周报」作为触发点，首次引导把使用价值说清楚，并减少从看到消息到开始使用的步骤。</p><div class="prompt-list"><div><h4><strong data-zh="触发 Prompt" data-en="Prompt">触发 Prompt</strong> <span aria-hidden="true">｜</span><span data-zh="在 Inbox 里被看见" data-en="Make the assistant visible in Inbox">在 Inbox 里被看见</span></h4><p data-zh="把助手放进已有消息列表，用户查看消息时就能发现入口。" data-en="Place the assistant in the existing message list.">把助手放进已有消息列表，用户查看消息时就能发现入口。</p></div><div><h4><strong data-zh="动机 Motivation" data-en="Motivation">动机 Motivation</strong> <span aria-hidden="true">｜</span><span data-zh="用周报给出点击理由" data-en="Give a reason to open">用周报给出点击理由</span></h4><p data-zh="在消息预览中展示 Weekly LIVE report，让主播知道这条消息与本周直播有关。" data-en="Show the Weekly LIVE report in the preview so creators know why it matters.">在消息预览中展示 Weekly LIVE report，让主播知道这条消息与本周直播有关。</p></div><div><h4><strong data-zh="降低行动门槛 Ability" data-en="Ability">降低行动门槛 Ability</strong> <span aria-hidden="true">｜</span><span data-zh="点开即可试用" data-en="Make it easy to try">点开即可试用</span></h4><p data-zh="点击消息直达助手，首次引导说明能力，再用一个主按钮进入体验。" data-en="Open the assistant directly, explain its capabilities briefly, and offer one primary action.">点击消息直达助手，首次引导说明能力，再用一个主按钮进入体验。</p></div></div></div>
+          <div class="phone-pair">
+          <figure><img src="./assets/live-assistant-project/revised/inbox.webp" width="720" height="1488" alt="Inbox" decoding="async" loading="lazy" /></figure>
+          <figure><img src="./assets/live-assistant-project/revised/onboarding.webp" width="720" height="1488" alt="First-use guidance" decoding="async" loading="lazy" /></figure>
+        </div>
+        </div>
+        </article>
+        <article class="case-block " id="solution-vip">
+        <header class="case-heading"><h3 data-zh="ASK WITH EASE" data-en="ASK WITH EASE">ASK WITH EASE</h3><p data-zh="根据用户身份和当下任务推荐问题，让主播和 VIP 用户都有明确的提问起点。" data-en="Recommend prompts by role and task so both creators and VIP users have a clear starting point.">根据用户身份和当下任务推荐问题，让主播和 VIP 用户都有明确的提问起点。</p></header><div class="solution-split reverse">
+          <div class="phone-pair">
+          <figure><img src="./assets/live-assistant-project/revised/creator-home.webp" width="720" height="1488" alt="Creator home" decoding="async" loading="lazy" /><figcaption data-zh="主播首页" data-en="Creator home">主播首页</figcaption></figure>
+          <figure><img src="./assets/live-assistant-project/revised/vip-home.webp" width="720" height="1488" alt="VIP home" decoding="async" loading="lazy" /><figcaption data-zh="VIP 首页" data-en="VIP home">VIP 首页</figcaption></figure>
+        </div>
+          <div><h4 data-zh="✦ 动态推荐问题与身份匹配服务" data-en="✦ Dynamic prompts and role-based services">✦ 动态推荐问题与身份匹配服务</h4><p data-zh="结合用户身份、账号状态和近期关注事项更新推荐。主播可以从周报或申诉开始，VIP 用户可以直达专属支持与快速申诉。" data-en="Use role, account status, and recent activity to refresh prompts. Creators can start from reports or appeals, and VIP users can go straight to dedicated support or fast appeals.">结合用户身份、账号状态和近期关注事项更新推荐。主播可以从周报或申诉开始，VIP 用户可以直达专属支持与快速申诉。</p><div class="suggestion-grid">
+          <ul class="prompt-chips"><li>Fast VIP Support ↗</li><li>Why did my LIVE viewership drop? ↗</li><li>Weekly LIVE report ↗</li></ul>
+          <ul class="prompt-factors"><li data-zh="用户身份" data-en="User role">用户身份</li><li data-zh="账号状态" data-en="Account status">账号状态</li><li data-zh="近期关注" data-en="Recent activity">近期关注</li><li data-zh="任务时机" data-en="Task timing">任务时机</li></ul>
+        </div></div>
+        </div>
+        </article>
+        <article class="case-block " id="ai-experience">
+        <header class="case-heading"><h3 data-zh="MULTIMODAL INPUT" data-en="MULTIMODAL INPUT">MULTIMODAL INPUT</h3><p data-zh="可以打字、语音转文字，或附上直播截图，让用户在不便输入或难以描述问题时也能把情况说清楚。" data-en="Support typing, voice transcription, and LIVE screenshots so users can explain a problem when typing or describing it is difficult.">可以打字、语音转文字，或附上直播截图，让用户在不便输入或难以描述问题时也能把情况说清楚。</p></header><div class="phone-trio">
+          <figure><img src="./assets/live-assistant-project/revised/speech.webp" width="720" height="1488" alt="Voice input" decoding="async" loading="lazy" /><figcaption data-zh="语音转文字" data-en="Voice input">语音转文字</figcaption></figure>
+          <figure><img src="./assets/live-assistant-project/revised/attachments.webp" width="720" height="1488" alt="Insert a recent screenshot" decoding="async" loading="lazy" /><figcaption data-zh="快速插入截图" data-en="Insert a recent screenshot">快速插入截图</figcaption></figure>
+          <figure><img src="./assets/live-assistant-project/revised/screenshot-picker.webp" width="720" height="1488" alt="Add an attachment" decoding="async" loading="lazy" /><figcaption data-zh="添加附件" data-en="Add an attachment">添加附件</figcaption></figure>
+        </div>
+        </article>
+        <article class="case-block " id="solution-efficiency">
+        <header class="case-heading"><h3 data-zh="让解答过程看得见" data-en="Make progress visible">让解答过程看得见</h3><p data-zh="把查询进度、判断依据和结果放在同一条会话里，减少等待时的不确定感。" data-en="Keep progress, evidence, and the answer in the same conversation to reduce uncertainty while users wait.">把查询进度、判断依据和结果放在同一条会话里，减少等待时的不确定感。</p></header><div class="solution-split efficiency">
+          <div><p data-zh="主播问「为什么这场直播的在线人数偏低？」时，助手先提示正在核对账号信息，再给出结论。用户可以展开查询详情，查看回答参考了哪些信息。" data-en="When a creator asks why their LIVE viewership fell, the assistant shows that it is checking account details before presenting its conclusion. Users can expand the details to see what informed the answer.">主播问「为什么这场直播的在线人数偏低？」时，助手先提示正在核对账号信息，再给出结论。用户可以展开查询详情，查看回答参考了哪些信息。</p><ul class="state-list"><li><img src="./assets/live-assistant-project/revised/default-state.webp" width="41" height="41" alt="" decoding="async" loading="lazy" /><span>LIVE Assistant</span><span data-zh="默认态" data-en="Default">默认态</span></li><li><img src="./assets/live-assistant-project/revised/thinking-state.webp" width="41" height="41" alt="" decoding="async" loading="lazy" /><span>Thinking…</span><span data-zh="思考中" data-en="Thinking">思考中</span></li><li><img src="./assets/live-assistant-project/revised/answering-state.webp" width="41" height="41" alt="" decoding="async" loading="lazy" /><span>Answering…</span><span data-zh="回答中" data-en="Answering">回答中</span></li></ul><div class="query-pills"><span>✓ &nbsp; Check your account ›</span><span>✓ &nbsp; Analyze your LIVE data ›</span></div></div>
+          <div class="phone-pair">
+          <figure><img src="./assets/live-assistant-project/revised/thinking.webp" width="720" height="1488" alt="Thinking and checking" decoding="async" loading="lazy" /></figure>
+          <figure><img src="./assets/live-assistant-project/revised/answering.webp" width="720" height="1488" alt="Answer and evidence" decoding="async" loading="lazy" /></figure>
+        </div>
+        </div>
+        </article>
+        <article class="case-block " id="response-pain-points">
+        <header class="case-heading"><h3 data-zh="内容设计" data-en="Response design">内容设计</h3><p data-zh="当回答又长又生硬，用户很难判断它有没有解决自己的问题。" data-en="Long, mechanical responses make it hard to tell whether the answer resolves the issue.">当回答又长又生硬，用户很难判断它有没有解决自己的问题。</p></header><div class="response-concerns"><img src="./assets/live-assistant-project/revised/frustrated-creator.webp" width="650" height="650" alt="Creator expressing frustration" decoding="async" loading="lazy" /><span data-zh="回答的不是我想问的" data-en="That wasn’t my question">回答的不是我想问的</span><span data-zh="态度太机械、生硬" data-en="It sounds mechanical">态度太机械、生硬</span><span data-zh="信息太长" data-en="Too much information">信息太长</span><span data-zh="行业术语太多" data-en="Too much jargon">行业术语太多</span><span data-zh="很难知道接下来怎么办" data-en="What should I do next?">很难知道接下来怎么办</span><span data-zh="我找不到重点" data-en="Where’s the main point?">我找不到重点</span></div>
+        </article>
+        <article class="case-block " id="content-definition">
+        <header class="case-heading"><h3 data-zh="CONTENT DEFINITION" data-en="CONTENT DEFINITION">CONTENT DEFINITION</h3><p data-zh="根据用户的任务和阅读习惯，定义回答该说什么，以及怎么说。" data-en="Use the audience’s tasks and reading habits to define what the assistant says and how it says it.">根据用户的任务和阅读习惯，定义回答该说什么，以及怎么说。</p></header><div class="solution-split">
+          <div class="content-criteria"><div><h4 data-zh="👤 用户是谁" data-en="👤 Who is it for?">👤 用户是谁</h4><p data-zh="以 TikTok 主播为主，也服务高价值付费用户。不同地区的用户对平台规则与术语的熟悉程度不同。" data-en="TikTok creators are the primary audience, alongside VIP users. Familiarity with platform rules and terms varies by market.">以 TikTok 主播为主，也服务高价值付费用户。不同地区的用户对平台规则与术语的熟悉程度不同。</p></div><div><h4 data-zh="💼 用户想做什么" data-en="💼 What do they need?">💼 用户想做什么</h4><p data-zh="主播想了解直播表现、解决账号问题并获得经营建议；VIP 用户更关心可用权益和专属支持。" data-en="Creators want to understand performance, resolve account issues, and get growth advice. VIP users look for available benefits and dedicated support.">主播想了解直播表现、解决账号问题并获得经营建议；VIP 用户更关心可用权益和专属支持。</p></div><div><h4 data-zh="😄 用户怎样阅读" data-en="😄 How do they read?">😄 用户怎样阅读</h4><p data-zh="先看结论和下一步，再按需查看依据。遇到限制或异常时，用户更需要清楚的说明和可选操作。" data-en="Users scan for the answer and next step, then inspect the evidence when needed. Restrictions call for a clear explanation and available options.">先看结论和下一步，再按需查看依据。遇到限制或异常时，用户更需要清楚的说明和可选操作。</p></div></div>
+          <div class="answer-cards"><div><h4 data-zh="回答结构" data-en="Response structure">回答结构</h4><p class="answer-question" data-zh="为什么直播间观看人数下降了？" data-en="Why did my LIVE viewership drop?">为什么直播间观看人数下降了？</p><dl><div><dt data-zh="结论" data-en="Conclusion">结论</dt><dd data-zh="本场直播的推荐流量下降。" data-en="This LIVE received less recommended traffic.">本场直播的推荐流量下降。</dd></div><div><dt data-zh="依据" data-en="Evidence">依据</dt><dd data-zh="直播中出现未成年人出镜的记录。" data-en="A minor appeared during the LIVE.">直播中出现未成年人出镜的记录。</dd></div><div><dt data-zh="问题" data-en="Issue">问题</dt><dd data-zh="该记录触发了平台的直播规则限制。" data-en="That event triggered a LIVE policy restriction.">该记录触发了平台的直播规则限制。</dd></div><div><dt data-zh="行动" data-en="Action">行动</dt><dd data-zh="查看违规详情。如认为判定有误，可以发起申诉。" data-en="Review the violation details and appeal if you believe the decision was incorrect.">查看违规详情。如认为判定有误，可以发起申诉。</dd></div></dl></div><div><h4 data-zh="表达语气" data-en="Tone of voice">表达语气</h4><p class="answer-question" data-zh="为什么直播间观看人数下降了？" data-en="Why did my LIVE viewership drop?">为什么直播间观看人数下降了？</p><p class="answer-bubble" data-zh="这场直播的推荐流量比之前少。你可以先查看详情，再决定是否申诉。" data-en="This LIVE received less recommended traffic. You can review the details before deciding whether to appeal.">这场直播的推荐流量比之前少。你可以先查看详情，再决定是否申诉。</p></div></div>
+        </div>
+        </article>
+        <article class="case-block " id="response-design">
+        <header class="case-heading"><h3 data-zh="RESPONSE DESIGN" data-en="RESPONSE DESIGN">RESPONSE DESIGN</h3><p data-zh="用同一个直播问题对比升级前后的回答，检验用户是否能快速找到结论、理解原因并采取行动。" data-en="Compare the same LIVE question before and after the redesign to see how easily users can find the conclusion, understand why, and act.">用同一个直播问题对比升级前后的回答，检验用户是否能快速找到结论、理解原因并采取行动。</p></header><div class="response-comparison">
+          <div class="response-details">
+          <div><h4 data-zh="✦ 语气设计" data-en="✦ Tone of voice">✦ 语气设计</h4><p class="answer-label" data-zh="直播经营专家" data-en="LIVE growth expert">直播经营专家</p><p class="answer-bubble" data-zh="承认用户遇到的困难，再给出具体建议。说明可选操作，让用户自己决定下一步。" data-en="Acknowledge the problem, give specific advice, and let the user choose what to do next.">承认用户遇到的困难，再给出具体建议。说明可选操作，让用户自己决定下一步。</p><p class="tone-note" data-zh="专业判断 · 自然对话 · 保留选择" data-en="Expert judgment · Natural tone · User choice">专业判断 · 自然对话 · 保留选择</p></div>
+          <div><h4 data-zh="✦ 结构设计" data-en="✦ Response structure">✦ 结构设计</h4><p class="answer-label" data-zh="LIVE Assistant" data-en="LIVE Assistant">LIVE Assistant</p><dl><div><dt data-zh="结论" data-en="Conclusion">结论</dt><dd data-zh="本场直播的推荐流量下降。" data-en="This LIVE received less recommended traffic.">本场直播的推荐流量下降。</dd></div><div><dt data-zh="依据" data-en="Evidence">依据</dt><dd data-zh="直播中出现未成年人出镜的记录。" data-en="A minor appeared during the LIVE.">直播中出现未成年人出镜的记录。</dd></div><div><dt data-zh="问题" data-en="Issue">问题</dt><dd data-zh="该记录触发了平台的直播规则限制。" data-en="That event triggered a LIVE policy restriction.">该记录触发了平台的直播规则限制。</dd></div><div><dt data-zh="行动" data-en="Action">行动</dt><dd data-zh="查看违规详情。如认为判定有误，可以发起申诉。" data-en="Review the violation details and appeal if you believe the decision was incorrect.">查看违规详情。如认为判定有误，可以发起申诉。</dd></div></dl></div>
+        </div>
+          <div class="phone-pair comparison-phones">
+          <figure><img src="./assets/live-assistant-project/revised/before.webp" width="496" height="1024" alt="Before" decoding="async" loading="lazy" /><figcaption data-zh="Before" data-en="Before">Before</figcaption></figure>
+          <figure><img src="./assets/live-assistant-project/revised/after.webp" width="720" height="1488" alt="After" decoding="async" loading="lazy" /><figcaption data-zh="After" data-en="After">After</figcaption></figure>
+        </div>
+        </div>
+        </article>
+        </section>
+        <section class="case-section" id="result" aria-labelledby="result-title">
+        <h2 id="result-title">Result</h2>
+        <article class="case-block " id="project-outcomes">
+        <header class="case-heading"><h3 data-zh="TikTok LIVE Assistant 设计结果" data-en="TikTok LIVE Assistant outcomes">TikTok LIVE Assistant 设计结果</h3><p data-zh="对比 AI 助手功能上线前后的日活跃用户与转人工率。" data-en="Daily active users and human escalation before and after the AI assistant update.">对比 AI 助手功能上线前后的日活跃用户与转人工率。</p></header><div class="result-metrics">
+          <div><strong><img src="./assets/live-assistant-project/revised/increase.svg" alt="" decoding="async" loading="lazy" />2.8×</strong><p data-zh="日活跃用户" data-en="Daily active users">日活跃用户</p></div>
+          <div><strong><img src="./assets/live-assistant-project/revised/decrease.svg" alt="" decoding="async" loading="lazy" /><span class="result-value">−31 <small data-zh="个百分点" data-en="pp">个百分点</small></span></strong><p data-zh="转人工率" data-en="Human escalation rate">转人工率</p></div>
+        </div><ul class="result-notes"><li data-zh="日活跃用户从 600 增至 1,700，约为上线前的 2.8 倍。" data-en="Daily active users grew from 600 to 1,700, about 2.8× the previous level.">日活跃用户从 600 增至 1,700，约为上线前的 2.8 倍。</li><li data-zh="转人工率从 37% 降至 6%。" data-en="Human escalation fell from 37% to 6%.">转人工率从 37% 降至 6%。</li></ul>
+        </article>
         </section>
       </div>
     </div>
