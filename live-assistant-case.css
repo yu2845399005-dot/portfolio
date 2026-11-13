@@ -508,6 +508,14 @@
 }
 .live-case .solution-split.reverse { grid-template-columns: minmax(0, 632fr) minmax(0, 468fr); gap: clamp(24px, 4.3vw, 62px); }
 .live-case .solution-split.efficiency { grid-template-columns: minmax(0, 446fr) minmax(0, 656fr); gap: clamp(24px, 4.2vw, 60px); }
+.live-case #solution-creator .solution-split {
+  grid-template-columns: minmax(0, 45fr) minmax(0, 55fr);
+  gap: clamp(24px, 2.6vw, 40px);
+}
+.live-case .creator-inbox-device {
+  width: min(100%, 270px);
+  justify-self: center;
+}
 .live-case .solution-split :is(h4, .star-heading) + p { margin-top: 10px; }
 .live-case :is(#solution-creator, #solution-vip, #solution-efficiency) .solution-split > div > p {
   font: 400 14px/1.7 "PingFang SC", "Helvetica Neue", Arial, sans-serif;
@@ -921,10 +929,7 @@
   .live-case .pose-sheet figcaption { margin-top: 24px; }
   .live-case .motion-grid .phone-pair { gap: min(1.42vw, 20.39px); }
   .live-case .motion-grid .phone-pair figcaption { margin-top: 17.2px; font-size: 12.49px; line-height: 17px; }
-  .live-case #solution-creator { min-height: 812px; }
   .live-case #solution-vip { margin-top: 40px; }
-  .live-case #solution-creator .solution-split { grid-template-columns: minmax(0, 498fr) minmax(0, 572fr); gap: min(6.39vw, 92px); }
-  .live-case #solution-creator .phone-pair { gap: min(3.47vw, 50px); }
   .live-case .prompt-list { margin-top: 70px; gap: 32px; }
   .live-case .prompt-list > div:nth-child(n+2) p { min-height: 48px; }
   .live-case .solution-split.reverse { grid-template-columns: minmax(0, 631.53fr) minmax(0, 468.47fr); gap: min(4.31vw, 62px); }
@@ -1057,7 +1062,6 @@
   .live-case .origin-grid { grid-template-columns: minmax(0, .85fr) repeat(2, minmax(0, 1fr)) minmax(0, .85fr); }
   .live-case .origin-grid > div:first-child { grid-area: 1 / 1 / 3; }
   .live-case .origin-grid > div:last-child { grid-area: 1 / 4 / 3; }
-  .live-case #solution-creator .solution-split { gap: clamp(24px, 4vw, 72px); }
   .live-case #solution-vip .solution-split { grid-template-columns: minmax(0, 1.06fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 44px); }
   .live-case .prompt-chips li { padding-inline: 12px; font-size: 14px; }
   .live-case .content-criteria p { font-size: 15px; line-height: 1.7; }
@@ -1082,6 +1086,8 @@
   .live-case .background-intro { grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); gap: 24px; }
   .live-case .solution-split, .live-case .solution-split.reverse, .live-case .solution-split.efficiency,
   .live-case .response-comparison { grid-template-columns: minmax(0, 1fr); }
+  .live-case #solution-creator .solution-split { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .live-case .creator-inbox-device { width: min(72%, 250px); }
   .live-case .phone-pair { width: min(100%, 530px); margin-inline: auto; }
   .live-case .response-details { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .live-case .research-insight p { padding: 13px 20px; font-size: 14px; line-height: 20px; }
