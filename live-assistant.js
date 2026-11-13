@@ -81,14 +81,22 @@
   }
 
   const motionVideo = document.querySelector(".motion-home-video");
-  if (motionVideo && "IntersectionObserver" in window) {
+  if (motionVideo) {
     const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-    // Play one preview per visit. Native controls handle pause and replay.
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting || reducedMotion.matches) return;
-      observer.disconnect();
-      motionVideo.play().catch(() => {});
-    }, { threshold: 0.4 });
-    observer.observe(motionVideo);
+    let onScreen = false;
+    function updateMotionPreview() {
+      if (onScreen && !reducedMotion.matches) motionVideo.play().catch(() => {});
+      else motionVideo.pause();
+    }
+    reducedMotion.addEventListener("change", updateMotionPreview);
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(([entry]) => {
+        onScreen = entry.isIntersecting;
+        updateMotionPreview();
+      }).observe(motionVideo);
+    } else {
+      onScreen = true;
+      updateMotionPreview();
+    }
   }
 })();
