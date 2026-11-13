@@ -80,7 +80,7 @@
     }, { threshold: 0.25 }).observe(carousel);
   }
 
-  const motionVideos = document.querySelectorAll(".motion-preview-video");
+  const motionVideos = document.querySelectorAll(".motion-preview-video, [data-motion-preview]");
   if (motionVideos.length) {
     const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
     const visibleVideos = new Set();
