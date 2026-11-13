@@ -67,4 +67,16 @@
 
   window.addEventListener("scroll", queueProgress, { passive: true });
   window.addEventListener("resize", queueProgress);
+
+  const carousel = document.querySelector(".prompt-carousel");
+  if (carousel && "IntersectionObserver" in window) {
+    const track = carousel.querySelector(".prompt-track");
+    const repeat = track.firstElementChild.cloneNode(true);
+    repeat.setAttribute("aria-hidden", "true");
+    track.append(repeat);
+    carousel.classList.add("is-animated");
+    new IntersectionObserver(([entry]) => {
+      carousel.classList.toggle("is-visible", entry.isIntersecting);
+    }, { threshold: 0.25 }).observe(carousel);
+  }
 })();

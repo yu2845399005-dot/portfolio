@@ -286,7 +286,7 @@
 }
 .live-case .interview p + p { margin-top: 14px; }
 .live-case .interview:nth-child(2) { justify-self: end; flex-direction: row-reverse; }
-.live-case .interview:nth-child(3) { margin-left: 12%; }
+.live-case .interview:nth-child(3) { margin-left: min(5%, 36px); }
 .live-case .research-insight {
   position: relative;
   width: min(100%, 915.5px);
@@ -486,7 +486,7 @@
 .live-case .solution-split.efficiency { grid-template-columns: minmax(0, 446fr) minmax(0, 656fr); gap: clamp(24px, 4.2vw, 60px); }
 .live-case .solution-split :is(h4, .star-heading) + p { margin-top: 10px; }
 .live-case :is(#solution-creator, #solution-vip, #solution-efficiency) .solution-split > div > p {
-  font: 400 16px/1.7 "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+  font: 400 14px/1.7 "PingFang SC", "Helvetica Neue", Arial, sans-serif;
 }
 .live-case :is(#solution-creator, #solution-efficiency) .solution-split > div > p strong { color: #fff; font-weight: 400; }
 .live-case #solution-vip .star-heading h4 { font-size: 18px; line-height: 25px; font-weight: 500; }
@@ -502,7 +502,25 @@
   margin-top: 28px;
 }
 .live-case .suggestion-grid ul, .live-case .state-list { list-style: none; padding: 0; }
-.live-case .prompt-chips, .live-case .prompt-factors { display: grid; align-content: space-between; gap: 12px; }
+.live-case .prompt-carousel { display: grid; min-width: 0; overflow: hidden; }
+.live-case .prompt-track { position: relative; display: grid; min-width: 0; }
+.live-case .prompt-chips { display: grid; grid-template-rows: repeat(3, minmax(52px, 1fr)); align-items: center; }
+.live-case .prompt-chips[aria-hidden="true"] { position: absolute; inset: 100% 0 auto; height: 100%; pointer-events: none; }
+.live-case .prompt-factors { display: grid; align-content: space-between; gap: 12px; }
+
+@keyframes live-prompt-scroll {
+  0%, 25% { transform: translateY(0); }
+  33.333%, 58.333% { transform: translateY(-33.333333%); }
+  66.667%, 91.667% { transform: translateY(-66.666667%); }
+  100% { transform: translateY(-100%); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .live-case .prompt-carousel.is-animated .prompt-track {
+    animation: live-prompt-scroll 7.8s cubic-bezier(.4, 0, .2, 1) infinite paused;
+  }
+  .live-case .prompt-carousel.is-visible:not(:hover):not(:focus-within) .prompt-track { animation-play-state: running; }
+}
 .live-case .prompt-chips li {
   display: inline-flex;
   align-items: center;
@@ -768,7 +786,7 @@
   }
   .live-case .interview:nth-child(1) { top: 0; left: 0; gap: 18.79px; width: 51.32%; }
   .live-case .interview:nth-child(2) { top: 104.41px; right: 0; gap: 18.2px; width: 54.85%; }
-  .live-case .interview:nth-child(3) { top: 284.68px; left: 10.77%; gap: 22.9px; width: 57.21%; }
+  .live-case .interview:nth-child(3) { top: 284.68px; left: 7.75%; gap: 22.9px; width: 57.21%; margin-left: 0; }
   .live-case .interview figure { width: 30%; }
   .live-case .interview:nth-child(1) figure { width: 30.54%; }
   .live-case .interview:nth-child(2) figure { width: 30.51%; }
@@ -885,12 +903,7 @@
   .live-case #solution-vip { margin-top: 40px; }
   .live-case #solution-creator .solution-split { grid-template-columns: minmax(0, 498fr) minmax(0, 572fr); gap: min(6.39vw, 92px); }
   .live-case #solution-creator .phone-pair { gap: min(3.47vw, 50px); }
-  .live-case :is(#solution-creator, #solution-vip, #solution-efficiency) .solution-split > div > p {
-  font: 400 16px/1.7 "PingFang SC", "Helvetica Neue", Arial, sans-serif;
-}
-.live-case :is(#solution-creator, #solution-efficiency) .solution-split > div > p strong { color: #fff; font-weight: 400; }
-.live-case #solution-vip .star-heading h4 { font-size: 18px; line-height: 25px; font-weight: 500; }
-.live-case .prompt-list { margin-top: 70px; gap: 32px; }
+  .live-case .prompt-list { margin-top: 70px; gap: 32px; }
   .live-case .prompt-list > div:nth-child(n+2) p { min-height: 48px; }
   .live-case .solution-split.reverse { grid-template-columns: minmax(0, 631.53fr) minmax(0, 468.47fr); gap: min(4.31vw, 62px); }
   .live-case .solution-split.reverse .phone-pair { gap: min(4.31vw, 62px); }
@@ -968,7 +981,6 @@
   .live-case .interviews { gap: 24px; }
   .live-case .interview { width: min(100%, 660px); gap: clamp(12px, 2vw, 24px); }
   .live-case .interview > div { max-width: none; min-width: 0; }
-  .live-case .interview:nth-child(3) { margin-left: min(8%, 60px); }
   .live-case .origin-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     min-height: 0;
