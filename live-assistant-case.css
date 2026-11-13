@@ -223,7 +223,7 @@
 .live-case .creator-grid, .live-case .competitor-grid, .live-case .app-icons,
 .live-case .tad-grid, .live-case .goal-grid, .live-case .strategy-grid,
 .live-case .shape-grid, .live-case .palette-grid, .live-case .phone-pair,
-.live-case .phone-trio, .live-case .delivery-grid, .live-case .motion-grid,
+.live-case .phone-trio, .live-case .motion-grid,
 .live-case .solution-split, .live-case .response-details, .live-case .response-comparison,
 .live-case .result-metrics {
   display: grid;
@@ -491,23 +491,15 @@
 
 .live-case .phone-pair { align-items: start; gap: clamp(16px, 3.3vw, 48px); }
 .live-case .phone-trio { grid-template-columns: repeat(3, minmax(0, 300px)); justify-content: space-between; gap: 20px; }
-.live-case .delivery-grid { grid-template-columns: minmax(0, 490fr) minmax(0, 647fr); gap: 24px; }
 .live-case .delivery-preview {
   display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 1600 / 886;
-  margin-bottom: 24px;
   border-radius: 8px;
   overflow: hidden;
   pointer-events: none;
 }
-.live-case .delivery-crop { position: relative; overflow: hidden; }
-.live-case .delivery-crop img { position: absolute; max-width: none; }
-.live-case .delivery-grid figure:first-child .delivery-crop { aspect-ratio: 490.042 / 371.62; border-radius: 8.92px; }
-.live-case .delivery-grid figure:first-child img { width: 101.27%; height: 100.1%; left: -.58%; top: -.05%; }
-.live-case .delivery-grid figure:last-child .delivery-crop { aspect-ratio: 647.403 / 371.305; border-radius: 12.3px; }
-.live-case .delivery-grid figure:last-child img { width: 139.43%; height: 135.04%; left: -19.72%; top: -17.57%; }
 
 .live-case .solution-split {
   grid-template-columns: minmax(0, 500fr) minmax(0, 560fr);
@@ -929,9 +921,6 @@
   .live-case .pose-sheet figcaption { margin-top: 24px; }
   .live-case .motion-grid .phone-pair { gap: min(1.42vw, 20.39px); }
   .live-case .motion-grid .phone-pair figcaption { margin-top: 17.2px; font-size: 12.49px; line-height: 17px; }
-  .live-case .delivery-grid { padding-block: 20px; gap: min(1.72vw, 24.77px); }
-  .live-case .delivery-preview { margin-bottom: 4px; }
-  .live-case .delivery-grid figcaption { margin-top: 16.51px; }
   .live-case #solution-creator { min-height: 812px; }
   .live-case #solution-vip { margin-top: 40px; }
   .live-case #solution-creator .solution-split { grid-template-columns: minmax(0, 498fr) minmax(0, 572fr); gap: min(6.39vw, 92px); }
@@ -1111,7 +1100,7 @@
   .live-case .background-intro { grid-template-columns: 1fr; }
   .live-case .background-intro figure { width: min(53%, 247px); margin-inline: auto; }
   .live-case .creator-grid, .live-case .goal-grid, .live-case .tad-grid,
-  .live-case .motion-grid, .live-case .delivery-grid { grid-template-columns: 1fr; gap: 24px; }
+  .live-case .motion-grid { grid-template-columns: 1fr; gap: 24px; }
   .live-case .creator-grid img { aspect-ratio: 4 / 3; }
   .live-case .interview { gap: 8px; }
   .live-case .interview figure { width: 84px; }
