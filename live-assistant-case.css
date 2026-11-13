@@ -448,13 +448,13 @@
 .live-case .mascot-poster span:first-of-type { left: 6%; top: 55%; color: #818181; }
 .live-case .mascot-poster span:last-of-type { right: 6%; top: 38%; }
 .live-case .motion-grid { align-items: center; grid-template-columns: minmax(0, 540fr) minmax(0, 544fr); gap: clamp(24px, 5vw, 76px); }
-.live-case .motion-home-device {
+.live-case .motion-device {
   position: relative;
   aspect-ratio: 720 / 1488;
   overflow: hidden;
   background: #000;
 }
-.live-case .motion-home-video {
+.live-case .motion-preview-video {
   position: absolute;
   display: block;
   /* Align the recorded screen opening with the frame's transparent cutout. */
@@ -465,7 +465,7 @@
   object-fit: fill;
   pointer-events: none;
 }
-.live-case .motion-home-frame {
+.live-case .motion-device-frame {
   position: absolute;
   inset: 0;
   pointer-events: none;
