@@ -509,12 +509,15 @@
 .live-case .solution-split.reverse { grid-template-columns: minmax(0, 632fr) minmax(0, 468fr); gap: clamp(24px, 4.3vw, 62px); }
 .live-case .solution-split.efficiency { grid-template-columns: minmax(0, 446fr) minmax(0, 656fr); gap: clamp(24px, 4.2vw, 60px); }
 .live-case #solution-creator .solution-split {
-  grid-template-columns: minmax(0, 45fr) minmax(0, 55fr);
-  gap: clamp(24px, 2.6vw, 40px);
+  width: min(100%, 871.66px);
+  margin-inline: auto;
+  padding-block: 30px;
+  grid-template-columns: minmax(0, 260.66fr) minmax(0, 519fr);
+  gap: clamp(28px, calc((100% - 640px) * .4), 92px);
 }
 .live-case .creator-inbox-device {
-  width: min(100%, 270px);
   justify-self: center;
+  width: 100%;
 }
 .live-case .solution-split :is(h4, .star-heading) + p { margin-top: 10px; }
 .live-case :is(#solution-creator, #solution-vip, #solution-efficiency) .solution-split > div > p {
@@ -526,6 +529,10 @@
 .live-case .prompt-list h4 { font-size: 16px; line-height: 27px; font-weight: 400; }
 .live-case .prompt-list p { margin-top: 9.44px; font-size: 14px; line-height: 24px; color: var(--caption); }
 .live-case .prompt-list strong { color: var(--pink); font-weight: 500; }
+.live-case #solution-creator .solution-split > div > p { line-height: 24px; }
+.live-case #solution-creator .prompt-list { margin-top: clamp(32px, 5.4vw, 70px); gap: 32px; }
+.live-case #solution-creator .prompt-list p { margin-top: 9.44px; }
+.live-case #solution-creator :is(.solution-split > div > p, .prompt-list p) { text-align: justify; }
 .live-case .suggestion-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) max-content;
@@ -929,9 +936,8 @@
   .live-case .pose-sheet figcaption { margin-top: 24px; }
   .live-case .motion-grid .phone-pair { gap: min(1.42vw, 20.39px); }
   .live-case .motion-grid .phone-pair figcaption { margin-top: 17.2px; font-size: 12.49px; line-height: 17px; }
+  .live-case #solution-creator { min-height: 812px; }
   .live-case #solution-vip { margin-top: 40px; }
-  .live-case .prompt-list { margin-top: 70px; gap: 32px; }
-  .live-case .prompt-list > div:nth-child(n+2) p { min-height: 48px; }
   .live-case .solution-split.reverse { grid-template-columns: minmax(0, 631.53fr) minmax(0, 468.47fr); gap: min(4.31vw, 62px); }
   .live-case .solution-split.reverse .phone-pair { gap: min(4.31vw, 62px); }
   .live-case .solution-split.reverse figcaption { margin-top: 17.4px; }
@@ -1086,7 +1092,7 @@
   .live-case .background-intro { grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); gap: 24px; }
   .live-case .solution-split, .live-case .solution-split.reverse, .live-case .solution-split.efficiency,
   .live-case .response-comparison { grid-template-columns: minmax(0, 1fr); }
-  .live-case #solution-creator .solution-split { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .live-case #solution-creator .solution-split { grid-template-columns: minmax(0, 1fr); gap: 32px; padding-block: 8px 0; }
   .live-case .creator-inbox-device { width: min(72%, 250px); }
   .live-case .phone-pair { width: min(100%, 530px); margin-inline: auto; }
   .live-case .response-details { grid-template-columns: repeat(2, minmax(0, 1fr)); }
