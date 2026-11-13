@@ -79,4 +79,16 @@
       carousel.classList.toggle("is-visible", entry.isIntersecting);
     }, { threshold: 0.25 }).observe(carousel);
   }
+
+  const motionVideo = document.querySelector(".motion-home-video");
+  if (motionVideo && "IntersectionObserver" in window) {
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+    // Play one preview per visit. Native controls handle pause and replay.
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting || reducedMotion.matches) return;
+      observer.disconnect();
+      motionVideo.play().catch(() => {});
+    }, { threshold: 0.4 });
+    observer.observe(motionVideo);
+  }
 })();

@@ -448,6 +448,14 @@
 .live-case .mascot-poster span:first-of-type { left: 6%; top: 55%; color: #818181; }
 .live-case .mascot-poster span:last-of-type { right: 6%; top: 38%; }
 .live-case .motion-grid { align-items: center; grid-template-columns: minmax(0, 540fr) minmax(0, 544fr); gap: clamp(24px, 5vw, 76px); }
+.live-case .motion-home-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 720 / 1488;
+  object-fit: contain;
+  background: #000;
+}
 .live-case .pose-sheet { margin-inline: auto; width: 90%; }
 .live-case .pose-grid {
   display: grid;
