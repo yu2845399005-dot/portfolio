@@ -470,6 +470,13 @@
   inset: 0;
   pointer-events: none;
 }
+.live-case #ai-experience .motion-preview-video {
+  /* Fit the cropped 552 × 1196 recording into the shared phone frame. */
+  top: 1.5%;
+  left: 3.65%;
+  width: 92.7%;
+  height: 97%;
+}
 .live-case .pose-sheet { margin-inline: auto; width: 90%; }
 .live-case .pose-grid {
   display: grid;
@@ -955,9 +962,7 @@
   .live-case .solution-split.reverse .star-heading img { width: 21px; }
   .live-case .solution-split.reverse .star-heading + p { margin-top: 18px; }
   .live-case .suggestion-grid { width: min(100%, 400.8px); margin-top: 71.6px; min-height: 167.9px; }
-  .live-case .phone-trio { grid-template-columns: 25.83% 25.83% 25.71%; }
-  .live-case .phone-trio img { aspect-ratio: 300.19 / 618.7; object-fit: cover; }
-  .live-case .phone-trio figure:last-child img { aspect-ratio: 298.78 / 618.7; }
+  .live-case .phone-trio { grid-template-columns: repeat(3, 25.83%); }
   .live-case .phone-trio figcaption { margin-top: 16.91px; }
   .live-case .solution-split.efficiency { grid-template-columns: minmax(0, 445.96fr) minmax(0, 667.3fr); gap: min(3.34vw, 48px); }
   .live-case .efficiency .phone-pair { gap: min(2.77vw, 39.92px); }
