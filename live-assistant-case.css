@@ -541,10 +541,17 @@
   margin-top: 28px;
 }
 .live-case .suggestion-grid ul, .live-case .state-list { list-style: none; padding: 0; }
-.live-case .prompt-carousel { display: grid; min-width: 0; overflow: hidden; }
+.live-case .prompt-carousel { position: relative; display: grid; min-width: 0; overflow: hidden; }
 .live-case .prompt-track { position: relative; display: grid; min-width: 0; }
 .live-case .prompt-chips { display: grid; grid-template-rows: repeat(3, minmax(52px, 1fr)); align-items: center; }
-.live-case .prompt-chips[aria-hidden="true"] { position: absolute; inset: 100% 0 auto; height: 100%; pointer-events: none; }
+.live-case .prompt-chips + .prompt-chips { position: absolute; inset: 100% 0 auto; height: 100%; pointer-events: none; }
+.live-case .prompt-highlight {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  clip-path: inset(33.333333% 0);
+  pointer-events: none;
+}
 .live-case .prompt-factors { display: grid; align-content: space-between; gap: 12px; }
 
 @keyframes live-prompt-scroll {
@@ -573,7 +580,10 @@
   font: 400 15.615px/20px var(--ui-font);
 }
 .live-case .prompt-chips img { width: 16px; flex: none; }
-.live-case .prompt-chips li:nth-child(2) { background: #fff; color: #222; }
+.live-case .prompt-highlight li,
+.live-case .prompt-carousel:not(.is-animated) li:nth-child(2) { background: #fff; color: #222; }
+.live-case .prompt-highlight img,
+.live-case .prompt-carousel:not(.is-animated) li:nth-child(2) img { opacity: .45; }
 .live-case .prompt-factors { color: rgb(255 255 255 / 80%); font-size: 14px; line-height: 24px; font-weight: 400; }
 .live-case .state-list { margin-block: 48px; display: grid; gap: 24px; }
 .live-case .state-list li {

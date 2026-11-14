@@ -74,6 +74,13 @@
     const repeat = track.firstElementChild.cloneNode(true);
     repeat.setAttribute("aria-hidden", "true");
     track.append(repeat);
+
+    // The highlight window stays on the middle row as the two tracks scroll together.
+    const highlight = document.createElement("div");
+    highlight.className = "prompt-highlight";
+    highlight.setAttribute("aria-hidden", "true");
+    highlight.append(track.cloneNode(true));
+    carousel.append(highlight);
     carousel.classList.add("is-animated");
     new IntersectionObserver(([entry]) => {
       carousel.classList.toggle("is-visible", entry.isIntersecting);
