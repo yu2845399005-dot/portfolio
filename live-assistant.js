@@ -94,12 +94,17 @@
     let scrollStart = null;
     let settleTimer = 0;
     let touching = false;
+    let wheelStep = null;
+
+    function startOfScene(from, top, viewport) {
+      return from >= top - 4 && from <= top + viewport * .22;
+    }
 
     function alignInterview() {
       const from = scrollStart;
       scrollStart = null;
       const to = window.scrollY;
-      if (from === null || Math.abs(to - from) < 28 || reducedMotion.matches) return;
+      if (from === null || Math.abs(to - from) < 18 || reducedMotion.matches) return;
 
       const viewport = document.documentElement.clientHeight;
       const direction = Math.sign(to - from);
@@ -109,7 +114,7 @@
       });
       const first = scenes[0];
       const last = scenes[scenes.length - 1];
-      const currentIndex = scenes.findIndex(({ top }) => from >= top - 4 && from <= top + viewport * .10);
+      const currentIndex = scenes.findIndex(({ top }) => startOfScene(from, top, viewport));
       let target;
 
       if (currentIndex !== -1) {
@@ -129,7 +134,7 @@
 
     function queueInterviewAlignment() {
       clearTimeout(settleTimer);
-      if (scrollStart !== null && !touching) settleTimer = setTimeout(alignInterview, 130);
+      if (scrollStart !== null && !touching) settleTimer = setTimeout(alignInterview, 85);
     }
 
     function startInterviewScroll() {
@@ -138,10 +143,45 @@
       queueInterviewAlignment();
     }
 
-    // Snap after a real scroll gesture settles so small wheel steps can leave a panel.
-    window.addEventListener("wheel", event => {
-      if (!event.ctrlKey && Math.abs(event.deltaY) > Math.abs(event.deltaX)) startInterviewScroll();
-    }, { passive: true });
+    function stepInterviewWithWheel(event) {
+      if (event.ctrlKey || reducedMotion.matches || Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+      const now = performance.now();
+      const y = window.scrollY;
+
+      // Keep momentum from the same gesture from carrying the page past its destination.
+      if (wheelStep && event.cancelable) {
+        const stillMoving = now - wheelStep.started < 550 && Math.abs(y - wheelStep.top) > 4;
+        if (stillMoving || now - wheelStep.lastEvent < 155) {
+          event.preventDefault();
+          wheelStep.lastEvent = now;
+          return;
+        }
+        wheelStep = null;
+      }
+
+      const viewport = document.documentElement.clientHeight;
+      const distance = event.deltaMode === 0 ? Math.abs(event.deltaY) : Math.abs(event.deltaY) * 16;
+      if (event.cancelable && distance >= 18) {
+        const index = interviewScenes.findIndex(scene => {
+          const bounds = scene.getBoundingClientRect();
+          return bounds.height <= viewport + 4 && startOfScene(0, bounds.top, viewport);
+        });
+        const neighbor = index === -1 ? null : interviewScenes[index + Math.sign(event.deltaY)];
+        if (neighbor) {
+          const bounds = neighbor.getBoundingClientRect();
+          if (bounds.height <= viewport + 4) {
+            event.preventDefault();
+            scrollStart = null;
+            wheelStep = { top: bounds.top + y, started: now, lastEvent: now };
+            window.scrollTo({ top: wheelStep.top, behavior: "smooth" });
+            return;
+          }
+        }
+      }
+      startInterviewScroll();
+    }
+
+    window.addEventListener("wheel", stepInterviewWithWheel, { passive: false });
     window.addEventListener("touchstart", () => { touching = true; }, { passive: true });
     window.addEventListener("touchmove", startInterviewScroll, { passive: true });
     for (const type of ["touchend", "touchcancel"]) {

@@ -260,16 +260,19 @@
 }
 .live-case .goal-grid h4 { font-size: 16.813px; line-height: 24px; font-weight: 500; }
 .live-case .goal-grid p { font-size: 11.208px; line-height: 1.7; font-weight: 400; color: var(--secondary); }
+.live-case #interviews {
+  --preview-width: clamp(115px, calc((100svh - 232px) * .484), min(300px, 24vw));
+  --interview-gap: clamp(52px, 10svh, 112px);
+}
 .live-case .interview-scene {
-  --preview-width: clamp(130px, calc((100svh - 112px) * .484), min(300px, 24vw));
   min-height: 100svh;
   display: grid;
   align-items: center;
   padding-block: clamp(22px, 5svh, 54px);
 }
+.live-case .interview-scene + .interview-scene { margin-block-start: var(--interview-gap); }
 .live-case .interview-scene[id] { scroll-margin-top: 0; }
 .live-case .interview-scene--intro {
-  --preview-width: clamp(115px, calc((100svh - 232px) * .484), min(300px, 24vw));
   grid-template-rows: auto 1fr;
   gap: clamp(16px, 3svh, 32px);
 }
@@ -1193,11 +1196,11 @@
 
 }
 @media (max-width: 760px) {
-  .live-case .interview-scene {
-    --preview-width: clamp(108px, calc((100svh - 307px) * .484), 196px);
-    padding-block: clamp(20px, 4svh, 34px);
+  .live-case #interviews {
+    --preview-width: clamp(100px, calc((100svh - 466px) * .484), 196px);
+    --interview-gap: clamp(32px, 7svh, 72px);
   }
-  .live-case .interview-scene--intro { --preview-width: clamp(100px, calc((100svh - 466px) * .484), 196px); }
+  .live-case .interview-scene { padding-block: clamp(20px, 4svh, 34px); }
   .live-case .interview-scene-content {
     grid-template-columns: minmax(0, 1fr);
     justify-items: center;
@@ -1229,10 +1232,8 @@
   .live-case .palette-mascot span::after { width: 12px; height: 12px; margin-left: 5px; }
 }
 @media (max-width: 480px) and (max-height: 710px) {
-  .live-case .interview-scene--intro {
-    --preview-width: clamp(86px, calc((100svh - 460px) * .484), 114px);
-    gap: 12px;
-  }
+  .live-case #interviews { --preview-width: clamp(86px, calc((100svh - 460px) * .484), 114px); }
+  .live-case .interview-scene--intro { gap: 12px; }
   .live-case .interview-intro h2 { margin-bottom: 12px; }
   .live-case .interview-scene--intro .interview-scene-content {
     grid-template-columns: repeat(2, minmax(0, 1fr));
