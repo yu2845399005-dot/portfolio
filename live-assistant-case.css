@@ -260,7 +260,27 @@
 }
 .live-case .goal-grid h4 { font-size: 16.813px; line-height: 24px; font-weight: 500; }
 .live-case .goal-grid p { font-size: 11.208px; line-height: 1.7; font-weight: 400; color: var(--secondary); }
-.live-case .interviews { display: grid; gap: 8px; }
+.live-case .creator-research {
+  display: grid;
+  grid-template-columns: minmax(0, 247px) minmax(0, 1fr);
+  align-items: end;
+  gap: clamp(24px, 7.2vw, 103px);
+  padding-inline: min(6%, 70px);
+}
+.live-case .creator-policy-demo { width: 100%; }
+.live-case .creator-research .interview {
+  align-self: end;
+  align-items: center;
+  width: 100%;
+  padding-bottom: clamp(16px, 5vw, 70px);
+}
+.live-case .creator-research .interview figure { width: min(32%, 200px); }
+.live-case .creator-research .interview > div { flex: 0 1 auto; min-width: 0; }
+.live-case .interviews {
+  display: grid;
+  gap: 8px;
+  margin-top: clamp(48px, 7vw, 98px);
+}
 .live-case .interview {
   display: flex;
   gap: 24px;
@@ -285,8 +305,8 @@
   color: #fff;
 }
 .live-case .interview p + p { margin-top: 14px; }
-.live-case .interview:nth-child(2) { justify-self: end; flex-direction: row-reverse; }
-.live-case .interview:nth-child(3) { margin-left: min(5%, 36px); }
+.live-case .interviews .interview:first-child { justify-self: end; flex-direction: row-reverse; }
+.live-case .interviews .interview:last-child { margin-left: min(5%, 36px); }
 .live-case .research-insight {
   position: relative;
   width: min(100%, 915.5px);
@@ -470,8 +490,8 @@
   inset: 0;
   pointer-events: none;
 }
-.live-case #ai-experience .motion-preview-video {
-  /* Fit the cropped 552 × 1196 recording into the shared phone frame. */
+.live-case :is(#ai-experience, .creator-policy-demo) .motion-preview-video {
+  /* Fit the recorded screen into the shared phone frame. */
   top: 1.5%;
   left: 3.65%;
   width: 92.7%;
@@ -832,29 +852,24 @@
     position: relative;
     width: 95.41%;
     margin-inline: auto;
-    min-height: 534.63px;
+    min-height: 431px;
   }
-  .live-case .interview {
+  .live-case .interviews .interview {
     position: absolute;
     align-items: start;
     width: auto;
     margin: 0;
   }
-  .live-case .interview:nth-child(1) { top: 0; left: 0; gap: 18.79px; width: 51.32%; }
-  .live-case .interview:nth-child(2) { top: 104.41px; right: 0; gap: 18.2px; width: 54.85%; }
-  .live-case .interview:nth-child(3) { top: 284.68px; left: 7.75%; gap: 22.9px; width: 57.21%; margin-left: 0; }
+  .live-case .interviews .interview:first-child { top: 0; right: 0; gap: 18.2px; width: 54.85%; }
+  .live-case .interviews .interview:last-child { top: 180.27px; left: 7.75%; gap: 22.9px; width: 57.21%; margin-left: 0; }
   .live-case .interview figure { width: 30%; }
-  .live-case .interview:nth-child(1) figure { width: 30.54%; }
-  .live-case .interview:nth-child(2) figure { width: 30.51%; }
-  .live-case .interview:nth-child(3) figure { width: 28.22%; }
-  .live-case .interview:nth-child(2) img { aspect-ratio: 636 / 807; }
+  .live-case .interviews .interview:first-child figure { width: 30.51%; }
+  .live-case .interviews .interview:last-child figure { width: 28.22%; }
+  .live-case .interviews .interview:first-child img { aspect-ratio: 636 / 807; }
   .live-case .interview figcaption { margin-top: 12px; font-size: 14.09px; color: var(--secondary); }
   .live-case .interview > div { flex: 1; min-width: 0; max-width: none; padding: 18px 20px; border-radius: 35.23px 35.23px 35.23px 7.05px; background: rgb(255 255 255 / 12%); }
-  .live-case .interview:nth-child(1) > div { margin-top: 82.19px; }
-  .live-case:lang(zh) .interview > div { min-width: max-content; }
-  .live-case:lang(zh) .interview p span[data-zh] { white-space: nowrap; }
-  .live-case .interview:nth-child(2) > div { margin-top: 117.42px; border-radius: 35.23px 35.23px 7.05px 35.23px; }
-  .live-case .interview:nth-child(3) > div { margin-top: 111.06px; }
+  .live-case .interviews .interview:first-child > div { margin-top: 117.42px; border-radius: 35.23px 35.23px 7.05px 35.23px; }
+  .live-case .interviews .interview:last-child > div { margin-top: 111.06px; }
   .live-case #interviews .research-insight { margin-top: 48px; }
   .live-case .research-insight { padding-bottom: 41.79px; }
   .live-case .app-icons {
@@ -1096,6 +1111,9 @@
 
 }
 @media (max-width: 760px) {
+  .live-case .creator-research { grid-template-columns: 1fr; gap: 28px; padding-inline: 0; }
+  .live-case .creator-policy-demo { width: min(78%, 247px); margin-inline: auto; }
+  .live-case .creator-research .interview { padding-bottom: 0; }
   .live-case .project-body { display: block; }
   .live-case .progress-rail { display: none; }
   .live-case .hero-heading .live-brand img:first-child { width: 14px; }
@@ -1133,7 +1151,7 @@
   .live-case .interview figure { width: 84px; }
   .live-case .interview > div { border-radius: 20px; padding: 12px; font-size: 13px; }
   .live-case .interview p span:first-child { font-size: 16px; }
-  .live-case .interview:nth-child(3) { margin-left: 0; }
+  .live-case .interviews .interview:last-child { margin-left: 0; }
   .live-case .state-list li { gap: 10px; font-size: 15px; }
   .live-case .interview figcaption { font-size: 11px; }
   .live-case .strategy-grid { --arrow-gap: 10px; }
