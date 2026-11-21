@@ -87,9 +87,78 @@
     }, { threshold: 0.25 }).observe(carousel);
   }
 
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  const creatorInterview = document.querySelector("[data-creator-interview]");
+  if (creatorInterview && "IntersectionObserver" in window && !reducedMotion.matches) {
+    const quotes = Array.from(creatorInterview.querySelectorAll(".creator-quote"), quote => {
+      const original = quote.firstElementChild;
+      const display = document.createElement("span");
+      display.setAttribute("aria-hidden", "true");
+      quote.append(display);
+      return { line: quote.closest("p"), characters: Array.from(original.textContent), display };
+    });
+    let revealFrame = 0;
+    let started = false;
+
+    function finishQuotes() {
+      observer.disconnect();
+      cancelAnimationFrame(revealFrame);
+      delete creatorInterview.dataset.speaking;
+      creatorInterview.classList.remove("is-revealing-quotes");
+      for (const { line, display } of quotes) {
+        line.classList.remove("is-revealed");
+        display.remove();
+      }
+      toggle.removeEventListener("click", finishQuotes);
+      reducedMotion.removeEventListener("change", finishQuotes);
+    }
+
+    function revealQuotes() {
+      const start = performance.now();
+      let speaking = "";
+      const timing = [{ delay: 220, duration: 1620 }, { delay: 2220, duration: 1510 }];
+      const last = timing[timing.length - 1];
+
+      function tick(now) {
+        const elapsed = now - start;
+        let next = "";
+        quotes.forEach(({ line, characters, display }, index) => {
+          const { delay, duration } = timing[index];
+          if (elapsed < delay) return;
+          line.classList.add("is-revealed");
+          const progress = Math.min(1, (elapsed - delay) / duration);
+          const text = characters.slice(0, Math.ceil(progress * characters.length)).join("");
+          if (display.textContent !== text) display.textContent = text;
+          if (progress < 1) next = String(index + 1);
+        });
+        if (next !== speaking) {
+          speaking = next;
+          if (speaking) creatorInterview.dataset.speaking = speaking;
+          else delete creatorInterview.dataset.speaking;
+        }
+        if (elapsed >= last.delay + last.duration) finishQuotes();
+        else revealFrame = requestAnimationFrame(tick);
+      }
+
+      revealFrame = requestAnimationFrame(tick);
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!started && entry.intersectionRatio >= .45) {
+        started = true;
+        revealQuotes();
+      } else if (started && !entry.isIntersecting) {
+        finishQuotes();
+      }
+    }, { threshold: [0, .45] });
+    creatorInterview.classList.add("is-revealing-quotes");
+    toggle.addEventListener("click", finishQuotes);
+    reducedMotion.addEventListener("change", finishQuotes);
+    observer.observe(creatorInterview);
+  }
+
   const motionVideos = document.querySelectorAll(".motion-preview-video, [data-motion-preview]");
   if (motionVideos.length) {
-    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
     const visibleVideos = new Set();
     function updateMotionPreview() {
       for (const video of motionVideos) {

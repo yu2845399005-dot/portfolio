@@ -299,12 +299,85 @@
   font-size: 14px;
 }
 .live-case .interview p { display: flex; align-items: center; gap: 9.4px; line-height: 20px; }
-.live-case .interview p span:first-child {
+.live-case .interview p > span:first-child {
   flex: none;
   font: 400 18.79px/1 "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
   color: #fff;
 }
 .live-case .interview p + p { margin-top: 14px; }
+.live-case .creator-portrait {
+  position: relative;
+  aspect-ratio: 612 / 764;
+}
+.live-case .creator-portrait-art {
+  position: absolute;
+  inset: 50% -9% auto;
+  translate: 0 -50%;
+  aspect-ratio: 1;
+  transform-origin: 50% 88%;
+}
+.live-case .interview .creator-portrait-art img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+.live-case .creator-portrait-hand {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+}
+.live-case .creator-quote { min-width: 0; }
+.live-case [data-creator-interview] p > span:first-child {
+  align-self: flex-start;
+  margin-top: 1px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .live-case .is-revealing-quotes .creator-quote { display: grid; }
+  .live-case .is-revealing-quotes .creator-quote > span { grid-area: 1 / 1; }
+  .live-case .is-revealing-quotes .creator-quote > [data-zh] { opacity: 0; }
+  .live-case .is-revealing-quotes p > [aria-hidden] { transition: opacity 200ms ease; }
+  .live-case .is-revealing-quotes p:not(.is-revealed) > [aria-hidden] { opacity: 0; }
+  .live-case [data-speaking] .creator-portrait-body {
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 74.5% 33%, 74.5% 54%, 100% 54%, 100% 100%, 0 100%);
+  }
+  .live-case [data-speaking] .creator-portrait-hand {
+    visibility: visible;
+    clip-path: inset(32% 0 44.5% 74%);
+    transform-origin: 78% 53.5%;
+    animation: creator-hand-gesture 1.4s ease-in-out both;
+  }
+  .live-case [data-speaking] .creator-portrait-art {
+    animation: creator-speaking-pose 1.5s ease-in-out both;
+  }
+  .live-case [data-speaking="2"] .creator-portrait-art {
+    animation-name: creator-concerned-pose;
+  }
+  .live-case [data-speaking="2"] .creator-portrait-hand {
+    animation-name: creator-hand-settle;
+  }
+}
+@keyframes creator-speaking-pose {
+  0%, 100% { transform: none; }
+  28% { transform: translateY(-2px) rotate(-2deg); }
+  59% { transform: translateY(-1px) rotate(-.6deg); }
+  76% { transform: rotate(-1.2deg); }
+}
+@keyframes creator-concerned-pose {
+  0%, 100% { transform: none; }
+  39% { transform: translateY(1px) rotate(1.7deg); }
+  70% { transform: rotate(.7deg); }
+}
+@keyframes creator-hand-gesture {
+  0%, 100% { transform: none; }
+  34% { transform: rotate(6deg); }
+  70% { transform: rotate(2deg); }
+}
+@keyframes creator-hand-settle {
+  0%, 100% { transform: none; }
+  42% { transform: rotate(-5deg); }
+}
+
 .live-case .interviews .interview:first-child { justify-self: end; flex-direction: row-reverse; }
 .live-case .interviews .interview:last-child { margin-left: min(5%, 36px); }
 .live-case .research-insight {
@@ -1150,7 +1223,9 @@
   .live-case .interview { gap: 8px; }
   .live-case .interview figure { width: 84px; }
   .live-case .interview > div { border-radius: 20px; padding: 12px; font-size: 13px; }
-  .live-case .interview p span:first-child { font-size: 16px; }
+  .live-case .interview p > span:first-child { font-size: 16px; }
+  .live-case [data-creator-interview] p > span:first-child { margin-top: 2px; }
+  .live-case .creator-portrait-art { inset-inline: -5%; }
   .live-case .interviews .interview:last-child { margin-left: 0; }
   .live-case .state-list li { gap: 10px; font-size: 15px; }
   .live-case .interview figcaption { font-size: 11px; }
