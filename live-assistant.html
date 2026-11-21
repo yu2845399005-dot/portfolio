@@ -10,7 +10,7 @@
 <link href="./page-transition.css?v=20261028-2" rel="stylesheet"/>
 <script src="./page-transition-boot.js?v=20261028-fast-3"></script>
 <script defer="" src="./page-transition.js?v=20261111-short-home"></script>
-<link href="./live-assistant-case.css?v=interview-intro-spacing" rel="stylesheet"/>
+<link href="./live-assistant-case.css?v=interview-conclusion" rel="stylesheet"/>
 <script defer="" src="./live-assistant.js?v=interview-settle"></script>
 </head>
 <body class="live-case">
@@ -144,9 +144,11 @@
 <div class="interview-scene-content">
 <figure class="interview-demo">
   <div class="motion-device">
-    <p class="interview-demo-placeholder" data-en="Demo coming soon" data-zh="演示待补充">演示待补充</p>
+    <video class="motion-preview-video" loop muted playsinline disablepictureinpicture disableremoteplayback preload="none" poster="./assets/live-assistant-project/revised/dual-role-usage-demo.webp" src="./assets/live-assistant-project/revised/dual-role-usage-demo.mp4" width="552" height="1196" aria-labelledby="dual-role-demo-caption" aria-describedby="dual-role-demo-description"></video>
     <img class="motion-device-frame" alt="" width="720" height="1488" loading="lazy" decoding="async" src="./assets/live-assistant-project/revised/motion-phone-frame.webp"/>
   </div>
+  <figcaption id="dual-role-demo-caption" data-en="Usage demo" data-zh="使用演示">使用演示</figcaption>
+  <span id="dual-role-demo-description" hidden data-en="A user switches between Creator Service and VIP Service in LIVE Assistant." data-zh="同一位用户在直播助手的主播服务和 VIP 服务会话之间来回切换。">同一位用户在直播助手的主播服务和 VIP 服务会话之间来回切换。</span>
 </figure>
 <div class="interview">
   <figure>
@@ -160,7 +162,26 @@
 </div>
 </div>
 </section>
-<div class="research-insight"><p><span aria-hidden="true" class="insight-icon">🔔</span><span data-en="Research takeaway: rigid answers and hard-to-find benefits make support harder to use." data-zh="调研总结：用户的主要障碍集中在回答太机械难理解、权益利益难感知，需要设计重构信息表达，提升整体服务体验">调研总结：用户的主要障碍集中在回答太机械难理解、权益利益难感知，需要设计重构信息表达，提升整体服务体验</span></p><img alt="" decoding="async" height="45" loading="lazy" src="./assets/live-assistant-project/revised/insight-underline.svg" width="238"/></div>
+<section class="interview-summary" id="interview-conclusion" aria-labelledby="interview-takeaway">
+  <div class="interview-summary-portraits">
+    <figure class="interview-summary-vip">
+      <img alt="" decoding="async" height="420" loading="lazy" src="./assets/live-assistant-project/revised/research-summary-vip.webp" width="420"/>
+      <figcaption data-en="VIP user" data-zh="金主">金主</figcaption>
+    </figure>
+    <figure class="interview-summary-creator">
+      <div><img alt="" decoding="async" height="664" loading="lazy" src="./assets/live-assistant-project/revised/research-summary-creator.webp" width="664"/></div>
+      <figcaption data-en="TikTok creator" data-zh="TikTok 主播">TikTok 主播</figcaption>
+    </figure>
+    <figure class="interview-summary-dual">
+      <img alt="" decoding="async" height="420" loading="lazy" src="./assets/live-assistant-project/revised/research-summary-dual-role.webp" width="420"/>
+      <figcaption data-en="Creator &amp; VIP user" data-zh="主播 &amp; 金主">主播 &amp; 金主</figcaption>
+    </figure>
+  </div>
+  <div class="research-insight">
+    <p><span aria-hidden="true" class="insight-icon">🔔</span><span id="interview-takeaway" data-en="Research takeaway: Rigid replies obscure next steps, exclusive perks are easy to miss, and dual-role users must switch between chats." data-zh="调研结论：机械式回复让用户难以判断下一步，专属权益不易发现，双重身份用户需在两个会话间来回切换。">调研结论：机械式回复让用户难以判断下一步，专属权益不易发现，双重身份用户需在两个会话间来回切换。</span></p>
+    <img alt="" decoding="async" height="45" loading="lazy" src="./assets/live-assistant-project/revised/insight-underline.svg" width="238"/>
+  </div>
+</section>
 </article>
 <article class="case-block" id="competitive">
 <header class="case-heading"><h3 data-en="Competitive research" data-zh="竞品分析核心目标">竞品分析核心目标</h3><p data-en="We tested four AI assistants with the same LIVE growth question and compared entry points, progress feedback, information hierarchy, and follow-up actions." data-zh="用同一个直播经营问题测试四款 AI 助手，对比提问入口、过程反馈、信息层级和任务执行方式，提炼适合直播服务的设计。">用同一个直播经营问题测试四款 AI 助手，对比提问入口、过程反馈、信息层级和任务执行方式，提炼适合直播服务的设计。</p></header><div class="app-icons">

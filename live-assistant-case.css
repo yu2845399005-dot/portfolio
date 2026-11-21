@@ -295,16 +295,7 @@
   inset-inline: 0;
   margin-top: 10px;
 }
-.live-case .interview-demo .interview-demo-placeholder {
-  position: absolute;
-  inset: 1.5% 3.65%;
-  display: grid;
-  place-items: center;
-  background: #141414;
-  font-size: 13px;
-  text-align: center;
-}
-.live-case .interview-scene--vip .motion-device::after {
+.live-case :is(#interview-vip, #interview-dual-role) .motion-device::after {
   position: absolute;
   inset: 2.85% 36% auto;
   height: 3.6%;
@@ -414,6 +405,54 @@
   42% { transform: rotate(-5deg); }
 }
 
+.live-case .interview-summary {
+  width: min(100%, 915.5px);
+  margin: clamp(48px, 8svh, 88px) auto 0;
+  container-type: inline-size;
+}
+.live-case .interview-summary-portraits {
+  position: relative;
+  width: min(100%, 657px);
+  margin-inline: auto;
+}
+.live-case .interview-summary-vip {
+  position: absolute;
+  top: 22.7%;
+  left: 2%;
+  width: 28.24%;
+  transform: rotate(-5.92deg);
+}
+.live-case .interview-summary-creator {
+  position: relative;
+  width: 46.27%;
+  margin-inline: auto;
+}
+.live-case .interview-summary-dual {
+  position: absolute;
+  top: 23.6%;
+  right: 2.1%;
+  width: 27.24%;
+  transform: rotate(6.49deg);
+}
+.live-case .interview-summary-vip img { aspect-ratio: 636 / 807; object-fit: cover; }
+.live-case .interview-summary-dual img { aspect-ratio: 612 / 764; object-fit: cover; }
+.live-case .interview-summary-creator > div {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 304 / 331.5;
+}
+.live-case .interview-summary-creator img {
+  position: absolute;
+  top: .11%;
+  left: -4.62%;
+  width: 109.02%;
+}
+.live-case .interview-summary-portraits figcaption {
+  margin-top: clamp(7px, 1.31cqw, 12px);
+  color: var(--secondary);
+  font-size: clamp(11px, 1.6cqw, 14.09px);
+  line-height: 1.4;
+}
 .live-case .research-insight {
   position: relative;
   width: min(100%, 915.5px);
@@ -446,6 +485,14 @@
   left: -2px;
   width: min(26%, 235px);
   transform: rotate(-6.95deg);
+}
+.live-case .interview-summary .research-insight {
+  margin-top: clamp(24px, 5.25cqw, 48px);
+  padding-bottom: clamp(22px, 4cqw, 36px);
+}
+.live-case .interview-summary .research-insight img {
+  top: auto;
+  bottom: clamp(8px, 1.1cqw, 10px);
 }
 .live-case .star-heading { display: flex; align-items: center; gap: 12px; }
 .live-case .star-heading img { width: 20px; flex: none; }
@@ -956,7 +1003,6 @@
   .live-case .goal-grid > div { gap: 11px; padding: 22px 30px; }
   .live-case .goal-grid p { min-height: 38px; }
   .live-case .interview figcaption { margin-top: 12px; font-size: 14.09px; color: var(--secondary); }
-  .live-case #interviews .research-insight { margin-top: 48px; }
   .live-case .research-insight { padding-bottom: 41.79px; }
   .live-case .app-icons {
     display: flex;
