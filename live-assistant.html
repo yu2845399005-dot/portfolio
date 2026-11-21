@@ -10,8 +10,8 @@
 <link href="./page-transition.css?v=20261028-2" rel="stylesheet"/>
 <script src="./page-transition-boot.js?v=20261028-fast-3"></script>
 <script defer="" src="./page-transition.js?v=20261111-short-home"></script>
-<link href="./live-assistant-case.css?v=creator-interview-motion" rel="stylesheet"/>
-<script defer="" src="./live-assistant.js?v=creator-interview-motion"></script>
+<link href="./live-assistant-case.css?v=interview-scenes" rel="stylesheet"/>
+<script defer="" src="./live-assistant.js?v=interview-scenes"></script>
 </head>
 <body class="live-case">
 <header class="project-bar">
@@ -80,11 +80,14 @@
 </article>
 </section>
 <section aria-labelledby="research-title" class="case-section" id="research">
-<h2 id="research-title">Design Research</h2>
 <article class="case-block" id="interviews">
-<header class="case-heading"><h3 data-en="User interviews" data-zh="用户调研">用户调研</h3><p data-en="We interviewed more than 10 TikTok creators and VIP users to understand where they struggled with LIVE Assistant. We focused on how easily they could find support, whether replies were clear, and which issues still required a human agent. The findings informed the redesign of the AI and self-service experience." data-zh="我们访谈了 10 多位 TikTok 主播和高价值付费用户，了解他们使用直播助手时遇到的困难，重点关注服务入口是否好找、回复是否易懂，以及哪些问题仍需转人工。访谈结果为后续的 AI 体验和自助服务设计提供了依据。">我们访谈了 10 多位 TikTok 主播和高价值付费用户，了解他们使用直播助手时遇到的困难，重点关注服务入口是否好找、回复是否易懂，以及哪些问题仍需转人工。访谈结果为后续的 AI 体验和自助服务设计提供了依据。</p></header>
-<div class="creator-research">
-<figure class="creator-policy-demo">
+<section class="interview-scene interview-scene--intro" aria-labelledby="interview-creator-label">
+<header class="interview-intro">
+  <h2 id="research-title">Design Research</h2>
+  <div class="case-heading"><h3 data-en="User interviews" data-zh="用户调研">用户调研</h3><p data-en="We interviewed more than 10 TikTok creators and VIP users to understand where they struggled with LIVE Assistant. We focused on how easily they could find support, whether replies were clear, and which issues still required a human agent. The findings informed the redesign of the AI and self-service experience." data-zh="我们访谈了 10 多位 TikTok 主播和高价值付费用户，了解他们使用直播助手时遇到的困难，重点关注服务入口是否好找、回复是否易懂，以及哪些问题仍需转人工。访谈结果为后续的 AI 体验和自助服务设计提供了依据。">我们访谈了 10 多位 TikTok 主播和高价值付费用户，了解他们使用直播助手时遇到的困难，重点关注服务入口是否好找、回复是否易懂，以及哪些问题仍需转人工。访谈结果为后续的 AI 体验和自助服务设计提供了依据。</p></div>
+</header>
+<div class="interview-scene-content">
+<figure class="interview-demo">
   <div class="motion-device">
     <video class="motion-preview-video" loop muted playsinline disablepictureinpicture disableremoteplayback preload="none" poster="./assets/live-assistant-project/revised/creator-usage-demo.webp" src="./assets/live-assistant-project/revised/creator-usage-demo.mp4" width="552" height="1196" aria-labelledby="creator-policy-caption" aria-describedby="creator-policy-description"></video>
     <img class="motion-device-frame" alt="" width="720" height="1488" loading="lazy" decoding="async" src="./assets/live-assistant-project/revised/motion-phone-frame.webp"/>
@@ -100,7 +103,7 @@
         <img class="creator-portrait-hand" alt="" decoding="async" height="420" loading="lazy" src="./assets/live-assistant-project/revised/interview-creator.webp" width="420"/>
       </div>
     </div>
-    <figcaption data-en="TikTok creator" data-zh="TikTok 主播">TikTok 主播</figcaption>
+    <figcaption id="interview-creator-label" data-en="TikTok creator" data-zh="TikTok 主播">TikTok 主播</figcaption>
   </figure>
   <div>
     <p>
@@ -114,10 +117,50 @@
   </div>
 </div>
 </div>
-<div class="interviews">
-<div class="interview"><figure><img alt="VIP user" decoding="async" height="420" loading="lazy" src="./assets/live-assistant-project/revised/interview-vip.webp" width="420"/><figcaption data-en="VIP user" data-zh="金主">金主</figcaption></figure><div><p><span aria-hidden="true">😀</span><span data-en="I can quickly reach human support, and I often get special VIP benefits." data-zh="能很快得到人工客服的支持，经常还有金主的特殊权益">能很快得到人工客服的支持，经常还有金主的特殊权益</span></p><p><span aria-hidden="true">😡</span><span data-en="I often miss which special benefits I can use." data-zh="经常忽略了有哪些特殊权益的使用">经常忽略了有哪些特殊权益的使用</span></p></div></div>
-<div class="interview"><figure><img alt="Creator and VIP user" decoding="async" height="420" loading="lazy" src="./assets/live-assistant-project/revised/interview-dual-role.webp" width="420"/><figcaption data-en="Creator &amp; VIP user" data-zh="主播 &amp; 金主">主播 &amp; 金主</figcaption></figure><div><p><span aria-hidden="true">😀</span><span data-en="The two separate conversations are easy to understand." data-zh="两套独立的会话框架，使用起来比较清楚易懂">两套独立的会话框架，使用起来比较清楚易懂</span></p><p><span aria-hidden="true">😡</span><span data-en="I often have to switch between conversations to ask questions, which takes time." data-zh="很多时候我需要来回切换会话入口去问问题，感觉很费时间">很多时候我需要来回切换会话入口去问问题，感觉很费时间</span></p></div></div>
-</div><div class="research-insight"><p><span aria-hidden="true" class="insight-icon">🔔</span><span data-en="Research takeaway: rigid answers and hard-to-find benefits make support harder to use." data-zh="调研总结：用户的主要障碍集中在回答太机械难理解、权益利益难感知，需要设计重构信息表达，提升整体服务体验">调研总结：用户的主要障碍集中在回答太机械难理解、权益利益难感知，需要设计重构信息表达，提升整体服务体验</span></p><img alt="" decoding="async" height="45" loading="lazy" src="./assets/live-assistant-project/revised/insight-underline.svg" width="238"/></div>
+</section>
+<section class="interview-scene interview-scene--vip" id="interview-vip" aria-labelledby="interview-vip-label">
+<div class="interview-scene-content">
+<figure class="interview-demo">
+  <div class="motion-device">
+    <video class="motion-preview-video" loop muted playsinline disablepictureinpicture disableremoteplayback preload="none" poster="./assets/live-assistant-project/revised/vip-usage-demo.webp" src="./assets/live-assistant-project/revised/vip-usage-demo.mp4" width="552" height="1196" aria-labelledby="vip-demo-caption" aria-describedby="vip-demo-description"></video>
+    <img class="motion-device-frame" alt="" width="720" height="1488" loading="lazy" decoding="async" src="./assets/live-assistant-project/revised/motion-phone-frame.webp"/>
+  </div>
+  <figcaption id="vip-demo-caption" data-en="Usage demo" data-zh="使用演示">使用演示</figcaption>
+  <span id="vip-demo-description" hidden data-en="A VIP user asks about a recharge issue, reads the recharge policy, and contacts VIP support." data-zh="金主询问充值失败的原因，查看充值政策，再联系专属客服。">金主询问充值失败的原因，查看充值政策，再联系专属客服。</span>
+</figure>
+<div class="interview">
+  <figure>
+    <img alt="" decoding="async" height="420" loading="lazy" src="./assets/live-assistant-project/revised/interview-vip.webp" width="420"/>
+    <figcaption id="interview-vip-label" data-en="VIP user" data-zh="金主">金主</figcaption>
+  </figure>
+  <div>
+    <p><span aria-hidden="true">😀</span><span data-en="I can quickly reach human support, and I often get special VIP benefits." data-zh="能很快得到人工客服的支持，经常还有金主的特殊权益">能很快得到人工客服的支持，经常还有金主的特殊权益</span></p>
+    <p><span aria-hidden="true">😡</span><span data-en="Some policies in the replies are hard to understand, and I miss many of the benefits I can use." data-zh="回答的一些政策难以理解，忽略了很多权益的使用">回答的一些政策难以理解，忽略了很多权益的使用</span></p>
+  </div>
+</div>
+</div>
+</section>
+<section class="interview-scene" id="interview-dual-role" aria-labelledby="interview-dual-role-label">
+<div class="interview-scene-content">
+<figure class="interview-demo">
+  <div class="motion-device">
+    <p class="interview-demo-placeholder" data-en="Demo coming soon" data-zh="演示待补充">演示待补充</p>
+    <img class="motion-device-frame" alt="" width="720" height="1488" loading="lazy" decoding="async" src="./assets/live-assistant-project/revised/motion-phone-frame.webp"/>
+  </div>
+</figure>
+<div class="interview">
+  <figure>
+    <img alt="" decoding="async" height="420" loading="lazy" src="./assets/live-assistant-project/revised/interview-dual-role.webp" width="420"/>
+    <figcaption id="interview-dual-role-label" data-en="Creator &amp; VIP user" data-zh="主播 &amp; 金主">主播 &amp; 金主</figcaption>
+  </figure>
+  <div>
+    <p><span aria-hidden="true">😀</span><span data-en="The two separate conversations are easy to understand." data-zh="两套独立的会话框架，使用起来比较清楚易懂">两套独立的会话框架，使用起来比较清楚易懂</span></p>
+    <p><span aria-hidden="true">😡</span><span data-en="I often have to switch between conversations to ask questions, which takes time." data-zh="很多时候我需要来回切换会话入口去问问题，感觉很费时间">很多时候我需要来回切换会话入口去问问题，感觉很费时间</span></p>
+  </div>
+</div>
+</div>
+</section>
+<div class="research-insight"><p><span aria-hidden="true" class="insight-icon">🔔</span><span data-en="Research takeaway: rigid answers and hard-to-find benefits make support harder to use." data-zh="调研总结：用户的主要障碍集中在回答太机械难理解、权益利益难感知，需要设计重构信息表达，提升整体服务体验">调研总结：用户的主要障碍集中在回答太机械难理解、权益利益难感知，需要设计重构信息表达，提升整体服务体验</span></p><img alt="" decoding="async" height="45" loading="lazy" src="./assets/live-assistant-project/revised/insight-underline.svg" width="238"/></div>
 </article>
 <article class="case-block" id="competitive">
 <header class="case-heading"><h3 data-en="Competitive research" data-zh="竞品分析核心目标">竞品分析核心目标</h3><p data-en="We tested four AI assistants with the same LIVE growth question and compared entry points, progress feedback, information hierarchy, and follow-up actions." data-zh="用同一个直播经营问题测试四款 AI 助手，对比提问入口、过程反馈、信息层级和任务执行方式，提炼适合直播服务的设计。">用同一个直播经营问题测试四款 AI 助手，对比提问入口、过程反馈、信息层级和任务执行方式，提炼适合直播服务的设计。</p></header><div class="app-icons">

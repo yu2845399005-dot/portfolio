@@ -88,6 +88,78 @@
   }
 
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  const interviewScenes = Array.from(document.querySelectorAll(".interview-scene"));
+  if (interviewScenes.length) {
+    let lastScrollY = window.scrollY;
+    let scrollStart = null;
+    let settleTimer = 0;
+    let touching = false;
+
+    function alignInterview() {
+      const from = scrollStart;
+      scrollStart = null;
+      const to = window.scrollY;
+      if (from === null || Math.abs(to - from) < 28 || reducedMotion.matches) return;
+
+      const viewport = document.documentElement.clientHeight;
+      const direction = Math.sign(to - from);
+      const scenes = interviewScenes.map(scene => {
+        const bounds = scene.getBoundingClientRect();
+        return { top: bounds.top + to, height: bounds.height };
+      });
+      const first = scenes[0];
+      const last = scenes[scenes.length - 1];
+      const currentIndex = scenes.findIndex(({ top }) => from >= top - 4 && from <= top + viewport * .10);
+      let target;
+
+      if (currentIndex !== -1) {
+        if (scenes[currentIndex].height <= viewport + 4) target = scenes[currentIndex + direction];
+      } else if (direction > 0 && from < first.top && to >= first.top - viewport * .15 && to < last.top) {
+        target = first;
+      } else if (direction < 0 && from >= last.top + last.height && to > first.top && to < last.top + viewport * .5) {
+        target = last;
+      } else {
+        target = scenes.find(({ top }) => Math.abs(top - to) < viewport * .18 && (top - from) * direction > 0);
+      }
+
+      if (target && target.height <= viewport + 4 && Math.abs(target.top - to) > 3) {
+        window.scrollTo({ top: target.top, behavior: "smooth" });
+      }
+    }
+
+    function queueInterviewAlignment() {
+      clearTimeout(settleTimer);
+      if (scrollStart !== null && !touching) settleTimer = setTimeout(alignInterview, 130);
+    }
+
+    function startInterviewScroll() {
+      if (reducedMotion.matches) return;
+      scrollStart ??= lastScrollY;
+      queueInterviewAlignment();
+    }
+
+    // Snap after a real scroll gesture settles so small wheel steps can leave a panel.
+    window.addEventListener("wheel", event => {
+      if (!event.ctrlKey && Math.abs(event.deltaY) > Math.abs(event.deltaX)) startInterviewScroll();
+    }, { passive: true });
+    window.addEventListener("touchstart", () => { touching = true; }, { passive: true });
+    window.addEventListener("touchmove", startInterviewScroll, { passive: true });
+    for (const type of ["touchend", "touchcancel"]) {
+      window.addEventListener(type, event => {
+        touching = event.touches.length > 0;
+        queueInterviewAlignment();
+      }, { passive: true });
+    }
+    window.addEventListener("keydown", event => {
+      const scrollKeys = ["ArrowUp", "ArrowDown", "PageUp", "PageDown", " "];
+      if (event.target === document.body && scrollKeys.includes(event.key)) startInterviewScroll();
+    });
+    window.addEventListener("scroll", () => {
+      lastScrollY = window.scrollY;
+      queueInterviewAlignment();
+    }, { passive: true });
+  }
+
   const creatorInterview = document.querySelector("[data-creator-interview]");
   if (creatorInterview && "IntersectionObserver" in window && !reducedMotion.matches) {
     const quotes = Array.from(creatorInterview.querySelectorAll(".creator-quote"), quote => {
@@ -154,7 +226,7 @@
     creatorInterview.classList.add("is-revealing-quotes");
     toggle.addEventListener("click", finishQuotes);
     reducedMotion.addEventListener("change", finishQuotes);
-    observer.observe(creatorInterview);
+    observer.observe(quotes[0].line.parentElement);
   }
 
   const motionVideos = document.querySelectorAll(".motion-preview-video, [data-motion-preview]");
@@ -168,13 +240,15 @@
     }
     reducedMotion.addEventListener("change", updateMotionPreview);
     if ("IntersectionObserver" in window) {
+      const interviewVisibility = 0.65;
       const observer = new IntersectionObserver(entries => {
-        for (const { target, isIntersecting } of entries) {
-          if (isIntersecting) visibleVideos.add(target);
+        for (const { target, isIntersecting, intersectionRatio } of entries) {
+          const inInterview = target.closest(".interview-demo");
+          if (isIntersecting && (!inInterview || intersectionRatio >= interviewVisibility)) visibleVideos.add(target);
           else visibleVideos.delete(target);
         }
         updateMotionPreview();
-      });
+      }, { threshold: [0, interviewVisibility] });
       motionVideos.forEach(video => observer.observe(video));
     } else {
       motionVideos.forEach(video => visibleVideos.add(video));
