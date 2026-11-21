@@ -274,7 +274,8 @@
 .live-case .interview-scene[id] { scroll-margin-top: 0; }
 .live-case .interview-scene--intro {
   grid-template-rows: auto 1fr;
-  gap: clamp(16px, 3svh, 32px);
+  row-gap: clamp(30px, 5svh, 48px);
+  padding-block-start: clamp(12px, calc(12svh - 72px), 54px);
 }
 .live-case .interview-intro .case-heading { margin-bottom: 0; }
 .live-case .interview-scene-content {
@@ -1201,6 +1202,7 @@
     --interview-gap: clamp(32px, 7svh, 72px);
   }
   .live-case .interview-scene { padding-block: clamp(20px, 4svh, 34px); }
+  .live-case .interview-scene--intro { row-gap: clamp(24px, 4.5svh, 42px); }
   .live-case .interview-scene-content {
     grid-template-columns: minmax(0, 1fr);
     justify-items: center;
@@ -1233,7 +1235,7 @@
 }
 @media (max-width: 480px) and (max-height: 710px) {
   .live-case #interviews { --preview-width: clamp(86px, calc((100svh - 460px) * .484), 114px); }
-  .live-case .interview-scene--intro { gap: 12px; }
+  .live-case .interview-scene--intro { row-gap: 22px; }
   .live-case .interview-intro h2 { margin-bottom: 12px; }
   .live-case .interview-scene--intro .interview-scene-content {
     grid-template-columns: repeat(2, minmax(0, 1fr));
