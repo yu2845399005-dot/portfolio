@@ -221,7 +221,7 @@
 .live-case .background-intro p { margin-top: clamp(18px, 3.33vw, 48px); font-size: 14.04px; line-height: 24px; color: rgb(255 255 255 / 80%); }
 .live-case .background-intro p.background-translation { margin-top: 9.36px; color: rgb(255 255 255 / 30%); }
 .live-case .creator-grid, .live-case .competitor-grid, .live-case .app-icons,
-.live-case .tad-grid, .live-case .goal-grid, .live-case .strategy-grid,
+.live-case .tad-grid, .live-case .strategy-grid,
 .live-case .shape-grid, .live-case .palette-grid, .live-case .phone-pair,
 .live-case .phone-trio, .live-case .motion-grid,
 .live-case .solution-split, .live-case .response-details, .live-case .response-comparison,
@@ -236,30 +236,6 @@
 .live-case .creator-grid img { aspect-ratio: 1; object-fit: cover; border-radius: 8px; }
 .live-case .creator-grid h4 { margin-top: 20px; }
 .live-case .creator-grid p { font-size: 12px; line-height: 17px; margin-top: 8px; color: var(--caption); }
-.live-case .goal-grid {
-  width: min(100%, 836px);
-  margin: clamp(28px, 4vw, 60px) auto 0;
-  gap: clamp(16px, 8.3vw, 120px);
-}
-.live-case .goal-grid > div {
-  position: relative;
-  display: grid;
-  align-content: center;
-  gap: 8px;
-  padding: 24px 28px;
-  min-height: 118px;
-  border-radius: 88.73px;
-  background: rgb(255 255 255 / 12%);
-  text-align: center;
-}
-.live-case .goal-grid .goal-dot {
-  position: absolute;
-  top: 22.42px;
-  right: 32px;
-  width: 17.75px;
-}
-.live-case .goal-grid h4 { font-size: 16.813px; line-height: 24px; font-weight: 500; }
-.live-case .goal-grid p { font-size: 11.208px; line-height: 1.7; font-weight: 400; color: var(--secondary); }
 .live-case #interviews {
   --preview-width: clamp(115px, calc((100svh - 232px) * .484), min(300px, 24vw));
   --interview-gap: clamp(52px, 10svh, 112px);
@@ -999,9 +975,6 @@
   .live-case #background-ai .case-heading p { min-height: 40px; }
   .live-case .background-intro { grid-template-columns: minmax(0, 246.92fr) minmax(0, 524fr); gap: min(9.54vw, 137.31px); align-items: start; }
   .live-case .background-intro > div { padding-top: clamp(54px, 9.24vw, 133px); }
-  .live-case .goal-grid { margin-top: 62px; }
-  .live-case .goal-grid > div { gap: 11px; padding: 22px 30px; }
-  .live-case .goal-grid p { min-height: 38px; }
   .live-case .interview figcaption { margin-top: 12px; font-size: 14.09px; color: var(--secondary); }
   .live-case .research-insight { padding-bottom: 41.79px; }
   .live-case .app-icons {
@@ -1301,7 +1274,7 @@
   .live-case .project-facts div + div { margin-top: 16px; padding-top: 16px; }
   .live-case .background-intro { grid-template-columns: 1fr; }
   .live-case .background-intro figure { width: min(53%, 247px); margin-inline: auto; }
-  .live-case .creator-grid, .live-case .goal-grid, .live-case .tad-grid,
+  .live-case .creator-grid, .live-case .tad-grid,
   .live-case .motion-grid { grid-template-columns: 1fr; gap: 24px; }
   .live-case .creator-grid img { aspect-ratio: 4 / 3; }
   .live-case .interview { gap: 8px; }
