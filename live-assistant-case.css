@@ -630,7 +630,7 @@
   inset: 0;
   pointer-events: none;
 }
-.live-case :is(#ai-experience, .interview-demo, .prompt-scenarios) .motion-preview-video {
+.live-case :is(#ai-experience, .interview-demo, .prompt-scenarios, .background-intro) .motion-preview-video {
   /* Fit the recorded screen into the shared phone frame. */
   top: 1.5%;
   left: 3.65%;
