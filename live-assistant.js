@@ -68,25 +68,6 @@
   window.addEventListener("scroll", queueProgress, { passive: true });
   window.addEventListener("resize", queueProgress);
 
-  const carousel = document.querySelector(".prompt-carousel");
-  if (carousel && "IntersectionObserver" in window) {
-    const track = carousel.querySelector(".prompt-track");
-    const repeat = track.firstElementChild.cloneNode(true);
-    repeat.setAttribute("aria-hidden", "true");
-    track.append(repeat);
-
-    // The highlight window stays on the middle row as the two tracks scroll together.
-    const highlight = document.createElement("div");
-    highlight.className = "prompt-highlight";
-    highlight.setAttribute("aria-hidden", "true");
-    highlight.append(track.cloneNode(true));
-    carousel.append(highlight);
-    carousel.classList.add("is-animated");
-    new IntersectionObserver(([entry]) => {
-      carousel.classList.toggle("is-visible", entry.isIntersecting);
-    }, { threshold: 0.25 }).observe(carousel);
-  }
-
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const interviewScenes = Array.from(document.querySelectorAll(".interview-scene"));
   if (interviewScenes.length) {
@@ -280,15 +261,15 @@
     }
     reducedMotion.addEventListener("change", updateMotionPreview);
     if ("IntersectionObserver" in window) {
-      const interviewVisibility = 0.65;
+      const framedDemoVisibility = 0.65;
       const observer = new IntersectionObserver(entries => {
         for (const { target, isIntersecting, intersectionRatio } of entries) {
-          const inInterview = target.closest(".interview-demo");
-          if (isIntersecting && (!inInterview || intersectionRatio >= interviewVisibility)) visibleVideos.add(target);
+          const isFramedDemo = target.closest(".interview-demo, .creator-prompt-phone");
+          if (isIntersecting && (!isFramedDemo || intersectionRatio >= framedDemoVisibility)) visibleVideos.add(target);
           else visibleVideos.delete(target);
         }
         updateMotionPreview();
-      }, { threshold: [0, interviewVisibility] });
+      }, { threshold: [0, framedDemoVisibility] });
       motionVideos.forEach(video => observer.observe(video));
     } else {
       motionVideos.forEach(video => visibleVideos.add(video));
