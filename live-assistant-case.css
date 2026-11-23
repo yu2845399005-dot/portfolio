@@ -941,7 +941,8 @@
 .live-case .comparison-phones figure { display: grid; }
 .live-case .comparison-phones figcaption { grid-row: 1; min-height: 30px; margin: 0 0 8px; text-align: left; padding-inline-start: 13.27px; }
 .live-case .comparison-phones figure:last-child figcaption { color: #fff; font-size: 21px; line-height: 30px; }
-.live-case .result-metrics { width: min(100%, 780px); margin: 56px auto 0; text-align: center; }
+.live-case #project-outcomes { --heading-gap: 64px; }
+.live-case .result-metrics { width: min(100%, 780px); margin: 112px auto 0; text-align: center; }
 .live-case .result-metrics strong {
   display: flex;
   align-items: center;
@@ -956,7 +957,7 @@
 .live-case .result-metrics > div:first-child img { transform: rotate(180deg); }
 .live-case .result-metrics img { width: clamp(30px, 4vw, 58px); flex: none; }
 .live-case .result-metrics p { margin-top: 15.85px; font-size: 14px; line-height: 20px; color: var(--secondary); }
-.live-case .result-notes { margin-top: 72px; color: var(--caption); padding: 0; list-style: none; font-size: 14px; line-height: 20px; }
+.live-case .result-notes { margin-top: 144px; color: var(--caption); padding: 0; list-style: none; font-size: 14px; line-height: 20px; }
 .live-case .result-notes li { white-space: pre-wrap; }
 .live-case .result-notes li + li { margin-top: 12px; }
 
@@ -1148,12 +1149,12 @@
   .live-case .comparison-phones { width: 100%; gap: min(2.03vw, 29.19px); }
   .live-case .comparison-phones figure:first-child img { aspect-ratio: 230.76 / 478.32; object-fit: cover; }
   .live-case .comparison-phones figure:last-child img { aspect-ratio: 255.39 / 528.74; object-fit: cover; }
-  .live-case .result-metrics { width: min(100%, 670.69px); gap: min(8.33vw, 120px); margin-top: 0; padding-block: 60px; }
+  .live-case .result-metrics { width: min(100%, 670.69px); gap: min(8.33vw, 120px); margin-top: 0; padding-block: 120px; }
   .live-case .result-metrics strong { justify-content: center; gap: 23.77px; line-height: 90px; }
   .live-case .result-metrics img { width: 84.52px; }
   .live-case .result-value { display: block; position: relative; min-width: 129px; text-align: left; }
   .live-case .result-value small { position: absolute; left: 100%; bottom: 18px; line-height: 1; }
-  .live-case .result-notes { margin-top: 32px; }
+  .live-case .result-notes { margin-top: 64px; }
 }
 
 /* Keep the design's groupings intact when the case study has less room. */
@@ -1323,7 +1324,7 @@
   .live-case .phone-trio { gap: 8px; }
   .live-case .phone-trio figcaption { font-size: 11px; margin-top: 8px; }
   .live-case .response-concerns span { padding: 5px 9px; }
-  .live-case .result-notes { margin-top: 40px; }
+  .live-case .result-notes { margin-top: 80px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .live-case .progress-rail a::before { transition: none; }
