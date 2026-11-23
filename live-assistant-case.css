@@ -630,7 +630,7 @@
   inset: 0;
   pointer-events: none;
 }
-.live-case :is(#ai-experience, .interview-demo, .prompt-scenarios, .background-intro) .motion-preview-video {
+.live-case :is(#ai-experience, .interview-demo, .prompt-scenarios, .background-intro, .vip-service-layout) .motion-preview-video {
   /* Fit the recorded screen into the shared phone frame. */
   top: 1.5%;
   left: 3.65%;
@@ -698,6 +698,16 @@
 .live-case #solution-creator .prompt-list { margin-top: clamp(32px, 5.4vw, 70px); gap: 32px; }
 .live-case #solution-creator .prompt-list p { margin-top: 9.44px; }
 .live-case #solution-creator :is(.solution-split > div > p, .prompt-list p) { text-align: justify; }
+
+.live-case .vip-service-layout {
+  width: min(100%, 923.77px);
+  grid-template-columns: minmax(0, 284.77fr) minmax(0, 549fr);
+  gap: clamp(24px, 7.8vw, 90px);
+  margin-inline: auto;
+  padding-block: clamp(16px, 2.8vw, 40px);
+}
+.live-case .vip-service-layout > div > p { font-size: 16px; line-height: 1.7; }
+.live-case .vip-service-layout .prompt-list { gap: 32px; }
 
 .live-case .creator-prompt-row {
   --prompt-device-width: min(29.3%, 284.77px);
@@ -1241,6 +1251,8 @@
   .live-case .creator-prompt-row { grid-template-columns: minmax(0, 1fr); gap: 30px; }
   .live-case .creator-prompt-row + .creator-prompt-row { margin-top: 32px; }
   .live-case .creator-prompt-phone { width: min(72%, 254px); }
+  .live-case .vip-service-layout figure { width: min(72%, 254px); justify-self: center; }
+  .live-case .vip-service-layout > div > p { font-size: 14px; }
   .live-case .creator-prompt-copy > p, .live-case .scenario-prompt-list p { font-size: 14px; }
   .live-case #solution-creator .solution-split { grid-template-columns: minmax(0, 1fr); gap: 32px; padding-block: 8px 0; }
   .live-case .creator-inbox-device { width: min(72%, 250px); }
