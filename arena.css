@@ -55,6 +55,20 @@ a:focus-visible,button:focus-visible { outline:2px solid var(--blue); outline-of
 .figure { min-width:0; }
 .screen-shell { position:relative; padding:6px; border-radius:14px; background:#000; }
 .screen-shell > img,.screen-shell > .image-zoom-link > img { display:block; width:100%; height:auto; border-radius:8px; }
+.dashboard-demo-shell {
+  --bezel: clamp(4px, .45vw, 7px);
+  padding: var(--bezel);
+  border-radius: calc(8px + var(--bezel));
+  background: #08090b;
+  box-shadow: 0 0 0 1px #353a41, 0 10px 24px -17px rgb(21 26 34 / 52%);
+}
+.dashboard-demo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1920 / 1194;
+  border-radius: 8px;
+}
 .figure figcaption { margin-top:16px; color:#0006; font-size:12px; line-height:17px; text-align:center; }
 .overview-copy { display:grid; gap:64px; }
 .note h4 { margin-bottom:12px; font-size:18px; font-weight:500; line-height:25px; overflow-wrap:anywhere; }

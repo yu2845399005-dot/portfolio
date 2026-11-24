@@ -55,6 +55,27 @@
   addEventListener('load', scheduleProgress);
   document.fonts?.ready.then(scheduleProgress);
 
+  const dashboardDemo = document.querySelector('.dashboard-demo');
+  if (dashboardDemo) {
+    let inView = false;
+    const updateDemoPlayback = () => {
+      if (inView && !reducedMotion.matches) dashboardDemo.play().catch(() => {});
+      else dashboardDemo.pause();
+    };
+    reducedMotion.addEventListener('change', updateDemoPlayback);
+    if ('IntersectionObserver' in window) {
+      const visibilityThreshold = .3;
+      const observer = new IntersectionObserver(([entry]) => {
+        inView = entry.intersectionRatio >= visibilityThreshold;
+        updateDemoPlayback();
+      }, { threshold: visibilityThreshold });
+      observer.observe(dashboardDemo);
+    } else {
+      inView = true;
+      updateDemoPlayback();
+    }
+  }
+
   [
     ['#budget-status .status-screen', 593.611, '--status-screen-scale'],
     ['#readability .after-composite', 584.878, '--readability-screen-scale'],
