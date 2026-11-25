@@ -338,7 +338,8 @@ html[lang="en"] #research .research-badges .badge strong { top:73%; font-size:3.
 }
 @media(max-width:440px) { #budget-status .screen-shell { padding:5px; border-radius:12px; } #budget-status .dashboard-demo { border-radius:7px; } }
 /* Figma 341:12524: before/after image masks, typography and the floating metric. */
-#readability .compare-grid { width:min(100%,1134.878px); grid-template-columns:minmax(0,502fr) minmax(0,584.878fr); gap:48px; align-items:start; }
+#readability .readability-content { display:grid; gap:32px; }
+#readability .compare-grid { padding-block:30px; width:min(100%,1134.878px); grid-template-columns:minmax(0,502fr) minmax(0,584.878fr); gap:48px; align-items:start; }
 #readability .compare-column { gap:36px; min-width:0; }
 #readability .compare-column:first-child { align-self:stretch; }
 #readability .compare-column:nth-child(2) { justify-content:flex-start; }
@@ -356,13 +357,11 @@ html[lang="en"] #research .research-badges .badge strong { top:73%; font-size:3.
 #readability .before-composite .screen-focus img { left:-14.47%; top:-55.83%; width:114.39%; height:155.71%; }
 #readability .after-composite .screen-focus { left:13.503670851015084%; top:36.20775425894915%; width:85.4335434056333%; height:62.40490672617942%; border-radius:7.171px 7.171px 7.171px 0; }
 #readability .after-composite .screen-focus img { left:-14.56%; top:-55.42%; width:114.59%; height:155.41%; }
-#readability .compare-column .note { width:min(100%,477px); margin-top:0; font-family:"Arena PingFang","PingFang SC",sans-serif; font-synthesis:none; -webkit-font-smoothing:antialiased; }
 #readability .note h4 { margin-bottom:8px; font-size:18px; font-weight:500; line-height:25px; color:#000; }
 #readability .note>p { font-size:14px; font-weight:400; line-height:20px; color:rgba(0,0,0,.4); }
 #readability .check-list { display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-top:16px; color:#000; font-size:16px; font-weight:500; line-height:22px; }
 #readability .check-list li { display:flex; align-items:center; gap:12px; }
 #readability .check-list li::before { margin:0; font-size:16px; line-height:22px; }
-#readability .small-metrics { margin-top:28px; gap:108px; justify-content:center; font-family:"Arena PingFang","PingFang SC",sans-serif; font-synthesis:none; -webkit-font-smoothing:antialiased; }
 #readability .small-metric { gap:4px; }
 #readability .small-metric span { color:rgba(0,0,0,.4); font-size:14px; font-weight:400; line-height:20px; }
 #readability .small-metric strong { color:#000; font-size:32px; font-weight:500; line-height:45px; white-space:nowrap; }
@@ -370,14 +369,13 @@ html[lang="en"] #research .research-badges .badge strong { top:73%; font-size:3.
 #readability .readability-popover p { color:rgba(28,31,35,.6); font-size:9.561px; font-weight:400; line-height:13.147px; letter-spacing:-.1912px; white-space:nowrap; }
 #readability .readability-popover strong { color:#1d232e; font-weight:600; }
 #readability .readability-popover small { display:flex; align-items:center; justify-content:flex-end; gap:4.781px; color:rgba(28,31,35,.6); font-size:7.171px; font-weight:400; line-height:9.561px; white-space:nowrap; }
-@media(max-width:1100px) { #readability .compare-grid { gap:32px; } #readability .small-metrics { gap:48px; } }
+@media(max-width:1100px) { #readability .compare-grid { gap:32px; } }
 @media(max-width:680px) {
-  #readability .compare-grid { grid-template-columns:minmax(0,1fr); gap:48px; }
+  #readability .compare-grid { grid-template-columns:minmax(0,1fr); gap:32px; padding-block:0; }
   #readability .compare-column { gap:28px; }
   #readability .compare-column:first-child { width:min(100%,502px); }
   #readability .compare-column:nth-child(2) { width:min(100%,584.878px); }
   #readability .check-list { gap:16px; }
-  #readability .small-metrics { gap:48px; }
 }
 @media(max-width:440px) { #readability .check-list { flex-direction:column; gap:10px; } }
 /* Figma 341:12575: measured workflow labels, frames and highlighted regions. */
@@ -616,25 +614,17 @@ html[lang="en"] #audiences .badge strong { font-size:17px; }
   padding-block:40px;
 }
 .priority-screen {
-  aspect-ratio:623.089 / 394;
   align-self:start;
   min-width:0;
   padding:4.653px;
   border-radius:11.633px;
 }
-.priority-screen .screen-base,
-.priority-screen .screen-base > .image-zoom-link { display:block; height:100%; border-radius:6.98px; overflow:hidden; }
-.priority-screen .screen-base .image-zoom-link > img { width:100%; height:100%; object-fit:cover; }
-.priority-screen.dimmed .screen-base::after { inset:4.653px; background:rgb(0 0 0 / 30%); }
-.priority-screen .screen-focus { left:13%; top:36.1%; width:86.2%; height:62.95%; border-radius:7.171px 7.171px 7.171px 0; }
+.priority-screen .dashboard-demo { border-radius:6.98px; }
 .priority-copy { display:grid; align-content:center; gap:48px; min-width:0; }
 .priority-copy .note h4 { margin-bottom:8px; }
-.priority-copy .visual-weight h4 { font-size:16px; line-height:22px; }
-.priority-copy .check-list { margin-top:24px; font-weight:500; color:#000; }
+#readability .visual-weight h4 { font-size:16px; line-height:22px; }
+#readability .priority-copy .check-list { margin-top:24px; }
 .priority-copy .small-metrics { justify-content:flex-start; gap:clamp(26px,7.5vw,108px); margin:0; }
-.priority-copy .small-metric { gap:4px; }
-.priority-copy .small-metric span { font-size:14px; color:#0006; }
-.priority-copy .small-metric strong { white-space:nowrap; }
 
 #budget-flow .workflow-new .workflow-screen { aspect-ratio:auto; padding:6.407px; border-radius:16.019px; }
 #budget-flow .workflow-new .dashboard-demo { border-radius:9.611px; }
