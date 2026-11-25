@@ -410,10 +410,10 @@ html[lang="en"] #research .research-badges .badge strong { top:73%; font-size:3.
 @media(max-width:440px) { #budget-flow .workflow-summary .small-metrics { flex-wrap:wrap; } }
 
 /* DS4, 341:12635: 693.419px product image, 36px gutter, 411px explanation. */
-#adjustment-feedback { font-family:"Arena PingFang","PingFang SC",sans-serif; font-synthesis:none; -webkit-font-smoothing:antialiased; }
+#adjustment-feedback { padding-bottom:var(--block-gap); font-family:"Arena PingFang","PingFang SC",sans-serif; font-synthesis:none; -webkit-font-smoothing:antialiased; }
 #adjustment-feedback .block-heading h3 { font-size:20px; line-height:28px; font-weight:500; }
 #adjustment-feedback .block-heading>p { color:rgba(0,0,0,.5); }
-#adjustment-feedback .block-content { margin-top:36px; }
+#adjustment-feedback .block-content { margin-top:72px; }
 #adjustment-feedback .adjustment-grid { width:calc(100% - 21.581px); grid-template-columns:minmax(0,693.419fr) minmax(0,411fr); gap:36px; align-items:center; }
 #adjustment-feedback .screen-composite { container-type:inline-size; padding:clamp(3px,.449514vw,6.473px); border-radius:16.183px; }
 #adjustment-feedback .screen-base { aspect-ratio:2880/1804; border-radius:9.71px; }
