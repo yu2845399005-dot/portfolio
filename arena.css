@@ -395,8 +395,6 @@ html[lang="en"] #research .research-badges .badge strong { top:73%; font-size:3.
 #budget-flow .workflow-value-focus img { width:100%; height:100%; max-width:none; object-fit:fill; }
 #budget-flow .workflow-after { margin-top:32px; }
 #budget-flow .workflow-new { grid-template-columns:minmax(0,641fr) minmax(0,457fr); gap:clamp(24px,4.45vw,64px); align-items:center; margin-top:0; }
-#budget-flow .workflow-row-focus { position:absolute; z-index:2; left:41.947681148236754%; top:54.15442695870093%; width:55.63855235743499%; height:9.452777981086397%; overflow:hidden; border-radius:5.137px; pointer-events:none; }
-#budget-flow .workflow-row-focus img { position:absolute; left:-90.05%; top:-614.29%; width:194.66%; height:1129.73%; max-width:none; }
 /* Match DS3 typography to its 324.46px design column so text cannot stretch the adjacent steps. */
 #budget-flow .workflow-summary { display:flex; flex-direction:column; gap:32px; min-width:0; grid-column:auto; padding:0; container-type:inline-size; font-family:"Arena PingFang","PingFang SC",sans-serif; font-synthesis:none; -webkit-font-smoothing:antialiased; }
 #budget-flow .workflow-summary .note h4 { margin-bottom:min(12px,3.6984528cqw); color:#000; font-size:clamp(14px,5.5476792cqw,18px); font-weight:500; line-height:1.3888889; text-wrap:balance; }
@@ -528,7 +526,8 @@ html[lang="en"] #research .research-badges .badge strong { top:73%; font-size:3.
 html[lang="en"] #change-history .history-features h5 { font-size:13px; gap:6px; }
 
 /* Figma 341:12875: both native badges share the same 184.258 x 235.402 geometry. */
-#audiences { font-family:"Arena PingFang","PingFang SC",sans-serif; font-synthesis:none; -webkit-font-smoothing:antialiased; }
+#audiences { padding-bottom:var(--block-gap); font-family:"Arena PingFang","PingFang SC",sans-serif; font-synthesis:none; -webkit-font-smoothing:antialiased; }
+#audiences > .block-content { margin-top:96px; }
 #audiences .block-heading>p { color:rgba(0,0,0,.5); }
 #audiences .audience-diagram { grid-template-columns:minmax(0,528.25354fr) minmax(0,405.648285fr); align-items:center; gap:12.062%; width:100%; margin:0; padding-inline:4.302926%; }
 #audiences .audience-group { position:relative; width:100%; aspect-ratio:528.25354/429.46875; justify-self:stretch; container-type:normal; }
@@ -637,11 +636,8 @@ html[lang="en"] #audiences .badge strong { font-size:17px; }
 .priority-copy .small-metric span { font-size:14px; color:#0006; }
 .priority-copy .small-metric strong { white-space:nowrap; }
 
-#budget-flow .workflow-new .workflow-screen { aspect-ratio:641 / 405.676; padding:6.407px; border-radius:16.019px; }
-#budget-flow .workflow-new .workflow-screen > .image-zoom-link,
-#budget-flow .workflow-new .workflow-screen.dimmed::after { border-radius:9.611px; }
-#budget-flow .workflow-new .workflow-screen.dimmed::after { inset:6.407px; }
-#budget-flow .workflow-new .workflow-row-focus { border-radius:8.469px; }
+#budget-flow .workflow-new .workflow-screen { aspect-ratio:auto; padding:6.407px; border-radius:16.019px; }
+#budget-flow .workflow-new .dashboard-demo { border-radius:9.611px; }
 #budget-flow .workflow-summary .note h4 { text-wrap:wrap; }
 @media (forced-colors:active) {
   #budget-flow .small-metric strong { color:CanvasText; background:none; }
