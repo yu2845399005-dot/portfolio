@@ -77,7 +77,6 @@
   }
 
   [
-    ['#budget-status .status-screen', 593.611, '--status-screen-scale'],
     ['#readability .after-composite', 584.878, '--readability-screen-scale'],
     ['#adjustment-feedback .adjustment-examples', 411, '--adjustment-example-scale'],
     ['#change-history .history-features', 480, '--history-copy-scale'],
