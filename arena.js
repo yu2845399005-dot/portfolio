@@ -55,8 +55,7 @@
   addEventListener('load', scheduleProgress);
   document.fonts?.ready.then(scheduleProgress);
 
-  const dashboardDemo = document.querySelector('.dashboard-demo');
-  if (dashboardDemo) {
+  document.querySelectorAll('.dashboard-demo').forEach(dashboardDemo => {
     let inView = false;
     const updateDemoPlayback = () => {
       if (inView && !reducedMotion.matches) dashboardDemo.play().catch(() => {});
@@ -74,7 +73,7 @@
       inView = true;
       updateDemoPlayback();
     }
-  }
+  });
 
   [
     ['#readability .after-composite', 584.878, '--readability-screen-scale'],

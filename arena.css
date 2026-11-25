@@ -66,7 +66,6 @@ a:focus-visible,button:focus-visible { outline:2px solid var(--blue); outline-of
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 1920 / 1194;
   border-radius: 8px;
 }
 .figure figcaption { margin-top:16px; color:#0006; font-size:12px; line-height:17px; text-align:center; }
@@ -302,9 +301,8 @@ html[lang="en"] #research .research-badges .badge strong { top:73%; font-size:3.
 /* Budget-status composition: Figma 341:12425. Keep SVGs at their exported sizes. */
 #budget-status .status-grid { grid-template-columns:minmax(0,631.669fr) minmax(0,450fr); gap:clamp(28px,5.58vw,80.331px); align-items:center; padding-block:40px; }
 #budget-status .status-screen { container-type:inline-size; min-width:0; margin:0; }
-#budget-status .screen-shell { aspect-ratio:1217/768.293; padding:8px; border-radius:18px; }
-#budget-status .screen-shell>.image-zoom-link { height:100%; border-radius:10px; overflow:hidden; }
-#budget-status .screen-shell>.image-zoom-link>img { width:100%; height:100%; object-fit:cover; border-radius:10px; }
+#budget-status .screen-shell { padding:8px; border-radius:18px; }
+#budget-status .dashboard-demo { border-radius:10px; }
 #budget-status figcaption { margin-top:16px; font-size:14px; line-height:20px; color:rgba(0,0,0,.5); }
 
 
@@ -338,7 +336,7 @@ html[lang="en"] #research .research-badges .badge strong { top:73%; font-size:3.
   #budget-status .status-screen { width:min(100%,631.669px); }
   #budget-status .status-grid>.note { width:min(100%,450px); justify-self:center; }
 }
-@media(max-width:440px) { #budget-status .screen-shell { padding:5px; border-radius:12px; } #budget-status .screen-shell>.image-zoom-link,#budget-status .screen-shell>.image-zoom-link>img { border-radius:7px; } }
+@media(max-width:440px) { #budget-status .screen-shell { padding:5px; border-radius:12px; } #budget-status .dashboard-demo { border-radius:7px; } }
 /* Figma 341:12524: before/after image masks, typography and the floating metric. */
 #readability .compare-grid { width:min(100%,1134.878px); grid-template-columns:minmax(0,502fr) minmax(0,584.878fr); gap:48px; align-items:start; }
 #readability .compare-column { gap:36px; min-width:0; }
