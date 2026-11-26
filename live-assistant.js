@@ -254,12 +254,14 @@
   if (motionVideos.length) {
     const visibleVideos = new Set();
     function updateMotionPreview() {
+      const previewOpen = document.documentElement.classList.contains('image-viewer-open');
       for (const video of motionVideos) {
-        if (visibleVideos.has(video) && !reducedMotion.matches) video.play().catch(() => {});
+        if (visibleVideos.has(video) && !reducedMotion.matches && !previewOpen) video.play().catch(() => {});
         else video.pause();
       }
     }
     reducedMotion.addEventListener("change", updateMotionPreview);
+    document.addEventListener("media-preview-change", updateMotionPreview);
     if ("IntersectionObserver" in window) {
       const framedDemoVisibility = 0.65;
       const observer = new IntersectionObserver(entries => {

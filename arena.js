@@ -58,10 +58,11 @@
   document.querySelectorAll('.dashboard-demo').forEach(dashboardDemo => {
     let inView = false;
     const updateDemoPlayback = () => {
-      if (inView && !reducedMotion.matches) dashboardDemo.play().catch(() => {});
+      if (inView && !reducedMotion.matches && !document.documentElement.classList.contains('image-viewer-open')) dashboardDemo.play().catch(() => {});
       else dashboardDemo.pause();
     };
     reducedMotion.addEventListener('change', updateDemoPlayback);
+    document.addEventListener('media-preview-change', updateDemoPlayback);
     if ('IntersectionObserver' in window) {
       const visibilityThreshold = .3;
       const observer = new IntersectionObserver(([entry]) => {
